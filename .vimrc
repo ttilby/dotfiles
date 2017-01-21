@@ -1,4 +1,4 @@
 
-# simple settings for now
+" simple settings for now
 set number
 syntax on
