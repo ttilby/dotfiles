@@ -3,6 +3,7 @@
 
 export JAVA_HOME=$(/usr/libexec/java_home)
 export ANDROID_HOME=/usr/local/opt/android-sdk
+export HOMEBREW_GITHUB_API_TOKEN="986a2427786b548ef8ca1a2c5c5fac4e2461964b"
 
 #   Change Prompt
 #   ------------------------------------------------------------
