@@ -54,6 +54,7 @@ ZSH_THEME="powerlevel9k/powerlevel9k"
 plugins=(git brew node npm sudo ng)
 
 source $ZSH/oh-my-zsh.sh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
