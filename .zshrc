@@ -59,7 +59,7 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
-source $HOME/dotfiles/.exports
+source $HOME/.exports
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
