@@ -59,6 +59,8 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
+source $HOME/dotfiles/.exports
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment

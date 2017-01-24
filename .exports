@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+# Needed for showing info when doing a 'brew cask search'
+export HOMEBREW_GITHUB_API_TOKEN="986a2427786b548ef8ca1a2c5c5fac4e2461964b"
