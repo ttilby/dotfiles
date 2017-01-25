@@ -10,6 +10,23 @@ export ZSH=$HOME/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
+# Powerlevel9k is the best theme for prompt, I like to keep it in dark gray colors
+DEFAULT_USER=t.tilby
+# POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+POWERLEVEL9K_DIR_BACKGROUND='238'
+POWERLEVEL9K_DIR_FOREGROUND='252'
+POWERLEVEL9K_STATUS_BACKGROUND='238'
+POWERLEVEL9K_STATUS_FOREGROUND='252'
+POWERLEVEL9K_CONTEXT_BACKGROUND='240'
+POWERLEVEL9K_CONTEXT_FOREGROUND='252'
+POWERLEVEL9K_TIME_BACKGROUND='238'
+POWERLEVEL9K_TIME_FOREGROUND='252'
+POWERLEVEL9K_HISTORY_BACKGROUND='240'
+POWERLEVEL9K_HISTORY_FOREGROUND='252'
+
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
 
@@ -59,7 +76,11 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
+# Contains sensitive data that should not be in source control
 source $HOME/.exports
+
+# These can be in source control
+source .exports
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
