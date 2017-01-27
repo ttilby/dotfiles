@@ -1,3 +1,10 @@
+" ./vimrc
+
+" AutoLoad
+" vim-pathogen-git - https://github.com/tpope/vim-pathogen
+
+
+
 " ===== General Config ======
 syntax on            " syntax highlighting   
 set number           " line numbers
@@ -11,3 +18,10 @@ set showmode         " Show the current mode
 " ===== Indentation  =======
 set wrap             " Wrap lines
 set linebreak        " Wrap lines at convenient points
+
+" ===== Plugins       ======
+" Pathogen
+execute pathogen#infect()
+
+" Install Notes
+" vim-gitgutter
