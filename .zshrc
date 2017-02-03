@@ -11,7 +11,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Powerlevel9k is the best theme for prompt, I like to keep it in dark gray colors
-DEFAULT_USER=t.tilby
+DEFAULT_USER=todd
 # POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
@@ -80,7 +80,11 @@ source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $HOME/.exports
 
 # These can be in source control
-source .exports
+for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
+    [ -r "$file" ] && source "$file"
+done
+unset file
+
 
 # export MANPATH="/usr/local/man:$MANPATH"
 

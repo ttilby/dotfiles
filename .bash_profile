@@ -1,10 +1,10 @@
 #   PATH variables
 #   -----------------------------------------------------------
+for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
+    [ -r "$file" ] && source "$file"
+done
+unset file
 
-export JAVA_HOME=$(/usr/libexec/java_home)
-export ANDROID_HOME=/usr/local/opt/android-sdk
-
-source $HOME/.exports
 
 #   Change Prompt
 #   ------------------------------------------------------------

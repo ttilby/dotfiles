@@ -28,3 +28,6 @@ execute pathogen#infect()
 
 " Install Notes
 " vim-gitgutter
+
+" ===== NERD Tree =====
+autocmd vimenter * NERDTree
