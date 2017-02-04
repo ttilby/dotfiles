@@ -3,31 +3,71 @@
 " AutoLoad
 " vim-pathogen-git - https://github.com/tpope/vim-pathogen
 
+" Install Notes
+" vim-gitgutter - https://github.com/airblade/vim-gitgutter
+" vim-airline - https://github.com/vim-airline/vim-airline
+" nerdtree - https://github.com/scrooloose/nerdtree
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" General Config
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+set number                        " line numbers
+set showmode                      " Show current mode at the bottom
+set hlsearch                      " highlight searches
+set incsearch                     " highlight dynamically as pattern is typed
+set clipboard=unnamed             " Use the OS clipboard by default
+set showmode                      " Show the current mode
 
 
-" ===== General Config ======
-syntax on            " syntax highlighting   
-set number           " line numbers
-set showmode         " Show current mode at the bottom
-set t_Co=256         " support for 256 colors
-set hlsearch         " highlight searches
-set incsearch        " highlight dynamically as pattern is typed
-set clipboard=unnamed" Use the OS clipboard by default
-set showmode         " Show the current mode
-
-" ===== Document Width =====
-set tw=79           " width of document (used by gd)
-set nowrap          " Don't automatically wrap on load
-set fo-=t           " Don't automatically wrap text when typing
-set colorcolumn=80  " Set right bar
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Document Width 
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+set tw=79                         " width of document (used by gd)
+set nowrap                        " Don't automatically wrap on load
+set fo-=t                         " Don't automatically wrap text when typing
+set colorcolumn=80                " Set right bar
 highlight ColorColumn ctermbg=233
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Key Bindings
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+let mapleader = ","
+
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Colors
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+set t_Co=256
+syntax on
+filetype off
+filetype plugin indent on
+colorscheme wallaby
+set guifont=Liberation\ Mono\ for\ Powerline\ 13
+
 
 " ===== Plugins       ======
 " Pathogen
 execute pathogen#infect()
-
-" Install Notes
-" vim-gitgutter
+execute pathogen#helptags()
 
 " ===== NERD Tree =====
 autocmd vimenter * NERDTree
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Airline Config
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Note: you need UTF8 support and a Poweline patched font
+" /etc/locale.conf
+"     LANG=en_US.utf8
+set laststatus=2
+set ttimeoutlen=50
+let g:airline_powerline_fonts = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:bufferline_echo = 0
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" NerdTREE (Git)
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+noremap <C-p> :NERDTreeToggle<CR>
+
+
