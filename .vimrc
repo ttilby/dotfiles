@@ -8,6 +8,10 @@
 " vim-airline - https://github.com/vim-airline/vim-airline
 " nerdtree - https://github.com/scrooloose/nerdtree
 
+" Colors
+" Link to included wallaby.vim file
+" ln -s ~/dotfiles/colors/wallaby.vim ~/.vim/colors/wallaby.vim
+
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " General Config
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
