@@ -33,7 +33,7 @@ set expandtab
 set tw=79                         " width of document (used by gd)
 set nowrap                        " Don't automatically wrap on load
 set fo-=t                         " Don't automatically wrap text when typing
-set colorcolumn=80                " Set right bar
+set colorcolumn=120               " Set right bar
 highlight ColorColumn ctermbg=233
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
