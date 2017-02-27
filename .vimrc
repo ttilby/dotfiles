@@ -11,6 +11,9 @@
 " Colors
 " Link to included wallaby.vim file
 " ln -s ~/dotfiles/colors/wallaby.vim ~/.vim/colors/wallaby.vim
+"
+" gruvbox
+" git clone https://github.com/morhetz/gruvbox.git ~/.vim/bundle/gruvbox
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " General Config
@@ -49,7 +52,7 @@ set t_Co=256
 syntax enable 
 filetype off
 filetype plugin indent on
-colorscheme wallaby
+" colorscheme wallaby
 set guifont=Liberation\ Mono\ for\ Powerline\ 13
 
 
@@ -64,6 +67,10 @@ autocmd vimenter * NERDTree
 " ===== Solarized =====
 "set background=dark
 "colorscheme solarized 
+
+" ===== gruvbox ======
+colorscheme gruvbox
+
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Airline Config
