@@ -49,7 +49,7 @@ set t_Co=256
 syntax enable 
 filetype off
 filetype plugin indent on
-" colorscheme wallaby
+colorscheme wallaby
 set guifont=Liberation\ Mono\ for\ Powerline\ 13
 
 
@@ -62,8 +62,8 @@ execute pathogen#helptags()
 autocmd vimenter * NERDTree
 
 " ===== Solarized =====
-set background=dark
-colorscheme solarized 
+"set background=dark
+"colorscheme solarized 
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Airline Config
