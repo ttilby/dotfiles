@@ -71,6 +71,8 @@ autocmd vimenter * NERDTree
 " ===== gruvbox ======
 colorscheme gruvbox
 
+" Make comments italic (must be after any theme settings)
+highlight Comment cterm=italic      
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Airline Config
