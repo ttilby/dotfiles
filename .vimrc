@@ -11,6 +11,9 @@
 " Colors
 " Link to included wallaby.vim file
 " ln -s ~/dotfiles/colors/wallaby.vim ~/.vim/colors/wallaby.vim
+"
+" gruvbox
+" git clone https://github.com/morhetz/gruvbox.git ~/.vim/bundle/gruvbox
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " General Config
@@ -21,7 +24,11 @@ set hlsearch                      " highlight searches
 set incsearch                     " highlight dynamically as pattern is typed
 set clipboard=unnamed             " Use the OS clipboard by default
 set showmode                      " Show the current mode
-
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set shiftround
+set expandtab
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Document Width 
@@ -42,10 +49,10 @@ let mapleader = ","
 " Colors
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set t_Co=256
-syntax on
+syntax enable 
 filetype off
 filetype plugin indent on
-colorscheme wallaby
+" colorscheme wallaby
 set guifont=Liberation\ Mono\ for\ Powerline\ 13
 
 
@@ -56,6 +63,16 @@ execute pathogen#helptags()
 
 " ===== NERD Tree =====
 autocmd vimenter * NERDTree
+
+" ===== Solarized =====
+"set background=dark
+"colorscheme solarized 
+
+" ===== gruvbox ======
+colorscheme gruvbox
+
+" Make comments italic (must be after any theme settings)
+highlight Comment cterm=italic      
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Airline Config
