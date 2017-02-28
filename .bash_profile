@@ -29,3 +29,10 @@ alias bashreload='source ~/.bash_profile'
 
 # show 10 most used commands
 alias muhistory='history | awk '"'"'{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}'"'"' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n10'
+
+
+# Workspace Management
+
+alias tsync-get='[ -f $HOME/.tsync ] && [ -d "$(cat $HOME/.tsync)" ] && cat $HOME/.tsync'
+alias tsync-set='pwd | tee $HOME/.tsync'
+alias tsync='[ -f $HOME/.tsync ] && [ -d "$(cat $HOME/.tsync)" ] && cd $(cat $HOME/.tsync)'
