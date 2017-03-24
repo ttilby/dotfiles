@@ -361,7 +361,7 @@
 	<key>Default Bookmark Guid</key>
 	<string>8B66B138-D643-48C6-87A8-9E0EDD29B372</string>
 	<key>HideFromDockAndAppSwitcher</key>
-	<true/>
+	<false/>
 	<key>HotKeyBookmark</key>
 	<string>2B1C7971-28C5-4BCD-A418-3E93A7EC9B0A</string>
 	<key>HotKeyTogglesWindow</key>
@@ -414,9 +414,9 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>2677 501 851 103 1680 -30 1920 1058 </string>
 	<key>NSWindow Frame SharedPreferences</key>
-	<string>2582 429 796 473 1680 -30 1920 1058 </string>
+	<string>2581 416 796 473 1680 -30 1920 1058 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>2433 175 1019 747 1680 -30 1920 1058 </string>
+	<string>1793 44 1649 978 1680 -30 1920 1058 </string>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -684,7 +684,7 @@
 			<key>Close Sessions On End</key>
 			<true/>
 			<key>Columns</key>
-			<integer>80</integer>
+			<integer>200</integer>
 			<key>Command</key>
 			<string></string>
 			<key>Cursor Color</key>
@@ -1077,9 +1077,9 @@
 			<key>Right Option Key Sends</key>
 			<integer>0</integer>
 			<key>Rows</key>
-			<integer>25</integer>
+			<integer>50</integer>
 			<key>Screen</key>
-			<integer>-1</integer>
+			<integer>-2</integer>
 			<key>Scrollback Lines</key>
 			<integer>100000</integer>
 			<key>Selected Text Color</key>
@@ -1114,12 +1114,14 @@
 			<string></string>
 			<key>Silence Bell</key>
 			<false/>
+			<key>Space</key>
+			<integer>0</integer>
 			<key>Sync Title</key>
 			<false/>
 			<key>Tags</key>
 			<array/>
 			<key>Terminal Type</key>
-			<string>xterm-256color</string>
+			<string>xterm-256color-italic</string>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
@@ -1845,6 +1847,8 @@
 	<real>0.14015925480769234</real>
 	<key>TabStyle</key>
 	<integer>1</integer>
+	<key>UseBorder</key>
+	<false/>
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>

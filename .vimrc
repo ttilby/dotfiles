@@ -69,7 +69,8 @@ autocmd vimenter * NERDTree
 "colorscheme solarized 
 
 " ===== gruvbox ======
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme brogrammer
 
 " Make comments italic (must be after any theme settings)
 highlight Comment cterm=italic      
