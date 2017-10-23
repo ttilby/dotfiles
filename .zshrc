@@ -85,6 +85,7 @@ for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
 done
 unset file
 
+export JAVA_HOME=$(/usr/libexec/java_home)
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
