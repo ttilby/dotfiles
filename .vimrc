@@ -52,7 +52,7 @@ set t_Co=256
 syntax enable 
 filetype off
 filetype plugin indent on
-" colorscheme wallaby
+colorscheme wallaby
 set guifont=Liberation\ Mono\ for\ Powerline\ 13
 
 
@@ -61,15 +61,17 @@ set guifont=Liberation\ Mono\ for\ Powerline\ 13
 execute pathogen#infect()
 execute pathogen#helptags()
 
-" ===== NERD Tree =====
-autocmd vimenter * NERDTree
 
 " ===== Solarized =====
 "set background=dark
 "colorscheme solarized 
 
-" ===== gruvbox ======
-colorscheme gruvbox
+" colorscheme gruvbox
+" colorscheme darkside
+
+" ===== NERD Tree =====
+autocmd vimenter * NERDTree
+
 
 " Make comments italic (must be after any theme settings)
 highlight Comment cterm=italic      
