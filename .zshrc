@@ -87,6 +87,10 @@ unset file
 
 export JAVA_HOME=$(/usr/libexec/java_home)
 
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # load nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # load nvm bash completion
+
 # export MANPATH="/usr/local/man:$MANPATH"
 
 # You may need to manually set your language environment
