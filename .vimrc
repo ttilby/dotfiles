@@ -89,7 +89,7 @@ let g:bufferline_echo = 0
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 noremap <C-p> :NERDTreeToggle<CR>     " use Ctrl-p to open/close NERDTree
 " autocmd vimenter * NERDTree         " auto open NERDTree when vim starts
-NERDTreeShowHidden=1                  " show hidden files by default
+let NERDTreeShowHidden=1                  " show hidden files by default
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Fugitive
