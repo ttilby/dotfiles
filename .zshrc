@@ -11,7 +11,7 @@ export ZSH=$HOME/.oh-my-zsh
 ZSH_THEME="powerlevel9k/powerlevel9k"
 
 # Powerlevel9k is the best theme for prompt, I like to keep it in dark gray colors
-DEFAULT_USER=t.tilby
+DEFAULT_USER=todd
 # POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status history time)
@@ -113,3 +113,5 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/opt/node@6/bin:$PATH"
