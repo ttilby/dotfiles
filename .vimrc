@@ -52,14 +52,14 @@ set t_Co=256
 syntax enable 
 filetype off
 filetype plugin indent on
-colorscheme wallaby
+" colorscheme wallaby
 set guifont=Liberation\ Mono\ for\ Powerline\ 13
 
 
 " ===== Plugins       ======
 " Pathogen
-execute pathogen#infect()
-execute pathogen#helptags()
+" execute pathogen#infect()
+" execute pathogen#helptags()
 
 " ===== Solarized =====
 "set background=dark
