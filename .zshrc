@@ -69,15 +69,15 @@ POWERLEVEL9K_HISTORY_FOREGROUND='252'
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git brew node npm sudo ng)
+plugins=(git brew node npm sudo ng zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # User configuration
 
 # Contains sensitive data that should not be in source control
 source $HOME/.exports
+source $HOME/.exports_cp
 
 # These can be in source control
 for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
@@ -85,7 +85,7 @@ for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
 done
 unset file
 
-export JAVA_HOME=$(/usr/libexec/java_home)
+#export JAVA_HOME=$(/usr/libexec/java_home)
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
@@ -113,5 +113,39 @@ export JAVA_HOME=$(/usr/libexec/java_home)
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias tldr="~/bin/tldr $1"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/node@6/bin:$PATH"
+export PATH="$PATH:~/bin"
+
+### Kubernetes context prompt ###
+get_kube_context() {
+    kubectl config current-context
+}
+get_kube_namespace(){
+    NS=$(kubectl config view --minify --output 'jsonpath={..namespace}')
+    if [ -z $NS ]; then echo "default"; else echo $NS; fi
+}
+ 
+# add \[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] to your PS1 prompt
+PS1="\[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] $PS1"
+ 
+# add kubectl autocomplete
+source <(kubectl completion zsh)
+
+### kubernetes pods lister ###
+pods() {
+    current_context=`kubectl config current-context`
+    if [ ! -z "$current_context" ]; then
+        current_namespace=`kubectl config view -o=jsonpath="{.contexts[?(@.name==\"$current_context\")].context.namespace}"`
+    else
+        current_namespace=default
+    fi
+    echo "($current_context, $current_namespace) pods:"
+    kubectl get pods | grep -v Completed | rev | cut -d '-' -f2- | rev | uniq | tail -n +2
+}
+
+### docker-machine completions ###
+fpath=(~/.zsh/completion $fpath)
+autoload -Uz compinit && compinit -i
+
