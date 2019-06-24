@@ -18,7 +18,7 @@ conky.config = {
     override_utf8_locale = true,
  
     -- placement
-    alignment = 'top_right',
+    alignment = 'top_left',
     gap_x = 0,
     gap_y = 25,
  
@@ -86,11 +86,11 @@ ${template1 Signal}             ${template2}${wireless_link_qual_perc wlan0} ${t
 ${template1 Download}           ${template2}${downspeed wlan0}              ${template3}${downspeedgraph wlan0}
 ${template1 Upload}             ${template2}${upspeed wlan0}                ${template3}${upspeedgraph wlan0}
 ${template1 Total Down/Up}                                                  ${template3}${totaldown wlan0}↓ / {totalup wlan0}↑
-${else}${if_existing /proc/net/route eth0}\
-${template1 Ip}                                                             ${template3}${addr eth0}
-${template1 Download}           ${template2}${downspeed eth0}               ${template3}${downspeedgraph eth0}
-${template1 Upload}             ${template2}${upspeed eth0}                 ${template3}${upspeedgraph eth0}
-${template1 Total Down/Up}                                                  ${template3}${totaldown eth0}↓ / ${totalup eth0}↑
+${else}${if_existing /proc/net/route enp5so}\
+${template1 Ip}                                                             ${template3}${addr eenp5so}
+${template1 Download}           ${template2}${downspeed enp5so}               ${template3}${downspeedgraph enp5so}
+${template1 Upload}             ${template2}${upspeed enp5so}                 ${template3}${upspeedgraph enp5so}
+${template1 Total Down/Up}                                                  ${template3}${totaldown enp5so}↓ / ${totalup enp5so}↑
 ${endif}${endif}\
  
  
