@@ -1,3 +1,8 @@
+# used to specify the system to control which lines are executed on which
+# system
+system_type=$(uname -s)
+host=$(uname -n)
+
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
@@ -77,7 +82,9 @@ source $ZSH/oh-my-zsh.sh
 
 # Contains sensitive data that should not be in source control
 source $HOME/.exports
-source $HOME/.exports_cp
+if [ "$host" != "SilverBullet" ]; then
+    source $HOME/.exports_cp
+fi
 
 # These can be in source control
 for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do
@@ -131,7 +138,9 @@ get_kube_namespace(){
 PS1="\[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] $PS1"
  
 # add kubectl autocomplete
-source <(kubectl completion zsh)
+if hash kubectl 2>/dev/null; then
+    source <(kubectl completion zsh)
+fi    
 
 ### kubernetes pods lister ###
 pods() {
