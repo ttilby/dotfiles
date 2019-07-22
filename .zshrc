@@ -149,3 +149,7 @@ pods() {
 fpath=(~/.zsh/completion $fpath)
 autoload -Uz compinit && compinit -i
 
+
+function dip() {
+    docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'
+}
