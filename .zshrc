@@ -119,7 +119,9 @@ unset file
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias tldr="~/bin/tldr $1"
+if [[ "$host" != "SilverBullet"* ]]; then
+    alias tldr="~/bin/tldr $1"
+fi
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/node@6/bin:$PATH"
 export PATH="$PATH:~/bin"
