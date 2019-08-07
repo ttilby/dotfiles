@@ -80,9 +80,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# Contains sensitive data that should not be in source control
 source $HOME/.exports
-if [ "$host" != "SilverBullet" ]; then
+if [[ "$host" != "SilverBullet"* ]]; then
     source $HOME/.exports_cp
 fi
 
