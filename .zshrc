@@ -1,3 +1,5 @@
+export TERM="xterm-256color"
+
 # used to specify the system to control which lines are executed on which
 # system
 system_type=$(uname -s)
@@ -164,3 +166,5 @@ autoload -Uz compinit && compinit -i
 function dip() {
     docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'
 }
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

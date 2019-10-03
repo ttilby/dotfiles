@@ -43,7 +43,10 @@ highlight ColorColumn ctermbg=233
 " Key Bindings
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 let mapleader = ","
-
+nnoremap <C-J> <C-W><C-J>         " change split navigation to not
+nnoremap <C-K> <C-W><C-K>         " require 'CTRL-W'.
+nnoremap <C-L> <C-W><C-L>         " Just use 'CTRL-H/J/K/L'
+nnoremap <C-H> <C-W><C-H>   
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Colors
@@ -54,6 +57,13 @@ filetype off
 filetype plugin indent on
 " colorscheme wallaby
 set guifont=Liberation\ Mono\ for\ Powerline\ 13
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Netrw
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+let g:netrw_liststyle = 3
+let g:netrw_winsize = 25
+" let g:netrw_browse_split = 4
 
 
 " ===== Plugins       ======
@@ -93,9 +103,9 @@ let g:bufferline_echo = 0
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " NerdTREE (Git)
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-noremap <C-p> :NERDTreeToggle<CR>     " use Ctrl-p to open/close NERDTree
+" noremap <C-p> :NERDTreeToggle<CR>     " use Ctrl-p to open/close NERDTree
 " autocmd vimenter * NERDTree         " auto open NERDTree when vim starts
-let NERDTreeShowHidden=1                  " show hidden files by default
+" let NERDTreeShowHidden=1                  " show hidden files by default
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Fugitive
