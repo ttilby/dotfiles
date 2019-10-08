@@ -1,5 +1,10 @@
 " ./vimrc
 
+" Installation:
+" 1. install pathogen
+" 2. git submodule init
+" 3. git submodule update
+
 " AutoLoad
 " vim-pathogen-git - https://github.com/tpope/vim-pathogen
 

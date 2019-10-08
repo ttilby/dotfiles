@@ -1,0 +1,6 @@
+[submodule "/Users/todd/.vim/bundle/vim-airline"]
+	path = /Users/todd/.vim/bundle/vim-airline
+	url = https://github.com/vim-airline/vim-airline
+[submodule "/Users/todd/.vim/bundle/vim-gitgutter"]
+	path = /Users/todd/.vim/bundle/vim-gitgutter
+	url = https://github.com/airblade/vim-gitgutter.git
