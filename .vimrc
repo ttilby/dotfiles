@@ -57,9 +57,9 @@ set guifont=Liberation\ Mono\ for\ Powerline\ 13
 
 
 " ===== Plugins       ======
-" Pathogen
-" execute pathogen#infect()
-" execute pathogen#helptags()
+" Pathogen - this will auto load plugins from .vim/bundle
+execute pathogen#infect()
+execute pathogen#helptags()
 
 " ===== Solarized =====
 "set background=dark
@@ -93,7 +93,7 @@ let g:bufferline_echo = 0
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " NerdTREE (Git)
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-noremap <C-p> :NERDTreeToggle<CR>     " use Ctrl-p to open/close NERDTree
+" noremap <C-p> :NERDTreeToggle<CR>     " use Ctrl-p to open/close NERDTree
 " autocmd vimenter * NERDTree         " auto open NERDTree when vim starts
 let NERDTreeShowHidden=1                  " show hidden files by default
 

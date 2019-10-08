@@ -1,3 +1,5 @@
+export TERM="xterm-256color"
+
 # used to specify the system to control which lines are executed on which
 # system
 system_type=$(uname -s)
