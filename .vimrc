@@ -22,6 +22,12 @@ set number                        " line numbers
 set showmode                      " Show current mode at the bottom
 set hlsearch                      " highlight searches
 set incsearch                     " highlight dynamically as pattern is typed
+set ignorecase                    " case insensitive search (unless specified)
+
+" Stop highlight after searching
+nnoremap <silent> <leader>, :noh<cr>
+
+set smartcase                     " override ignorecase if search string has capitals
 set clipboard=unnamed             " Use the OS clipboard by default
 set showmode                      " Show the current mode
 set tabstop=4
@@ -29,6 +35,7 @@ set softtabstop=4
 set shiftwidth=4
 set shiftround
 set expandtab
+" set ruler
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Document Width 
@@ -38,14 +45,20 @@ set nowrap                        " Don't automatically wrap on load
 set fo-=t                         " Don't automatically wrap text when typing
 set colorcolumn=120               " Set right bar
 highlight ColorColumn ctermbg=233
+set scrolloff=8                   " Start scrolling when x lines away from margins
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Key Bindings
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 let mapleader = ","
-nnoremap <C-J> <C-W><C-J>         " change split navigation to not
-nnoremap <C-K> <C-W><C-K>         " require 'CTRL-W'.
-nnoremap <C-L> <C-W><C-L>         " Just use 'CTRL-H/J/K/L'
+nnoremap <F5> :buffers<CR>:buffer<Space>
+
+" Change split navigation to not
+" require 'CTRL-W'. 
+" Just use 'CTRL-H/J/K/L' 
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>   
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
