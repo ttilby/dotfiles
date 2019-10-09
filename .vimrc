@@ -29,9 +29,6 @@ set hlsearch                      " highlight searches
 set incsearch                     " highlight dynamically as pattern is typed
 set ignorecase                    " case insensitive search (unless specified)
 
-" Stop highlight after searching
-nnoremap <silent> <leader>, :noh<cr>
-
 set smartcase                     " override ignorecase if search string has capitals
 set clipboard=unnamed             " Use the OS clipboard by default
 set showmode                      " Show the current mode
@@ -58,6 +55,9 @@ set scrolloff=8                   " Start scrolling when x lines away from margi
 let mapleader = ","
 nnoremap <F5> :buffers<CR>:buffer<Space>
 
+" Stop highlight after searching
+nnoremap <silent> <leader>, :noh<cr>
+
 " Change split navigation to not
 " require 'CTRL-W'. 
 " Just use 'CTRL-H/J/K/L' 
@@ -65,6 +65,11 @@ nnoremap <C-J> <C-W><C-J>
 nnoremap <C-K> <C-W><C-K>
 nnoremap <C-L> <C-W><C-L>
 nnoremap <C-H> <C-W><C-H>   
+
+" YouCompleteMe
+nnoremap <leader>dc :YcmCompleter GoToDeclaration<CR>
+nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>r :YcmCompleter GoToReferences<CR>
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Colors
