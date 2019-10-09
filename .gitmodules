@@ -10,3 +10,9 @@
 [submodule ".vim/bundle/YouCompleteMe"]
 	path = .vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
+[submodule "/home/todd/.vim/bundle/nerdtree"]
+	path = /home/todd/.vim/bundle/nerdtree
+	url = https://github.com/scrooloose/nerdtree.git
+[submodule "/home/todd/.vim/bundle/flake8"]
+	path = /home/todd/.vim/bundle/flake8
+	url = git@github.com:nvie/vim-flake8.git

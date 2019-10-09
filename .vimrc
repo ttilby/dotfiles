@@ -12,6 +12,7 @@
 " vim-gitgutter - https://github.com/airblade/vim-gitgutter
 " vim-airline - https://github.com/vim-airline/vim-airline
 " nerdtree - https://github.com/scrooloose/nerdtree
+" flake8 - git@github.com:nvie/vim-flake8.git (python checking)
 
 " Colors
 " Link to included wallaby.vim file
@@ -84,8 +85,8 @@ set guifont=Liberation\ Mono\ for\ Powerline\ 13
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Netrw
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-let g:netrw_liststyle = 3
-let g:netrw_winsize = 25
+" let g:netrw_liststyle = 3
+" let g:netrw_winsize = 25
 " let g:netrw_browse_split = 4
 
 
@@ -93,6 +94,7 @@ let g:netrw_winsize = 25
 " Pathogen - this will auto load plugins from .vim/bundle
 execute pathogen#infect()
 execute pathogen#helptags()
+filetype plugin indent on
 
 " ===== Solarized =====
 "set background=dark
@@ -103,10 +105,6 @@ execute pathogen#helptags()
 colorscheme brogrammer
 " colorscheme gruvbox
 " colorscheme darkside
-
-" ===== NERD Tree =====
-" autocmd vimenter * NERDTree
-
 
 " Make comments italic (must be after any theme settings)
 highlight Comment cterm=italic      
@@ -126,11 +124,21 @@ let g:bufferline_echo = 0
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " NerdTREE (Git)
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" noremap <C-p> :NERDTreeToggle<CR>     " use Ctrl-p to open/close NERDTree
-" autocmd vimenter * NERDTree         " auto open NERDTree when vim starts
-" let NERDTreeShowHidden=1                  " show hidden files by default
+" use Ctrl-p to open/close NERDTree
+noremap <C-p> :NERDTreeToggle<CR>     
+" auto open NERDTree when vim starts
+autocmd vimenter * NERDTree         
+" show hidden files by default
+let NERDTreeShowHidden=1
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Fugitive
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 set diffopt+=vertical                 " use vertical split for :Gdiff
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Flake (python checking)
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" automatically check style when writing python code
+autocmd BufWritePost *.py call Flake8()
+
