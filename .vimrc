@@ -28,9 +28,12 @@
 set number relativenumber
 augroup numbertoggle
     autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-    autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set norelativenumber
 augroup END
+
+" Save whenever switching windows or leaving vim
+au FocusLost,WinLeave * :silent! wa
 
 set showmode                      " Show current mode at the bottom
 set hlsearch                      " highlight searches
