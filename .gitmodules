@@ -10,9 +10,15 @@
 [submodule ".vim/bundle/YouCompleteMe"]
 	path = .vim/bundle/YouCompleteMe
 	url = https://github.com/Valloric/YouCompleteMe.git
-[submodule "/home/todd/.vim/bundle/nerdtree"]
-	path = /home/todd/.vim/bundle/nerdtree
+[submodule ".vim/bundle/nerdtree"]
+	path = .vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
-[submodule "/home/todd/.vim/bundle/flake8"]
-	path = /home/todd/.vim/bundle/flake8
+[submodule ".vim/bundle/flake8"]
+	path = .vim/bundle/flake8
 	url = git@github.com:nvie/vim-flake8.git
+[submodule ".tmux/plugins/resurrect"]
+	path = .tmux/plugins/resurrect
+	url = https://github.com/tmux-plugins/tmux-resurrect
+[submodule ".tmux/plugins/continuum"]
+	path = .tmux/plugins/continuum
+	url = https://github.com/tmux-plugins/tmux-continuum
