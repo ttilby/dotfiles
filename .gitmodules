@@ -22,3 +22,6 @@
 [submodule ".tmux/plugins/yank"]
 	path = .tmux/plugins/yank
 	url = https://github.com/tmux-plugins/tmux-yank
+[submodule ".tmux/plugins/tmux-mem-cpu-load"]
+	path = .tmux/plugins/tmux-mem-cpu-load
+	url = https://github.com/thewtex/tmux-mem-cpu-load.git
