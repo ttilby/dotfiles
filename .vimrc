@@ -49,6 +49,8 @@ set shiftwidth=4
 set shiftround
 set expandtab
 " set ruler
+set wildmenu
+set wildmode=list:longest,full
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Document Width 
