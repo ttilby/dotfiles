@@ -67,8 +67,13 @@ set scrolloff=8                   " Start scrolling when x lines away from margi
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 let mapleader = ","
 
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Buffer management
-nnoremap <F5> :buffers<CR>:buffer<Space>
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" manual management
+" nnoremap <F5> :buffers<CR>:buffer<Space>
+" using bufexplorer plugin
+nnoremap <F5> :ToggleBufExplorer<CR>
 
 
 " Stop highlight after searching
