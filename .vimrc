@@ -92,6 +92,11 @@ nnoremap <leader>dc :YcmCompleter GoToDeclaration<CR>
 nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
 nnoremap <leader>r :YcmCompleter GoToReferences<CR>
 
+" FZF
+nnoremap <leader>f :FZF<CR>
+nnoremap <leader>g :Rg<CR>
+set rtp+=~/.fzf
+
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Colors
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -109,6 +114,9 @@ set guifont=Liberation\ Mono\ for\ Powerline\ 13
 " let g:netrw_winsize = 25
 " let g:netrw_browse_split = 4
 
+" ===== FZF.vim =======
+" https://github.com/junegunn/fzf#installation
+"set runtimepath+=~/.fzf 
 
 " ===== Plugins       ======
 " Pathogen - this will auto load plugins from .vim/bundle
