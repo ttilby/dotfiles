@@ -13,6 +13,7 @@
 " vim-airline - https://github.com/vim-airline/vim-airline
 " nerdtree - https://github.com/scrooloose/nerdtree
 " flake8 - git@github.com:nvie/vim-flake8.git (python checking)
+" vim-obession - git://github.com/tpope/vim-obsession.git
 
 " Colors
 " Link to included wallaby.vim file
@@ -131,7 +132,6 @@ filetype plugin indent on
 " ===== gruvbox ======
 " colorscheme gruvbox
 colorscheme brogrammer
-" colorscheme gruvbox
 " colorscheme darkside
 
 " Make comments italic (must be after any theme settings)
@@ -147,6 +147,9 @@ set laststatus=2
 set ttimeoutlen=50
 let g:airline_powerline_fonts = 1
 let g:airline#extensions#tabline#enabled = 1
+" adds an indicator (default "$") to the status line if session is currently
+" tracked by vim-obsession
+let g:airline#extensions#obession#enabled = 1
 let g:bufferline_echo = 0
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
