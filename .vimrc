@@ -13,6 +13,8 @@
 " vim-airline - https://github.com/vim-airline/vim-airline
 " nerdtree - https://github.com/scrooloose/nerdtree
 " flake8 - git@github.com:nvie/vim-flake8.git (python checking)
+"        - require local install of flake8
+"        - pip install flake8
 " vim-obession - git://github.com/tpope/vim-obsession.git
 
 " Colors
