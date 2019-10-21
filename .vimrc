@@ -175,7 +175,8 @@ let g:bufferline_echo = 0
 " NerdTREE (Git)
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " use Ctrl-p to open/close NERDTree
-noremap <C-p> :NERDTreeToggle<CR>     
+noremap <C-p> :NERDTreeToggle<CR>
+noremap <leader>p :NERDTreeFind<CR>
 " auto open NERDTree when vim starts
 " autocmd vimenter * NERDTree         
 " auto open NERDTree when vim starts if no files were specified
