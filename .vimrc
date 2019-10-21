@@ -3,10 +3,18 @@
 " Installation:
 " 1. install pathogen
 " 2. git submodule init
-" 3. git submodule update
+" 3. git submodule update --recursive
+"
+" Steps 2 and 3 will need to be done if a new submodule is added on another
+" computer
 
 " AutoLoad
 " vim-pathogen-git - https://github.com/tpope/vim-pathogen
+
+" Required external programs
+" 1. fzf
+"       need to ensure the runtime path (rtp) below is properly set
+" 2. ripgrep
 
 " Install Notes
 " vim-gitgutter - https://github.com/airblade/vim-gitgutter
@@ -16,6 +24,10 @@
 "        - require local install of flake8
 "        - pip install flake8
 " vim-obession - git://github.com/tpope/vim-obsession.git
+" YouCompleteMe - https://github.com/ycm-core/YouCompleteMe.git
+"        - requires additional installation:
+"           - cd ~/.vim/bundle/YouCompleteMe
+"           - ./install.py
 
 " Colors
 " Link to included wallaby.vim file
@@ -98,7 +110,12 @@ nnoremap <leader>r :YcmCompleter GoToReferences<CR>
 " FZF
 nnoremap <leader>f :FZF<CR>
 nnoremap <leader>g :Rg<CR>
-set rtp+=~/.fzf
+if isdirectory("~/.fzf")
+    set rtp+=~/.fzf
+endif
+if isdirectory("/usr/local/opt/fzf")
+    set rtp+=/usr/local/opt/fzf
+endif
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Colors
