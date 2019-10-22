@@ -53,6 +53,26 @@ git_branch () {
   echo "${ref#refs/heads/}"
 }
 
+git_remote_branch () {
+    local remote
+    # local branch_name="${hook_com[branch]}"
+    local _branch_name=$(git_branch)
+
+
+    # Are we on a remote-tracking branch?
+    remote=${$(command git rev-parse --verify HEAD@{upstream} --symbolic-full-name 2>/dev/null)/refs\/(remotes|heads)\/}
+
+    # branch_name="$(print_icon 'VCS_BRANCH_ICON')${_branch_name}"
+    branch_name="${_branch_name}"
+    # Always show the remote
+    #if [[ -n ${remote} ]] ; then
+    # Only show the remote if it differs from the local
+    if [[ -n ${remote} ]] && [[ "${remote#*/}" != "${_branch_name}" ]] ; then
+        branch_name+="${remote// /}"
+    fi
+    echo "${branch_name}"
+}
+
 git_status () {
   _STATUS=""
 
@@ -89,6 +109,7 @@ git_status () {
 
 git_prompt () {
   local _branch=$(git_branch)
+  #local _branch=$(git_remote_branch)
   local _status=$(git_status)
   local _result=""
   if [[ "${_branch}x" != "x" ]]; then

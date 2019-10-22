@@ -9,7 +9,7 @@ SPACESHIP_PROMPT_ORDER=(
   venv
   pyenv
   aws
-  kubecontext
+  # kubecontext
   node
   char
 )

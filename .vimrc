@@ -110,7 +110,7 @@ nnoremap <leader>r :YcmCompleter GoToReferences<CR>
 " FZF
 nnoremap <leader>f :FZF<CR>
 nnoremap <leader>g :Rg<CR>
-if isdirectory("~/.fzf")
+if isdirectory("/home/todd/.fzf")
     set rtp+=~/.fzf
 endif
 if isdirectory("/usr/local/opt/fzf")
