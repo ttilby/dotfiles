@@ -37,3 +37,9 @@
 [submodule ".vim/bundle/vim-obsession"]
 	path = .vim/bundle/vim-obsession
 	url = git://github.com/tpope/vim-obsession.git
+[submodule ".themes/zeta-zsh-theme"]
+	path = .themes/zeta-zsh-theme
+	url = https://github.com/skylerlee/zeta-zsh-theme.git
+[submodule ".themes/zsh-spaceship-prompt"]
+	path = .themes/zsh-spaceship-prompt
+	url = https://github.com/denysdovhan/spaceship-prompt.git

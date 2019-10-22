@@ -15,24 +15,28 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="powerlevel9k/powerlevel9k"
+# ZSH_THEME="powerlevel9k/powerlevel9k"
+ZSH_THEME="spaceship"
+source ~/.themes/spaceship-prompt
+
 
 # Powerlevel9k is the best theme for prompt, I like to keep it in dark gray colors
-DEFAULT_USER=todd
-# POWERLEVEL9K_PROMPT_ON_NEWLINE=true
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
-POWERLEVEL9K_DIR_BACKGROUND='238'
-POWERLEVEL9K_DIR_FOREGROUND='252'
-POWERLEVEL9K_STATUS_BACKGROUND='238'
-POWERLEVEL9K_STATUS_FOREGROUND='252'
-POWERLEVEL9K_CONTEXT_BACKGROUND='240'
-POWERLEVEL9K_CONTEXT_FOREGROUND='252'
-POWERLEVEL9K_TIME_BACKGROUND='238'
-POWERLEVEL9K_TIME_FOREGROUND='252'
-POWERLEVEL9K_HISTORY_BACKGROUND='240'
-POWERLEVEL9K_HISTORY_FOREGROUND='252'
+# DEFAULT_USER=todd
+# # POWERLEVEL9K_PROMPT_ON_NEWLINE=true
+# # POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+# POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context)
+# # POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
+# POWERLEVEL9K_SHORTEN_DIR_LENGTH=3
+# POWERLEVEL9K_DIR_BACKGROUND='238'
+# POWERLEVEL9K_DIR_FOREGROUND='252'
+# POWERLEVEL9K_STATUS_BACKGROUND='238'
+# POWERLEVEL9K_STATUS_FOREGROUND='252'
+# POWERLEVEL9K_CONTEXT_BACKGROUND='240'
+# POWERLEVEL9K_CONTEXT_FOREGROUND='252'
+# POWERLEVEL9K_TIME_BACKGROUND='238'
+# POWERLEVEL9K_TIME_FOREGROUND='252'
+# POWERLEVEL9K_HISTORY_BACKGROUND='240'
+# POWERLEVEL9K_HISTORY_FOREGROUND='252'
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -133,41 +137,45 @@ export PATH="$PATH:~/bin"
 export PATH="/home/todd/.npm-global/bin:$PATH"
 
 ### Kubernetes context prompt ###
-get_kube_context() {
-    kubectl config current-context
-}
-get_kube_namespace(){
-    NS=$(kubectl config view --minify --output 'jsonpath={..namespace}')
-    if [ -z $NS ]; then echo "default"; else echo $NS; fi
-}
+if type "$kubectl" > /dev/null; then
+    get_kube_context() {
+        kubectl config current-context
+    }
+    get_kube_namespace(){
+        NS=$(kubectl config view --minify --output 'jsonpath={..namespace}')
+        if [ -z $NS ]; then echo "default"; else echo $NS; fi
+    }
+    
+    # add \[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] to your PS1 prompt
+    PS1="\[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] $PS1"
  
-# add \[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] to your PS1 prompt
-PS1="\[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] $PS1"
- 
-# add kubectl autocomplete
-if hash kubectl 2>/dev/null; then
-    source <(kubectl completion zsh)
-fi    
+    # add kubectl autocomplete
+    if hash kubectl 2>/dev/null; then
+        source <(kubectl completion zsh)
+    fi    
 
-### kubernetes pods lister ###
-pods() {
-    current_context=`kubectl config current-context`
-    if [ ! -z "$current_context" ]; then
-        current_namespace=`kubectl config view -o=jsonpath="{.contexts[?(@.name==\"$current_context\")].context.namespace}"`
-    else
-        current_namespace=default
-    fi
-    echo "($current_context, $current_namespace) pods:"
-    kubectl get pods | grep -v Completed | rev | cut -d '-' -f2- | rev | uniq | tail -n +2
-}
+    ### kubernetes pods lister ###
+    pods() {
+        current_context=`kubectl config current-context`
+        if [ ! -z "$current_context" ]; then
+            current_namespace=`kubectl config view -o=jsonpath="{.contexts[?(@.name==\"$current_context\")].context.namespace}"`
+        else
+            current_namespace=default
+        fi
+        echo "($current_context, $current_namespace) pods:"
+        kubectl get pods | grep -v Completed | rev | cut -d '-' -f2- | rev | uniq | tail -n +2
+    }
+fi
 
-### docker-machine completions ###
-fpath=(~/.zsh/completion $fpath)
-autoload -Uz compinit && compinit -i
+if type "$docker" > /dev/null; then
+    ### docker-machine completions ###
+    fpath=(~/.zsh/completion $fpath)
+    autoload -Uz compinit && compinit -i
 
 
-function dip() {
-    docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'
-}
+    function dip() {
+        docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'
+    }
+fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
