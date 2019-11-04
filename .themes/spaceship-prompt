@@ -4,7 +4,7 @@ SPACESHIP_PROMPT_ORDER=(
   vi_mode  # these sections will be
   user     # before prompt char
   host     #
-  # dir
+  dir
   docker
   venv
   pyenv
@@ -16,7 +16,7 @@ SPACESHIP_PROMPT_ORDER=(
 
 # PROMPT
 SPACESHIP_CHAR_SYMBOL="$"
-SPACESHIP_CHAR_PREFIX=" "
+SPACESHIP_CHAR_PREFIX=""
 SPACESHIP_CHAR_SUFFIX=" "
 SPACESHIP_PROMPT_ADD_NEWLINE=false
 SPACESHIP_PROMPT_SEPARATE_LINE=false

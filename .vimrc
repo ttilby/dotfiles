@@ -16,6 +16,13 @@
 "       need to ensure the runtime path (rtp) below is properly set
 " 2. ripgrep
 
+" NeoVim---------------
+" If switching to neovim, run these commands to link up original vim configs
+" ln -s ~/.vimrc ~/.config/nvim/init.vim
+" ln -s ~/.vim/bundle ~/.config/nvim/bundle
+" ln -s ~/.vim/autoload ~/.config/nvim/autoload
+" ln -s ~/.vim/colors ~/.config/nvim/colors
+
 " Install Notes
 " vim-gitgutter - https://github.com/airblade/vim-gitgutter
 " vim-airline - https://github.com/vim-airline/vim-airline
