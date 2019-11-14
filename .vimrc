@@ -207,4 +207,3 @@ let NERDTreeShowHidden=1
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " automatically check style when writing python code
 autocmd BufWritePost *.py call Flake8()
-
