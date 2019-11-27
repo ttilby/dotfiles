@@ -74,6 +74,9 @@ set expandtab
 set wildmenu
 set wildmode=list:longest,full
 
+" remove trailing whitespace on save
+autocmd BufWritePre * :%s/\s+$//e
+
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Document Width 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
