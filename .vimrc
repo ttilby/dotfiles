@@ -46,6 +46,10 @@
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " General Config
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+if &compatible
+    set nocompatible
+endif
+
 " hybrid line numbers
 set number relativenumber
 augroup numbertoggle
@@ -63,19 +67,21 @@ set incsearch                     " highlight dynamically as pattern is typed
 set ignorecase                    " case insensitive search (unless specified)
 
 set smartcase                     " override ignorecase if search string has capitals
-set clipboard=unnamed             " Use the OS clipboard by default
+" set clipboard=unnamed             " Use the OS clipboard by default
+set clipboard+=unnamedplus
 set showmode                      " Show the current mode
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set shiftround
 set expandtab
+set mouse=a mousemodel=popup
 " set ruler
 set wildmenu
 set wildmode=list:longest,full
 
 " remove trailing whitespace on save
-autocmd BufWritePre * :%s/\s+$//e
+" autocmd BufWritePre * :%s/\s\+$//e
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Document Width 
@@ -83,7 +89,7 @@ autocmd BufWritePre * :%s/\s+$//e
 set tw=79                         " width of document (used by gd)
 set nowrap                        " Don't automatically wrap on load
 set fo-=t                         " Don't automatically wrap text when typing
-set colorcolumn=120               " Set right bar
+set colorcolumn=88                " Set right bar
 highlight ColorColumn ctermbg=233
 set scrolloff=8                   " Start scrolling when x lines away from margins
 
@@ -209,4 +215,7 @@ let NERDTreeShowHidden=1
 " Flake (python checking)
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " automatically check style when writing python code
+let g:flake8_show_quickfix=1
+let g:flake8_show_in_gutter=1
+
 autocmd BufWritePost *.py call Flake8()

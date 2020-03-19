@@ -43,6 +43,3 @@
 [submodule ".themes/zsh-spaceship-prompt"]
 	path = .themes/zsh-spaceship-prompt
 	url = https://github.com/denysdovhan/spaceship-prompt.git
-[submodule ".tmux/plugins/sysstat"]
-	path = .tmux/plugins/sysstat
-	url = https://github.com/samoshkin/tmux-plugin-sysstat.git

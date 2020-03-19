@@ -87,8 +87,10 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 source $HOME/.exports
-if [[ "$host" != "SilverBullet"* ]]; then
-    source $HOME/.exports_cp
+if [[ "$host" == "toddt-SH370"* ]]; then
+#    source $HOME/.exports_cp
+    source $HOME/CProjects/environ/default.env
+    source $HOME/.confluent.env
 fi
 
 # These can be in source control
@@ -153,6 +155,9 @@ if type "$kubectl" > /dev/null; then
     if hash kubectl 2>/dev/null; then
         source <(kubectl completion zsh)
     fi    
+
+    # get a new dashboard key
+    alias dashboard-rekey="aws eks get-token --cluster-name $(kubectl config current-context) | jq -r .status.token | pbcopy"
 
     ### kubernetes pods lister ###
     pods() {
