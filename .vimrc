@@ -160,15 +160,18 @@ execute pathogen#infect()
 execute pathogen#helptags()
 filetype plugin indent on
 
+" ===== Background =====
+" used by some themes, can be dark or light
+set background=dark
+
 " ===== Solarized =====
-"set background=dark
 "colorscheme solarized 
 
 " ===== gruvbox ======
 " colorscheme gruvbox
 " colorscheme brogrammer
 " colorscheme darkside
-colorscheme fingerpaint
+colorscheme ThemerVim
 
 " Make comments italic (must be after any theme settings)
 highlight Comment cterm=italic      
