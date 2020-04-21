@@ -166,8 +166,9 @@ filetype plugin indent on
 
 " ===== gruvbox ======
 " colorscheme gruvbox
-colorscheme brogrammer
+" colorscheme brogrammer
 " colorscheme darkside
+colorscheme fingerpaint
 
 " Make comments italic (must be after any theme settings)
 highlight Comment cterm=italic      
