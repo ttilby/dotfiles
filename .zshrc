@@ -16,8 +16,10 @@ export ZSH=$HOME/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="powerlevel9k/powerlevel9k"
+
+# link the spaceship theme into .oh-my-zsh/custom/themes folder
+# ln -s ~/.themes/zsh-spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
 ZSH_THEME="spaceship"
-export SPACESHIP_ROOT="$ZSH_CUSTOM/themes/spaceship-prompt"
 source ~/.themes/spaceship-prompt
 
 
