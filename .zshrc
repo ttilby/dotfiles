@@ -17,6 +17,7 @@ export ZSH=$HOME/.oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="powerlevel9k/powerlevel9k"
 ZSH_THEME="spaceship"
+export SPACESHIP_ROOT="$ZSH_CUSTOM/themes/spaceship-prompt"
 source ~/.themes/spaceship-prompt
 
 
