@@ -2,8 +2,9 @@
 
 " Installation:
 " 1. install pathogen
-" 2. git submodule init
-" 3. git submodule update --recursive
+" 2. cd ~
+" 3. yadm submodule init
+" 4. yadm submodule update --recursive
 "
 " Steps 2 and 3 will need to be done if a new submodule is added on another
 " computer
@@ -35,6 +36,7 @@
 "        - requires additional installation:
 "           - cd ~/.vim/bundle/YouCompleteMe
 "           - ./install.py
+" vim-python - https://github.com/vim-python/python-syntax.git
 
 " Colors
 " Link to included wallaby.vim file
@@ -140,7 +142,6 @@ set t_Co=256
 syntax enable 
 filetype off
 filetype plugin indent on
-" colorscheme wallaby
 set guifont=Liberation\ Mono\ for\ Powerline\ 13
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -160,18 +161,37 @@ execute pathogen#infect()
 execute pathogen#helptags()
 filetype plugin indent on
 
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" vim-python
+" https://github.com/vim-python/python-syntax.git
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+let g:python_highlight_all = 1
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" vim-srcery config
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" let g:srcery_bold = 1
+" let g:srcery_italic = 1
+" let g:srcery_transparent_background = 1
+" let g:srcery_underline = 1
+" let g:srcery_undercurl = 1
+" let g:srcery_inverse = 1
+" let g:srcery_inverse_matches = 1
+" let g:srcery_inverse_match_paren = 1
+" let g:srcery_dim_lisp_paren = 1
+" let g:airline = { 'colorscheme': 'srcery' }
+
 " ===== Background =====
 " used by some themes, can be dark or light
 set background=dark
 
-" ===== Solarized =====
-"colorscheme solarized 
-
-" ===== gruvbox ======
+" colorscheme solarized 
 " colorscheme gruvbox
 " colorscheme brogrammer
 " colorscheme darkside
 colorscheme ThemerVim
+" colorscheme wallaby
+" colorscheme srcery
 
 " Make comments italic (must be after any theme settings)
 highlight Comment cterm=italic      
@@ -223,3 +243,8 @@ let g:flake8_show_quickfix=1
 let g:flake8_show_in_gutter=1
 
 autocmd BufWritePost *.py call Flake8()
+
+" Use F10 to show what highlight group is actually used by the word under the
+" cursor.
+" https://vim.fandom.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
