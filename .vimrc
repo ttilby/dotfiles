@@ -36,6 +36,10 @@
 "        - requires additional installation:
 "           - cd ~/.vim/bundle/YouCompleteMe
 "           - ./install.py
+" coc-nvim - git@github.com:neoclide/coc.nvim.git
+"        - requires additional installation:
+"           - cd ~/.vim/bundle/coc.nvim
+"           - yarn install
 " vim-python - https://github.com/vim-python/python-syntax.git
 
 " Colors
@@ -121,9 +125,14 @@ nnoremap <silent> <leader>, :noh<cr>
 " nnoremap <C-H> <C-W><C-H>   
 
 " YouCompleteMe
-nnoremap <leader>dc :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>r :YcmCompleter GoToReferences<CR>
+" nnoremap <leader>dc :YcmCompleter GoToDeclaration<CR>
+" nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
+" nnoremap <leader>r :YcmCompleter GoToReferences<CR>
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Conquer of Completion
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+source $HOME/.vim/modules/coc.vim
 
 " FZF
 nnoremap <leader>f :FZF<CR>
@@ -209,6 +218,7 @@ let g:airline#extensions#tabline#enabled = 1
 " adds an indicator (default "$") to the status line if session is currently
 " tracked by vim-obsession
 let g:airline#extensions#obession#enabled = 1
+let g:airline#extensions#coc#enabled = 1
 let g:bufferline_echo = 0
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
