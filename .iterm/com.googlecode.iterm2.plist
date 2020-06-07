@@ -12,6 +12,8 @@
 	<true/>
 	<key>AppleAntiAliasingThreshold</key>
 	<integer>1</integer>
+	<key>ApplePressAndHoldEnabled</key>
+	<false/>
 	<key>AppleScrollAnimationEnabled</key>
 	<integer>0</integer>
 	<key>AppleSmoothFixedFontsSizeThreshold</key>
@@ -1278,15 +1280,15 @@
 	<key>NSWindow Frame NSFontPanel</key>
 	<string>340 342 445 77 0 0 1440 878 </string>
 	<key>NSWindow Frame SUStatusFrame</key>
-	<string>640 674 400 129 0 0 1680 1027 </string>
+	<string>-1920 1431 400 129 -3440 465 3440 1417 </string>
 	<key>NSWindow Frame SUUpdateAlert</key>
-	<string>650 588 620 392 0 0 1920 1177 </string>
+	<string>-2030 1233 620 392 -3440 465 3440 1417 </string>
 	<key>NSWindow Frame SessionsPreferences</key>
 	<string>269 76 599 519 0 0 1440 878 </string>
 	<key>NSWindow Frame SharedPreferences</key>
 	<string>652 509 918 452 0 0 1680 1028 </string>
 	<key>NSWindow Frame iTerm Window 0</key>
-	<string>-2293 465 2293 1417 -3440 465 3440 1417 </string>
+	<string>391 75 1152 867 0 0 1680 1027 </string>
 	<key>NSWindow Frame iTerm Window 1</key>
 	<string>331 433 570 402 0 0 1680 1028 </string>
 	<key>New Bookmarks</key>
@@ -2582,9 +2584,13 @@
 	</array>
 	<key>NoSyncAllAppVersions</key>
 	<array>
-		<string>3.3.2</string>
-		<string>3.2.9</string>
+		<string>3.3.6</string>
+		<string>3.3.8</string>
 		<string>3.3.1</string>
+		<string>3.3.5</string>
+		<string>3.3.7</string>
+		<string>3.2.9</string>
+		<string>3.3.2</string>
 		<string>3.3.4</string>
 	</array>
 	<key>NoSyncFrame_SharedPreferences</key>
@@ -2592,7 +2598,7 @@
 		<key>screenFrame</key>
 		<string>{{-3440, 465}, {3440, 1440}}</string>
 		<key>topLeft</key>
-		<string>{-3171, 1060}</string>
+		<string>{-3105, 1565}</string>
 	</dict>
 	<key>NoSyncHaveRequestedFullDiskAccess</key>
 	<true/>
@@ -2601,7 +2607,7 @@
 	<key>NoSyncInstallationId</key>
 	<string>485C9D0A-47D6-4E25-94B5-B56BFA1D840C</string>
 	<key>NoSyncLaunchExperienceControllerRunCount</key>
-	<integer>3</integer>
+	<integer>12</integer>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile</key>
 	<true/>
 	<key>NoSyncNeverRemindPrefsChangesLostForFile_selection</key>
@@ -3099,11 +3105,11 @@
 		<array>
 			<dict>
 				<key>isTerminal</key>
-				<false/>
+				<true/>
 				<key>name</key>
-				<string>currentSession</string>
+				<string>tmuxWindow</string>
 				<key>nonterminalContext</key>
-				<integer>1</integer>
+				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
@@ -3123,9 +3129,25 @@
 			</dict>
 			<dict>
 				<key>isTerminal</key>
+				<false/>
+				<key>name</key>
+				<string>title</string>
+				<key>nonterminalContext</key>
+				<integer>1</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
 				<string>tmuxWindowTitle</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>title</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3142,6 +3164,14 @@
 				<true/>
 				<key>name</key>
 				<string>iterm2.localhostName</string>
+				<key>nonterminalContext</key>
+				<integer>0</integer>
+			</dict>
+			<dict>
+				<key>isTerminal</key>
+				<true/>
+				<key>name</key>
+				<string>currentSession.jobPid</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
@@ -3277,17 +3307,17 @@
 				<key>isTerminal</key>
 				<true/>
 				<key>name</key>
-				<string>tmuxWindow</string>
+				<string>currentSession</string>
 				<key>nonterminalContext</key>
 				<integer>0</integer>
 			</dict>
 			<dict>
 				<key>isTerminal</key>
-				<true/>
+				<false/>
 				<key>name</key>
 				<string>currentSession</string>
 				<key>nonterminalContext</key>
-				<integer>0</integer>
+				<integer>1</integer>
 			</dict>
 		</array>
 		<key>4</key>
@@ -3378,11 +3408,11 @@
 	<key>SUHasLaunchedBefore</key>
 	<true/>
 	<key>SULastCheckTime</key>
-	<date>2019-10-08T15:36:54Z</date>
+	<date>2020-02-08T14:23:15Z</date>
 	<key>SUSendProfileInfo</key>
 	<false/>
 	<key>SUUpdateRelaunchingMarker</key>
-	<true/>
+	<false/>
 	<key>ShowBookmarkName</key>
 	<true/>
 	<key>ShowFullScreenTabBar</key>
@@ -3402,6 +3432,6 @@
 	<key>WordCharacters</key>
 	<string>/-+\~_.</string>
 	<key>iTerm Version</key>
-	<string>3.3.4</string>
+	<string>3.3.8</string>
 </dict>
 </plist>
