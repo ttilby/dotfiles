@@ -16,6 +16,9 @@ export ZSH=$HOME/.oh-my-zsh
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 # ZSH_THEME="powerlevel9k/powerlevel9k"
+
+# link the spaceship theme into .oh-my-zsh/custom/themes folder
+# ln -s ~/.themes/zsh-spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
 ZSH_THEME="spaceship"
 source ~/.themes/spaceship-prompt
 
@@ -87,8 +90,11 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 source $HOME/.exports
-if [[ "$host" != "SilverBullet"* ]]; then
-    source $HOME/.exports_cp
+if [[ "$host" == "toddt-SH370"* ]]; then
+#    source $HOME/.exports_cp
+    source $HOME/CProjects/environ/default.env
+    source $HOME/.confluent.env
+    source $HOME/.cp_functions
 fi
 
 # These can be in source control
@@ -131,10 +137,13 @@ export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins
 if [[ "$host" != "SilverBullet"* ]]; then
     alias tldr="~/bin/tldr $1"
 fi
+export PATH="/usr/local/go/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/node@6/bin:$PATH"
-export PATH="$PATH:~/bin"
+export PATH="$PATH:$HOME/bin"
 export PATH="/home/todd/.npm-global/bin:$PATH"
+# this was added for global npm packages
+export PATH="/usr/local/bin/lib/node_modules:$PATH"
 
 ### Kubernetes context prompt ###
 if type "$kubectl" > /dev/null; then
@@ -153,6 +162,9 @@ if type "$kubectl" > /dev/null; then
     if hash kubectl 2>/dev/null; then
         source <(kubectl completion zsh)
     fi    
+
+    # get a new dashboard key
+    alias dashboard-rekey="aws eks get-token --cluster-name $(kubectl config current-context) | jq -r .status.token | pbcopy"
 
     ### kubernetes pods lister ###
     pods() {

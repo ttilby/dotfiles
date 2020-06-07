@@ -2,8 +2,9 @@
 
 " Installation:
 " 1. install pathogen
-" 2. git submodule init
-" 3. git submodule update --recursive
+" 2. cd ~
+" 3. yadm submodule init
+" 4. yadm submodule update --recursive
 "
 " Steps 2 and 3 will need to be done if a new submodule is added on another
 " computer
@@ -35,6 +36,11 @@
 "        - requires additional installation:
 "           - cd ~/.vim/bundle/YouCompleteMe
 "           - ./install.py
+" coc-nvim - git@github.com:neoclide/coc.nvim.git
+"        - requires additional installation:
+"           - cd ~/.vim/bundle/coc.nvim
+"           - yarn install
+" vim-python - https://github.com/vim-python/python-syntax.git
 
 " Colors
 " Link to included wallaby.vim file
@@ -46,6 +52,10 @@
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " General Config
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+if &compatible
+    set nocompatible
+endif
+
 " hybrid line numbers
 set number relativenumber
 augroup numbertoggle
@@ -63,16 +73,21 @@ set incsearch                     " highlight dynamically as pattern is typed
 set ignorecase                    " case insensitive search (unless specified)
 
 set smartcase                     " override ignorecase if search string has capitals
-set clipboard=unnamed             " Use the OS clipboard by default
+" set clipboard=unnamed             " Use the OS clipboard by default
+set clipboard+=unnamedplus
 set showmode                      " Show the current mode
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set shiftround
 set expandtab
+set mouse=a mousemodel=popup
 " set ruler
 set wildmenu
 set wildmode=list:longest,full
+
+" remove trailing whitespace on save
+" autocmd BufWritePre * :%s/\s\+$//e
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Document Width 
@@ -80,7 +95,7 @@ set wildmode=list:longest,full
 set tw=79                         " width of document (used by gd)
 set nowrap                        " Don't automatically wrap on load
 set fo-=t                         " Don't automatically wrap text when typing
-set colorcolumn=120               " Set right bar
+set colorcolumn=88                " Set right bar
 highlight ColorColumn ctermbg=233
 set scrolloff=8                   " Start scrolling when x lines away from margins
 
@@ -110,9 +125,14 @@ nnoremap <silent> <leader>, :noh<cr>
 " nnoremap <C-H> <C-W><C-H>   
 
 " YouCompleteMe
-nnoremap <leader>dc :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>r :YcmCompleter GoToReferences<CR>
+" nnoremap <leader>dc :YcmCompleter GoToDeclaration<CR>
+" nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
+" nnoremap <leader>r :YcmCompleter GoToReferences<CR>
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Conquer of Completion
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+source $HOME/.vim/modules/coc.vim
 
 " FZF
 nnoremap <leader>f :FZF<CR>
@@ -131,7 +151,6 @@ set t_Co=256
 syntax enable 
 filetype off
 filetype plugin indent on
-" colorscheme wallaby
 set guifont=Liberation\ Mono\ for\ Powerline\ 13
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -151,14 +170,37 @@ execute pathogen#infect()
 execute pathogen#helptags()
 filetype plugin indent on
 
-" ===== Solarized =====
-"set background=dark
-"colorscheme solarized 
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" vim-python
+" https://github.com/vim-python/python-syntax.git
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+let g:python_highlight_all = 1
 
-" ===== gruvbox ======
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" vim-srcery config
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" let g:srcery_bold = 1
+" let g:srcery_italic = 1
+" let g:srcery_transparent_background = 1
+" let g:srcery_underline = 1
+" let g:srcery_undercurl = 1
+" let g:srcery_inverse = 1
+" let g:srcery_inverse_matches = 1
+" let g:srcery_inverse_match_paren = 1
+" let g:srcery_dim_lisp_paren = 1
+" let g:airline = { 'colorscheme': 'srcery' }
+
+" ===== Background =====
+" used by some themes, can be dark or light
+set background=dark
+
+" colorscheme solarized 
 " colorscheme gruvbox
-colorscheme brogrammer
+" colorscheme brogrammer
 " colorscheme darkside
+colorscheme ThemerVim
+" colorscheme wallaby
+" colorscheme srcery
 
 " Make comments italic (must be after any theme settings)
 highlight Comment cterm=italic      
@@ -176,6 +218,7 @@ let g:airline#extensions#tabline#enabled = 1
 " adds an indicator (default "$") to the status line if session is currently
 " tracked by vim-obsession
 let g:airline#extensions#obession#enabled = 1
+let g:airline#extensions#coc#enabled = 1
 let g:bufferline_echo = 0
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -206,5 +249,12 @@ let NERDTreeShowHidden=1
 " Flake (python checking)
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " automatically check style when writing python code
+let g:flake8_show_quickfix=1
+let g:flake8_show_in_gutter=1
+
 autocmd BufWritePost *.py call Flake8()
 
+" Use F10 to show what highlight group is actually used by the word under the
+" cursor.
+" https://vim.fandom.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>

@@ -4,9 +4,6 @@
 [submodule ".vim/bundle/vim-gitgutter"]
     path = .vim/bundle/vim-gitgutter
 	url = https://github.com/airblade/vim-gitgutter.git
-[submodule ".vim/bundle/YouCompleteMe"]
-	path = .vim/bundle/YouCompleteMe
-	url = https://github.com/Valloric/YouCompleteMe.git
 [submodule ".vim/bundle/nerdtree"]
 	path = .vim/bundle/nerdtree
 	url = https://github.com/scrooloose/nerdtree.git
@@ -43,6 +40,12 @@
 [submodule ".themes/zsh-spaceship-prompt"]
 	path = .themes/zsh-spaceship-prompt
 	url = https://github.com/denysdovhan/spaceship-prompt.git
-[submodule "/home/todd/.tmux/plugins/sysstat"]
-	path = /home/todd/.tmux/plugins/sysstat
-	url = https://github.com/samoshkin/tmux-plugin-sysstat.git
+[submodule "/home/todd/.vim/bundle/vim-python"]
+	path = /home/todd/.vim/bundle/vim-python
+	url = https://github.com/vim-python/python-syntax.git
+[submodule "/home/todd/.vim/bundle/srcery"]
+	path = /home/todd/.vim/bundle/srcery
+	url = https://github.com/srcery-colors/srcery-vim
+[submodule "/home/todd/.vim/bundle/coc.nvim"]
+	path = /home/todd/.vim/bundle/coc.nvim
+	url = git@github.com:neoclide/coc.nvim.git
