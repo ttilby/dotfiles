@@ -145,6 +145,12 @@ export PATH="/home/todd/.npm-global/bin:$PATH"
 # this was added for global npm packages
 export PATH="/usr/local/bin/lib/node_modules:$PATH"
 
+if type "$nvm" > /dev/null; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
+
 ### Kubernetes context prompt ###
 if type "$kubectl" > /dev/null; then
     get_kube_context() {

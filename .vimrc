@@ -3,8 +3,9 @@
 " Installation:
 " 1. install pathogen
 " 2. cd ~
-" 3. yadm submodule init
-" 4. yadm submodule update --recursive
+" 3. yadm submodule update --init --recursive
+" 	if there are problems with the submodules, delete them locally first
+" 	then try running this again
 "
 " Steps 2 and 3 will need to be done if a new submodule is added on another
 " computer
