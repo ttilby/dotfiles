@@ -49,3 +49,6 @@
 [submodule ".vim/bundle/coc.nvim"]
 	path = .vim/bundle/coc.nvim
 	url = git@github.com:neoclide/coc.nvim.git
+[submodule "apps/diff-so-fancy"]
+	path = apps/diff-so-fancy
+	url = git@github.com:so-fancy/diff-so-fancy.git
