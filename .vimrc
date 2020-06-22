@@ -41,6 +41,9 @@
 "        - requires additional installation:
 "           - cd ~/.vim/bundle/coc.nvim
 "           - yarn install
+"        - useful commands
+"           - :CocList extensions  # show list of installed extensions
+"           - :checkhealth         # general health check for nvim only
 " vim-python - https://github.com/vim-python/python-syntax.git
 
 " Colors

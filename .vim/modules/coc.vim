@@ -1,8 +1,13 @@
 " configurations for coc-nvim
+" - useful commands
+"   - :CocList extensions  # show list of installed extensions
+"   - :checkhealth         # general health check for nvim only
 
 " Hide version warning for now since kubectl/git edits open an old version of
 " vim
 let g:coc_disable_startup_warning = 1
+
+let g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-yaml']
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -65,3 +70,17 @@ nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+
+" Use K for show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if &filetype == 'vim'
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
