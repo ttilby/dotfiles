@@ -7,7 +7,7 @@
 " vim
 let g:coc_disable_startup_warning = 1
 
-let g:coc_global_extensions = ['coc-json', 'coc-python', 'coc-yaml']
+let g:coc_global_extensions = ['coc-json', 'coc-pyright']
 
 " TextEdit might fail if hidden is not set.
 set hidden

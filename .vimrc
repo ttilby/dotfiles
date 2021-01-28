@@ -10,6 +10,10 @@
 " Steps 2 and 3 will need to be done if a new submodule is added on another
 " computer
 
+" Updating:
+" 1. yadm pull --recurse-submodules
+" 2. yadm submodule update --remote --recursive
+
 " AutoLoad
 " vim-pathogen-git - https://github.com/tpope/vim-pathogen
 
@@ -75,11 +79,12 @@ set showmode                      " Show current mode at the bottom
 set hlsearch                      " highlight searches
 set incsearch                     " highlight dynamically as pattern is typed
 set ignorecase                    " case insensitive search (unless specified)
-
 set smartcase                     " override ignorecase if search string has capitals
 " set clipboard=unnamed             " Use the OS clipboard by default
 set clipboard+=unnamedplus
 set showmode                      " Show the current mode
+" set cursorline
+" set cursorcolumn
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -138,15 +143,22 @@ nnoremap <silent> <leader>, :noh<cr>
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 source $HOME/.vim/modules/coc.vim
 
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " FZF
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Search for files
 nnoremap <leader>f :FZF<CR>
-nnoremap <leader>g :Rg<CR>
+" search for content
+nnoremap <leader>g :Rg <CR>
+" search for content using word under cursor
+nnoremap <leader>d :Rg <C-R><C-W><CR>
 if isdirectory("/home/todd/.fzf")
     set rtp+=~/.fzf
 endif
 if isdirectory("/usr/local/opt/fzf")
     set rtp+=/usr/local/opt/fzf
 endif
+let g:fzf_layout = { 'down': '40%' }
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Colors
@@ -163,10 +175,6 @@ set guifont=Liberation\ Mono\ for\ Powerline\ 13
 " let g:netrw_liststyle = 3
 " let g:netrw_winsize = 25
 " let g:netrw_browse_split = 4
-
-" ===== FZF.vim =======
-" https://github.com/junegunn/fzf#installation
-"set runtimepath+=~/.fzf 
 
 " ===== Plugins       ======
 " Pathogen - this will auto load plugins from .vim/bundle
