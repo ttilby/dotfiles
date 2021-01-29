@@ -1,16 +1,19 @@
 " ./vimrc
 
 " Installation:
+" !! These steps may no long be needed since I migrated to vim-plug
 " 1. install pathogen
 " 2. cd ~
-" 3. yadm submodule init
-" 4. yadm submodule update --recursive
+" 3. yadm submodule update --init --recursive
+" 	if there are problems with the submodules, delete them locally first
+" 	then try running this again
 "
 " Steps 2 and 3 will need to be done if a new submodule is added on another
 " computer
 
-" AutoLoad
-" vim-pathogen-git - https://github.com/tpope/vim-pathogen
+" Updating:
+" 1. yadm pull --recurse-submodules
+" 2. yadm submodule update --remote --recursive
 
 " Required external programs
 " 1. fzf
@@ -24,19 +27,6 @@
 " ln -s ~/.vim/autoload ~/.config/nvim/autoload
 " ln -s ~/.vim/colors ~/.config/nvim/colors
 
-" Install Notes
-" vim-gitgutter - https://github.com/airblade/vim-gitgutter
-" vim-airline - https://github.com/vim-airline/vim-airline
-" nerdtree - https://github.com/scrooloose/nerdtree
-" flake8 - git@github.com:nvie/vim-flake8.git (python checking)
-"        - require local install of flake8
-"        - pip install flake8
-" vim-obession - git://github.com/tpope/vim-obsession.git
-" YouCompleteMe - https://github.com/ycm-core/YouCompleteMe.git
-"        - requires additional installation:
-"           - cd ~/.vim/bundle/YouCompleteMe
-"           - ./install.py
-" vim-python - https://github.com/vim-python/python-syntax.git
 
 " Colors
 " Link to included wallaby.vim file
@@ -44,6 +34,42 @@
 "
 " gruvbox
 " git clone https://github.com/morhetz/gruvbox.git ~/.vim/bundle/gruvbox
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" vim-plug
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+
+" Install vim-plug if not found
+if empty(glob('~/.vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+call plug#begin('~/.vim/plugged')
+
+Plug 'jlanzarotta/bufexplorer'
+Plug 'nvie/vim-flake8'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'preservim/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
+Plug 'vim-airline/vim-airline'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-obsession'
+Plug 'christoomey/vim-tmux-navigator'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'vim-python/python-syntax'
+" Plug 'tmhedberg/SimpylFold'
+
+" Initialize plugin system
+call plug#end()
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " General Config
@@ -67,11 +93,12 @@ set showmode                      " Show current mode at the bottom
 set hlsearch                      " highlight searches
 set incsearch                     " highlight dynamically as pattern is typed
 set ignorecase                    " case insensitive search (unless specified)
-
 set smartcase                     " override ignorecase if search string has capitals
 " set clipboard=unnamed             " Use the OS clipboard by default
 set clipboard+=unnamedplus
 set showmode                      " Show the current mode
+" set cursorline
+" set cursorcolumn
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
@@ -81,6 +108,10 @@ set mouse=a mousemodel=popup
 " set ruler
 set wildmenu
 set wildmode=list:longest,full
+
+" folding
+set foldmethod=indent
+set foldlevelstart=20
 
 " remove trailing whitespace on save
 " autocmd BufWritePre * :%s/\s\+$//e
@@ -103,8 +134,6 @@ let mapleader = ","
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Buffer management
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" manual management
-" nnoremap <F5> :buffers<CR>:buffer<Space>
 " using bufexplorer plugin
 nnoremap <F5> :ToggleBufExplorer<CR>
 
@@ -121,19 +150,25 @@ nnoremap <silent> <leader>, :noh<cr>
 " nnoremap <C-H> <C-W><C-H>   
 
 " YouCompleteMe
-nnoremap <leader>dc :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
-nnoremap <leader>r :YcmCompleter GoToReferences<CR>
+" nnoremap <leader>dc :YcmCompleter GoToDeclaration<CR>
+" nnoremap <leader>df :YcmCompleter GoToDefinition<CR>
+" nnoremap <leader>r :YcmCompleter GoToReferences<CR>
 
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Conquer of Completion
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+source $HOME/.vim/modules/coc.vim
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " FZF
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Search for files
 nnoremap <leader>f :FZF<CR>
-nnoremap <leader>g :Rg<CR>
-if isdirectory("/home/todd/.fzf")
-    set rtp+=~/.fzf
-endif
-if isdirectory("/usr/local/opt/fzf")
-    set rtp+=/usr/local/opt/fzf
-endif
+" search for content
+nnoremap <leader>g :Rg <CR>
+" search for content using word under cursor
+nnoremap <leader>d :Rg <C-R><C-W><CR>
+let g:fzf_layout = { 'down': '40%' }
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Colors
@@ -142,24 +177,8 @@ set t_Co=256
 syntax enable 
 filetype off
 filetype plugin indent on
-set guifont=Liberation\ Mono\ for\ Powerline\ 13
-
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" Netrw
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" let g:netrw_liststyle = 3
-" let g:netrw_winsize = 25
-" let g:netrw_browse_split = 4
-
-" ===== FZF.vim =======
-" https://github.com/junegunn/fzf#installation
-"set runtimepath+=~/.fzf 
-
-" ===== Plugins       ======
-" Pathogen - this will auto load plugins from .vim/bundle
-execute pathogen#infect()
-execute pathogen#helptags()
-filetype plugin indent on
+" set guifont=Liberation\ Mono\ for\ Powerline\ 13
+set guifont=Hack\ Regular\ Nerd\ Font\ Complete 
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " vim-python
@@ -167,31 +186,12 @@ filetype plugin indent on
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 let g:python_highlight_all = 1
 
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" vim-srcery config
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" let g:srcery_bold = 1
-" let g:srcery_italic = 1
-" let g:srcery_transparent_background = 1
-" let g:srcery_underline = 1
-" let g:srcery_undercurl = 1
-" let g:srcery_inverse = 1
-" let g:srcery_inverse_matches = 1
-" let g:srcery_inverse_match_paren = 1
-" let g:srcery_dim_lisp_paren = 1
-" let g:airline = { 'colorscheme': 'srcery' }
 
 " ===== Background =====
 " used by some themes, can be dark or light
 set background=dark
 
-" colorscheme solarized 
-" colorscheme gruvbox
-" colorscheme brogrammer
-" colorscheme darkside
 colorscheme ThemerVim
-" colorscheme wallaby
-" colorscheme srcery
 
 " Make comments italic (must be after any theme settings)
 highlight Comment cterm=italic      
@@ -209,6 +209,7 @@ let g:airline#extensions#tabline#enabled = 1
 " adds an indicator (default "$") to the status line if session is currently
 " tracked by vim-obsession
 let g:airline#extensions#obession#enabled = 1
+let g:airline#extensions#coc#enabled = 1
 let g:bufferline_echo = 0
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -229,6 +230,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 " show hidden files by default
 let NERDTreeShowHidden=1
 
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" CHADTree
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" nnoremap <C-p> <cmd>CHADopen<cr>
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Fugitive

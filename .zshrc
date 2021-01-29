@@ -114,6 +114,7 @@ export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins
 # export LANG=en_US.UTF-8
 
 # Preferred editor for local and remote sessions
+export EDITOR=nvim
 # if [[ -n $SSH_CONNECTION ]]; then
 #   export EDITOR='vim'
 # else
@@ -137,11 +138,27 @@ export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins
 if [[ "$host" != "SilverBullet"* ]]; then
     alias tldr="~/bin/tldr $1"
 fi
+
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/node@6/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
 export PATH="/home/todd/.npm-global/bin:$PATH"
+# this was added for global npm packages
+export PATH="/usr/local/bin/lib/node_modules:$PATH"
+export PATH="/home/todd/.local/bin:$PATH"
+
+# this was added for pyenv
+export PATH="/home/todd/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+
+if type "$nvm" > /dev/null; then
+    export NVM_DIR="$HOME/.nvm"
+    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+fi
 
 ### Kubernetes context prompt ###
 if type "$kubectl" > /dev/null; then
