@@ -148,6 +148,12 @@ export PATH="/home/todd/.npm-global/bin:$PATH"
 export PATH="/usr/local/bin/lib/node_modules:$PATH"
 export PATH="/home/todd/.local/bin:$PATH"
 
+# this was added for pyenv
+export PATH="/home/todd/.pyenv/bin:$PATH"
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
+
+
 if type "$nvm" > /dev/null; then
     export NVM_DIR="$HOME/.nvm"
     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
