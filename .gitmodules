@@ -44,8 +44,8 @@
 	path = .themes/zsh-spaceship-prompt
 	url = https://github.com/denysdovhan/spaceship-prompt.git
 [submodule "/home/todd/.vim/bundle/vim-python"]
-	path = /home/todd/.vim/bundle/vim-python
+	path = .vim/bundle/vim-python
 	url = https://github.com/vim-python/python-syntax.git
 [submodule "/home/todd/.vim/bundle/srcery"]
-	path = /home/todd/.vim/bundle/srcery
+	path = .vim/bundle/srcery
 	url = https://github.com/srcery-colors/srcery-vim
