@@ -60,7 +60,10 @@ Plug 'tpope/vim-obsession'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-python/python-syntax'
+Plug 'ryanoasis/vim-devicons'
+Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 " Plug 'tmhedberg/SimpylFold'
+Plug 'towolf/vim-helm'
 
 " Initialize plugin system
 call plug#end()
@@ -108,6 +111,7 @@ set mouse=a mousemodel=popup
 " set ruler
 set wildmenu
 set wildmode=list:longest,full
+set termguicolors
 
 " folding
 set foldmethod=indent
@@ -178,7 +182,7 @@ syntax enable
 filetype off
 filetype plugin indent on
 " set guifont=Liberation\ Mono\ for\ Powerline\ 13
-set guifont=Hack\ Regular\ Nerd\ Font\ Complete 
+set guifont=Hack\ Regular\ Nerd\ Font\ Complete\ 13
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " vim-python
@@ -194,7 +198,7 @@ set background=dark
 colorscheme ThemerVim
 
 " Make comments italic (must be after any theme settings)
-highlight Comment cterm=italic      
+highlight Comment cterm=italic gui=italic     
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Airline Config
@@ -229,6 +233,10 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " show hidden files by default
 let NERDTreeShowHidden=1
+
+" used by vim-devicons
+let g:webdevicons_enable_nerdtree = 1
+let g:webdevicons_enable_airline_statusline = 1
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " CHADTree
