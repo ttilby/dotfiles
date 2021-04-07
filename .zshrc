@@ -1,4 +1,8 @@
 
+# debugging shell startup
+# Uncomment this line to load the the profiler, then run `zprof` to see how zsh is spending time during startup.
+# zmodload zsh/zprof
+
 # used to specify the system to control which lines are executed on which
 # system
 system_type=$(uname -s)
@@ -147,10 +151,12 @@ export PATH="/home/todd/.npm-global/bin:$PATH"
 export PATH="/usr/local/bin/lib/node_modules:$PATH"
 export PATH="/home/todd/.local/bin:$PATH"
 
-# this was added for pyenv
-export PATH="/home/todd/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
+# this was added for pyenv, not needed on silverbullet
+if [[ "$host" == "toddt-SH370"* ]]; then
+    export PATH="/home/todd/.pyenv/bin:$PATH"
+    eval "$(pyenv init -)"
+    eval "$(pyenv virtualenv-init -)"
+fi
 
 
 if type "$nvm" > /dev/null; then
