@@ -54,8 +54,8 @@ Plug 'chriskempson/base16-vim'
 " Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
 Plug 'kyazdani42/nvim-tree.lua'
 Plug 'kyazdani42/nvim-web-devicons'
-Plug 'vim-airline/vim-airline'
-" Plug 'glepnir/galaxyline.nvim'
+" Plug 'vim-airline/vim-airline'
+Plug 'glepnir/galaxyline.nvim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-obsession'
 Plug 'christoomey/vim-tmux-navigator'
@@ -244,23 +244,26 @@ highlight Comment cterm=italic gui=italic
 " Note: you need UTF8 support and a Poweline patched font
 " /etc/locale.conf
 "     LANG=en_US.utf8
- set laststatus=2
- set ttimeoutlen=50
- let g:airline_powerline_fonts = 1
- let g:airline#extensions#tabline#enabled = 1
- " adds an indicator (default "$") to the status line if session is currently
- " tracked by vim-obsession
- let g:airline#extensions#obession#enabled = 1
- let g:airline#extensions#coc#enabled = 1
- let g:bufferline_echo = 0
+
+" set laststatus=2
+" set ttimeoutlen=50
+" let g:airline_powerline_fonts = 1
+" let g:airline#extensions#tabline#enabled = 1
+" " adds an indicator (default "$") to the status line if session is currently
+" " tracked by vim-obsession
+" let g:airline#extensions#obession#enabled = 1
+" let g:airline#extensions#coc#enabled = 1
+" let g:bufferline_echo = 0
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " GalaxyLine Config
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " https://github.com/glepnir/galaxyline.nvim
-" lua << EOF
-" require('plugins.galaxyline')
-" EOF
+lua << EOF
+    -- require('plugins.galaxyline')
+    -- require('plugins.galaxyline_siduck76')
+    require('plugins.galaxyline_yutkat')
+EOF
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " NerdTREE
