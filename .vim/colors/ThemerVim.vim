@@ -101,8 +101,8 @@
   exec "hi Constant ctermfg=".s:ctermaccent3
   exec "hi Character guifg=".s:guiaccent4
   exec "hi Character ctermfg=".s:ctermaccent4
-  exec "hi Identifier guifg=".s:guiaccent2." gui=none"
-  exec "hi Identifier ctermfg=".s:ctermaccent2." cterm=none"
+  exec "hi Identifier guifg=".s:guiaccent1." gui=none"
+  exec "hi Identifier ctermfg=".s:ctermaccent1." cterm=none"
   exec "hi Statement guifg=".s:guiaccent5
   exec "hi Statement ctermfg=".s:ctermaccent5
   exec "hi PreProc guifg=".s:guiaccent6
@@ -210,8 +210,8 @@
   exec "hi PmenuThumb ctermfg=".s:ctermaccent0." ctermbg=".s:ctermshade2
   exec "hi Question guifg=".s:guishade7." guibg=".s:guishade1
   exec "hi Question ctermfg=".s:ctermshade7." ctermbg=".s:ctermshade1
-  exec "hi Search guifg=".s:guishade0." guibg=".s:guiaccent2
-  exec "hi Search ctermfg=".s:ctermshade0." ctermbg=".s:ctermaccent2
+  exec "hi Search guifg=".s:guishade0." guibg=".s:guiaccent5
+  exec "hi Search ctermfg=".s:ctermshade0." ctermbg=".s:ctermaccent5
   exec "hi SpecialKey guifg=".s:guiaccent7." guibg=".s:guishade0
   exec "hi SpecialKey ctermfg=".s:ctermaccent7." ctermbg=".s:ctermshade0
   exec "hi SpellBad guifg=".s:guiaccent0

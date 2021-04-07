@@ -1,4 +1,3 @@
-export TERM="xterm-256color"
 
 # used to specify the system to control which lines are executed on which
 # system
@@ -169,14 +168,14 @@ if type "$kubectl" > /dev/null; then
         NS=$(kubectl config view --minify --output 'jsonpath={..namespace}')
         if [ -z $NS ]; then echo "default"; else echo $NS; fi
     }
-    
+
     # add \[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] to your PS1 prompt
     PS1="\[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] $PS1"
- 
+
     # add kubectl autocomplete
     if hash kubectl 2>/dev/null; then
         source <(kubectl completion zsh)
-    fi    
+    fi
 
     # get a new dashboard key
     alias dashboard-rekey="aws eks get-token --cluster-name $(kubectl config current-context) | jq -r .status.token | pbcopy"
