@@ -37,4 +37,4 @@ alias tsync-get='[ -f $HOME/.tsync ] && [ -d "$(cat $HOME/.tsync)" ] && cat $HOM
 alias tsync-set='pwd | tee $HOME/.tsync'
 alias tsync='[ -f $HOME/.tsync ] && [ -d "$(cat $HOME/.tsync)" ] && cd $(cat $HOME/.tsync)'
 
-export PATH="$HOME/.cargo/bin:$PATH"
+. "$HOME/.cargo/env"

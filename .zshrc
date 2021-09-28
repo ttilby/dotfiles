@@ -1,4 +1,3 @@
-
 # debugging shell startup
 # Uncomment this line to load the the profiler, then run `zprof` to see how zsh is spending time during startup.
 # zmodload zsh/zprof
@@ -12,7 +11,6 @@ host=$(uname -n)
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-# export ZSH=/Users/t.tilby/.oh-my-zsh
 export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
@@ -142,13 +140,17 @@ if [[ "$host" != "SilverBullet"* ]]; then
     alias tldr="~/bin/tldr $1"
 fi
 
+alias awsume="source awsume"
+
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
 export PATH="/usr/local/opt/node@6/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
 export PATH="/home/todd/.npm-global/bin:$PATH"
 # this was added for global npm packages
-export PATH="/usr/local/bin/lib/node_modules:$PATH"
+# export PATH="/usr/local/bin/lib/node_modules:$PATH"
+# also for global npm packages
+export PATH="/usr/local/bin/bin:$PATH"
 export PATH="/home/todd/.local/bin:$PATH"
 
 # this was added for pyenv, not needed on silverbullet

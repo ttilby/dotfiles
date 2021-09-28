@@ -12,14 +12,29 @@
 " ln -s ~/.vim/autoload ~/.config/nvim/autoload
 " ln -s ~/.vim/colors ~/.config/nvim/colors
 
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Upgrading to latest nightly NeoVim
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+"
+" curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -o ~/Downloads/nvim-nightly
+"  or
+" curl -L https://github.com/neovim/neovim/releases/download/v0.5.0/nvim.appimage -o ~/Downloads/nvim-stable
+"
+" chmod u+x nvim-nightly
+" ./nvim-nightly --version
+" rm /usr/local/bin/nvim
+" mv nvim-nightly /usr/local/bin/nvim_0.5.0-dev1354
+" cp /usr/local/bin/nvim_0.5.0-dev1354 /usr/local/bin/nvim
+" nvim --version
 
-" Colors
-" gruvbox
-" git clone https://github.com/morhetz/gruvbox.git ~/.vim/bundle/gruvbox
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Useful info
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" https://github.com/nanotee/nvim-lua-guide
 
-" =-=-=-=-=
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Python virtual env's for neovim
-" =-=-=-=-=
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " See https://github.com/deoplete-plugins/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 "
 " $ pyenv install 2.7.18
@@ -51,10 +66,8 @@ Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'gruvbox-community/gruvbox'
 Plug 'chriskempson/base16-vim'
-" Plug 'ms-jpq/chadtree', {'branch': 'chad', 'do': 'python3 -m chadtree deps'}
-Plug 'kyazdani42/nvim-tree.lua'
-Plug 'kyazdani42/nvim-web-devicons'
-" Plug 'vim-airline/vim-airline'
+" Plug 'kyazdani42/nvim-tree.lua'
+" Plug 'kyazdani42/nvim-web-devicons'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-obsession'
@@ -66,9 +79,10 @@ Plug 'towolf/vim-helm'
 Plug 'mbbill/undotree'
 Plug 'puremourning/vimspector'
 Plug 'hashivim/vim-terraform'
+" Plug 'jvirtanen/vim-hcl'
 
 if has("nvim-0.5")
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+    Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdate'}
 else
     Plug 'vim-python/python-syntax'
 endif
@@ -90,11 +104,13 @@ if &compatible
 endif
 
 " hybrid line numbers
+" use `set ft?` to see filetype of current buffer
+let nu_blacklist = ['NvimTree', 'nerdtree']
 set number relativenumber
 augroup numbertoggle
     autocmd!
-    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set relativenumber
-    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * set norelativenumber
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * if index(nu_blacklist, &ft) < 0 | set relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave   * if index(nu_blacklist, &ft) < 0 | set norelativenumber
 augroup END
 
 " Save whenever switching windows or leaving vim
@@ -124,9 +140,16 @@ set wildmenu
 set wildmode=list:longest,full
 set termguicolors
 
+" Stop highlight after searching
+nnoremap <silent> <leader>, :noh<cr>
+
+let mapleader = " "
+
 " folding
-set foldmethod=indent
+" set foldmethod=indent
 set foldlevelstart=20
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 
 " remove trailing whitespace on save
 fun! TrimWhiteSpace()
@@ -140,7 +163,6 @@ augroup CUSTOM
     autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
 
-
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Document Width
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -152,33 +174,10 @@ highlight ColorColumn ctermbg=233
 set scrolloff=8                   " Start scrolling when x lines away from margins
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" Key Bindings
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-let mapleader = " "
-
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Buffer management
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " using bufexplorer plugin
 nnoremap <F5> :ToggleBufExplorer<CR>
-
-
-" Stop highlight after searching
-nnoremap <silent> <leader>, :noh<cr>
-
-" Change split navigation to not
-" require 'CTRL-W'.
-" Just use 'CTRL-H/J/K/L'
-" nnoremap <C-J> <C-W><C-J>
-" nnoremap <C-K> <C-W><C-K>
-" nnoremap <C-L> <C-W><C-L>
-" nnoremap <C-H> <C-W><C-H>
-
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" Conquer of Completion
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-source $HOME/.vim/modules/coc.vim
-
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " FZF
@@ -201,31 +200,6 @@ filetype plugin indent on
 " set guifont=Liberation\ Mono\ for\ Powerline\ 13
 set guifont=Hack\ Regular\ Nerd\ Font\ Complete\ 13
 
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" vim-python
-" https://github.com/vim-python/python-syntax.git
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" let g:python_highlight_all = 1
-
-
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" Treesitter (0.5 only)
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-if has("nvim-0.5")
-lua << EOF
-require'nvim-treesitter.configs'.setup {
-    ensure_installed = "python", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    highlight = {
-        enable = true,              -- false will disable the whole extension
-    },
-    indent = {
-        enable = true
-    }
-}
-EOF
-endif
-
-
 " ===== Background =====
 " used by some themes, can be dark or light
 set background=dark
@@ -238,22 +212,28 @@ colorscheme base16-onedark
 " Make comments italic (must be after any theme settings)
 highlight Comment cterm=italic gui=italic
 
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" Airline Config
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" Note: you need UTF8 support and a Poweline patched font
-" /etc/locale.conf
-"     LANG=en_US.utf8
+" Use F10 to show what highlight group is actually used by the word under the
+" cursor.
+" https://vim.fandom.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
+map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
-" set laststatus=2
-" set ttimeoutlen=50
-" let g:airline_powerline_fonts = 1
-" let g:airline#extensions#tabline#enabled = 1
-" " adds an indicator (default "$") to the status line if session is currently
-" " tracked by vim-obsession
-" let g:airline#extensions#obession#enabled = 1
-" let g:airline#extensions#coc#enabled = 1
-" let g:bufferline_echo = 0
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Treesitter (0.5 only)
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+if has("nvim-0.5")
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+    -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    ensure_installed = {"python", "bash", "json", "lua", "dockerfile", "yaml"},
+    highlight = {
+        enable = true,              -- false will disable the whole extension
+    },
+    indent = {
+        enable = false,             -- removed to fix python indentation 08/04/2021
+    },
+}
+EOF
+endif
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " GalaxyLine Config
@@ -266,59 +246,16 @@ lua << EOF
 EOF
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" NerdTREE
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" use Ctrl-p to open/close NERDTree
-" noremap <C-p> :NERDTreeToggle<CR>
-" noremap <leader>p :NERDTreeFind<CR>
-
-" noremap <silent> <expr> <leader>p g:NERDTree.IsOpen() ? "\:NERDTreeClose<CR>" : bufexists(expand('%')) ? "\:NERDTreeFind<CR>" : "\:NERDTree<CR>"
-"
-"
-" " auto open NERDTree when vim starts if no files were specified
-" autocmd StdinReadPre * let s:std_in=1
-" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"
-" " close vim if only window left open in NERDTree
-" autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-"
-" " show hidden files by default
-" let NERDTreeShowHidden=1
-"
-" " used by vim-devicons
-" let g:webdevicons_enable_nerdtree = 1
-" let g:webdevicons_enable_airline_statusline = 1
-
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" Nvim Tree
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" https://github.com/kyazdani42/nvim-tree.lua
-source $HOME/.config/nvim/plugins/nvim-tree.vim
-
-
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" CHADTree
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" nnoremap <C-p> <cmd>CHADopen<cr>
-
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" Fugitive
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" set diffopt+=vertical                 " use vertical split for :Gdiff
-
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Flake (python checking)
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " automatically check style when writing python code
 let g:flake8_show_quickfix=1
 let g:flake8_show_in_gutter=1
 
-autocmd BufWritePost *.py call Flake8()
-
-" Use F10 to show what highlight group is actually used by the word under the
-" cursor.
-" https://vim.fandom.com/wiki/Identify_the_syntax_highlighting_group_used_at_the_cursor
-map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
+augroup flake
+    autocmd!
+    autocmd BufWritePost *.py call Flake8()
+augroup END
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " UndoTree
@@ -355,5 +292,10 @@ nmap <leader>dcb <Plug>VimspectorToggleConditionalBreakpoint
 " vim-terraform
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " https://github.com/hashivim/vim-terraform
+let g:hcl_align=1
 let g:terraform_align=1
 let g:terraform_fmt_on_save=1
+augroup custom_terraform
+    autocmd!
+    autocmd BufRead,BufNewFile *.hcl set filetype=terraform
+augroup END

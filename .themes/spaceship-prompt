@@ -1,19 +1,39 @@
 # ORDER
-SPACESHIP_PROMPT_ORDER=(
-  # time     #
-  # vi_mode  # these sections will be
-  user     # before prompt char
-  host     #
-  dir
-  # git
-  docker
-  venv
-  pyenv
-  aws
-  kubectl
-  node
-  char
-)
+if [ -z "$TMUX" ]; then
+    # This is the configuration to use when NOT in tmux
+    SPACESHIP_PROMPT_ORDER=(
+    # time     #
+    # vi_mode  # these sections will be
+    user     # before prompt char
+    host     #
+    dir
+    # git
+    docker
+    venv
+    pyenv
+    aws
+    kubectl
+    node
+    char
+    )
+else
+    # This configuration will be used while in tmux
+    SPACESHIP_PROMPT_ORDER=(
+    # time     #
+    # vi_mode  # these sections will be
+    user     # before prompt char
+    # host     #
+    dir
+    # git
+    docker
+    venv
+    pyenv
+    aws
+    kubectl
+    node
+    char
+    )
+fi
 
 # PROMPT
 SPACESHIP_CHAR_SYMBOL="$"
@@ -33,7 +53,7 @@ SPACESHIP_USER_SUFFIX="" # remove space before host
 # HOST
 # Result will look like this:
 #   username@:(hostname)
-SPACESHIP_HOST_SHOW=false
+SPACESHIP_HOST_SHOW=true
 SPACESHIP_HOST_PREFIX="@:("
 SPACESHIP_HOST_SUFFIX=") "
 
@@ -42,14 +62,12 @@ SPACESHIP_DIR_PREFIX='' # disable directory prefix, cause it's not the first sec
 SPACESHIP_DIR_TRUNC='1' # show only last directory
 
 # GIT
-# Disable git symbol
-SPACESHIP_GIT_SYMBOL=" " # disable git prefix
-SPACESHIP_GIT_BRANCH_PREFIX="$SPACESHIP_GIT_SYMBOL" # disable branch prefix too
+SPACESHIP_GIT_SYMBOL=" "
+SPACESHIP_GIT_BRANCH_PREFIX="$SPACESHIP_GIT_SYMBOL"
 # Wrap git in `git:(...)`
 SPACESHIP_GIT_PREFIX=''
 SPACESHIP_GIT_SUFFIX=""
-SPACESHIP_GIT_BRANCH_SUFFIX=" " # remove space after branch name
-# Unwrap git status from `[...]`
+SPACESHIP_GIT_BRANCH_SUFFIX=" "
 SPACESHIP_GIT_STATUS_PREFIX=""
 SPACESHIP_GIT_STATUS_SUFFIX=""
 SPACESHIP_GIT_STATUS_STASHED="@"

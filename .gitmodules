@@ -1,12 +1,3 @@
-[submodule ".tmux/plugins/resurrect"]
-	path = .tmux/plugins/resurrect
-	url = https://github.com/tmux-plugins/tmux-resurrect
-[submodule ".tmux/plugins/continuum"]
-	path = .tmux/plugins/continuum
-	url = https://github.com/tmux-plugins/tmux-continuum
-[submodule ".tmux/plugins/yank"]
-	path = .tmux/plugins/yank
-	url = https://github.com/tmux-plugins/tmux-yank
 [submodule ".tmux/plugins/tmux-mem-cpu-load"]
 	path = .tmux/plugins/tmux-mem-cpu-load
 	url = https://github.com/thewtex/tmux-mem-cpu-load.git
