@@ -34,6 +34,12 @@ If on macos
 
 ## Third-party
 
+### Misc
+
+1. [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
+1. [tfenv](https://github.com/tfutils/tfenv)
+1. [tig](https://github.com/jonas/tig)
+
 ### zsh
 
 #### Spaceship Prompt
@@ -55,13 +61,13 @@ To customize, edit the `~/.themes/spaceship-prompt` file.
 
 #### Rust
 
-Installed to support [tmux-thumbs]().
+Installed to support [tmux-thumbs](https://github.com/fcsonline/tmux-thumbs).
 
 Instructions can be found on [rustup.rs](rustup.rs).
 
-```
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-```
+    ```bash
+    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+    ```
 
 ### neovim
 
@@ -88,4 +94,3 @@ The configuration can be found in the coc-settings.json file (editable with
     unzip terraform-ls_0.21.0_linux_amd64.zip
     mv terraform-ls ~/bin/terraform-ls
     ```
-
