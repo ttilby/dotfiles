@@ -152,6 +152,11 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 
 " remove trailing whitespace on save
+" If this needs to be temporarily disabled:
+"   set eventignore=BufWritePre
+"   Then save the file
+"   To re-enable:
+"   set eventignore=""
 fun! TrimWhiteSpace()
     let l:save = winsaveview()
     keeppatterns %s/\s\+$//e
