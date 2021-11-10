@@ -136,36 +136,42 @@ export EDITOR=nvim
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-if [[ "$host" != "SilverBullet"* ]]; then
-    alias tldr="~/bin/tldr $1"
-fi
+# if [[ "$host" != "SilverBullet"* ]]; then
+#     alias tldr="~/bin/tldr $1"
+# fi
 
 alias awsume="source awsume"
 
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/local/opt/node@6/bin:$PATH"
+# export PATH="/usr/local/opt/node@6/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
-export PATH="/home/todd/.npm-global/bin:$PATH"
+# export PATH="/home/todd/.npm-global/bin:$PATH"
 # this was added for global npm packages
 # export PATH="/usr/local/bin/lib/node_modules:$PATH"
 # also for global npm packages
-export PATH="/usr/local/bin/bin:$PATH"
+# export PATH="/usr/local/bin/bin:$PATH"
 export PATH="/home/todd/.local/bin:$PATH"
 
 # this was added for pyenv, not needed on silverbullet
-if [[ "$host" == "toddt-SH370"* ]]; then
+if [[ "$host" == "toddt-SH370"* || "$host" == "Precision-3240" ]]; then
+    export PYENV_ROOT="$HOME/.pyenv"
     export PATH="/home/todd/.pyenv/bin:$PATH"
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
 
 
-if type "$nvm" > /dev/null; then
-    export NVM_DIR="$HOME/.nvm"
-    [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-    [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-fi
+# if type "$nvm" > /dev/null; then
+#     export NVM_DIR="$HOME/.nvm"
+#     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+#     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# fi
+
+# used to define where global npm packages are installed
+# Note that the n executable is at $HOME/bin/n
+export N_PREFIX=$HOME/n
+export PATH="$HOME/n/bin:$PATH"
 
 ### Kubernetes context prompt ###
 if type "$kubectl" > /dev/null; then

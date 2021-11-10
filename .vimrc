@@ -40,8 +40,14 @@
 " $ pyenv install 2.7.18
 " $ pyenv virtualenv 2.7.18 neovim2
 " $ pyenv activate neovim2
+" $ pip install neovim
 " $ pyenv which python
 let g:python_host_prog = '/home/todd/.pyenv/versions/neovim2/bin/python'
+" $ pyenv install 3.7.8
+" $ pyenv virutalenv 3.7.8 neovim3
+" $ pyenv activate neovim3
+" $ pip install neovim
+" $ pyenv which python
 let g:python3_host_prog = '/home/todd/.pyenv/versions/neovim3/bin/python'
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -77,7 +83,7 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 Plug 'towolf/vim-helm'
 Plug 'mbbill/undotree'
-Plug 'puremourning/vimspector'
+" Plug 'puremourning/vimspector'
 Plug 'hashivim/vim-terraform'
 " Plug 'jvirtanen/vim-hcl'
 
