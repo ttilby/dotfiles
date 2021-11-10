@@ -1,3 +1,35 @@
 [user]
-	name = Todd Tilby
+	name = todd.tilby
 	email = todd.tilby@cradlepoint.com
+[diff]
+	tool = vimdiff
+[difftool "vimdiff"]
+    path = nvim
+[difftool "bc3"]
+	trustExitCode = true
+[merge]
+	tool = vimdiff
+    conflictstyle = diff3
+[mergetool "vimdiff"]
+    path = nvim
+[mergetool "bc3"]
+	trustExitCode = true
+[mergetool]
+	prompt = false
+[core]
+	pager = diff-so-fancy | less --tabs=4 -RFX
+[color]
+	ui = true
+[color "diff-highlight"]
+	oldNormal = red bold
+	oldHighlight = red bold 52
+	newNormal = green bold
+	newHighlight = green bold 22
+[color "diff"]
+	meta = 11
+	frag = magenta bold
+    func = 146 bold
+	commit = yellow bold
+	old = red bold
+	new = green bold
+	whitespace = red reverse
