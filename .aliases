@@ -1,0 +1,3 @@
+
+alias awsume="source awsume"
+alias tls="tmux ls"

@@ -91,10 +91,10 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 source $HOME/.exports
-if [[ "$host" == "toddt-SH370"* ]]; then
-#    source $HOME/.exports_cp
+if [[ "$host" == "toddt-SH370"* || "$host" == "Precision-3240" ]]; then
+    # source $HOME/.exports_cp
     source $HOME/CProjects/environ/default.env
-    source $HOME/.confluent.env
+    # source $HOME/.confluent.env
     source $HOME/.cp_functions
 fi
 
@@ -140,7 +140,6 @@ export EDITOR=nvim
 #     alias tldr="~/bin/tldr $1"
 # fi
 
-alias awsume="source awsume"
 
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
