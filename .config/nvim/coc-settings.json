@@ -38,5 +38,6 @@
         "constructor": "  ",
         "value": "  ",
         "enumMember": "  "
-	}
+	},
+    "jedi.executable.command": "/home/todd/.local/bin/jedi-language-server"
 }
