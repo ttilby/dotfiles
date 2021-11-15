@@ -4,6 +4,7 @@
 " 1. fzf
 "       need to ensure the runtime path (rtp) below is properly set
 " 2. ripgrep
+" 3. flake8
 
 " NeoVim---------------
 " If switching to neovim, run these commands to link up original vim configs
@@ -190,16 +191,6 @@ set scrolloff=8                   " Start scrolling when x lines away from margi
 " using bufexplorer plugin
 nnoremap <F5> :ToggleBufExplorer<CR>
 
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" FZF
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" Search for files
-nnoremap <leader>f :FZF<CR>
-" search for content
-nnoremap <leader>g :Rg <CR>
-" search for content using word under cursor
-" nnoremap <leader>d :Rg <C-R><C-W><CR>
-let g:fzf_layout = { 'down': '40%' }
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Colors
@@ -288,16 +279,16 @@ set undofile
 " <Plug>VimspectorRunToCursor
 " <Plug>VimspectorBalloonEval
 
-nnoremap <leader>dd :call vimspector#Launch()<CR>
-nnoremap <leader>de :call vimspector#Reset()<CR>
-
-nmap <leader>dl <Plug>VimspectorStepInto
-nmap <leader>dj <Plug>VimspectorStepOver
-nmap <leader>dk <Plug>VimspectorStepOut
-nmap <leader>d_ <Plug>VimspectorRestart
-nmap <leader>d5 <Plug>VimspectorContinue
-nmap <leader>db <Plug>VimspectorToggleBreakpoint
-nmap <leader>dcb <Plug>VimspectorToggleConditionalBreakpoint
+# nnoremap <leader>dd :call vimspector#Launch()<CR>
+# nnoremap <leader>de :call vimspector#Reset()<CR>
+#
+# nmap <leader>dl <Plug>VimspectorStepInto
+# nmap <leader>dj <Plug>VimspectorStepOver
+# nmap <leader>dk <Plug>VimspectorStepOut
+# nmap <leader>d_ <Plug>VimspectorRestart
+# nmap <leader>d5 <Plug>VimspectorContinue
+# nmap <leader>db <Plug>VimspectorToggleBreakpoint
+# nmap <leader>dcb <Plug>VimspectorToggleConditionalBreakpoint
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " vim-terraform

@@ -40,6 +40,7 @@ source ~/.themes/spaceship-prompt
 # POWERLEVEL9K_TIME_BACKGROUND='238'
 # POWERLEVEL9K_TIME_FOREGROUND='252'
 # POWERLEVEL9K_HISTORY_BACKGROUND='240'
+# pt
 # POWERLEVEL9K_HISTORY_FOREGROUND='252'
 
 # Uncomment the following line to use case-sensitive completion.
@@ -75,7 +76,10 @@ source ~/.themes/spaceship-prompt
 # Uncomment the following line if you want to change the command execution time
 # stamp shown in the history command output.
 # The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
+HIST_STAMPS="yyyy-mm-dd"
+
+export HISTFILESIZE=1000000000
+export HISTSIZE=1000000000
 
 # Would you like to use another custom folder than $ZSH/custom?
 # ZSH_CUSTOM=/path/to/new-custom-folder
@@ -136,10 +140,6 @@ export EDITOR=nvim
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-# if [[ "$host" != "SilverBullet"* ]]; then
-#     alias tldr="~/bin/tldr $1"
-# fi
-
 
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
@@ -159,13 +159,6 @@ if [[ "$host" == "toddt-SH370"* || "$host" == "Precision-3240" ]]; then
     eval "$(pyenv init -)"
     eval "$(pyenv virtualenv-init -)"
 fi
-
-
-# if type "$nvm" > /dev/null; then
-#     export NVM_DIR="$HOME/.nvm"
-#     [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-#     [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
-# fi
 
 # used to define where global npm packages are installed
 # Note that the n executable is at $HOME/bin/n
