@@ -1,0 +1,16 @@
+- defaults:
+    link:
+      relink: true
+
+- clean: ['~']
+
+- link:
+    ~/.vimrc: .vimrc
+
+- create:
+    - ~/Downloads
+    - ~/.vim/sessions
+    - ~/.vim/undodir
+
+- shell:
+  - [git submodule update --init --recursive, Install submodules]
