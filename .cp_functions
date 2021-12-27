@@ -1,0 +1,72 @@
+# functions specifically for Cradlepoint
+
+# Allow entry into local postgres without specifying host
+export PGHOST=localhost
+
+# logs into docker registry at AWS
+# only works with aws v1
+ecrlogin() {
+    export $(awsudo cp-ecr)
+    $(aws ecr get-login --registry-ids 737819302384  --no-include-email --region us-west-2)
+}
+
+# works with aws cli v2
+# ecrlogin() {
+#     export $(awsudo cp-ecr)
+#     aws ecr get-login-password | docker login --username AWS --password-stdin 737819302384.dkr.ecr.us-west-2.amazonaws.com
+# }
+
+offline-db() {
+    export $(awsudo offline-db-session-manager-prod)
+    aws ssm start-session --target "$(aws ec2 describe-instances --filters Name=tag:Name,Values=offline-db-prod Name=instance-state-name,Values=running --query 'Reservations[0].Instances[0].InstanceId' --output text)" --document-name offline-db-session-manager-prod
+}
+
+offline-db-f() {
+    export $(awsudo offline-db-session-manager-prod)
+    aws ssm start-session --target "$(aws ec2 describe-instances --filters Name=tag:Name,Values=offline-db-prod Name=instance-state-name,Values=running --query 'Reservations[0].Instances[0].InstanceId' --output text)" --document-name port-forwarding-offline-db-session-manager-prod --parameters '{"portNumber":["22"],"localPortNumber":["2222"]}'
+}
+
+### Kubernetes context prompt ###
+if type "$kubectl" > /dev/null; then
+    get_kube_context() {
+        kubectl config current-context
+    }
+    get_kube_namespace(){
+        NS=$(kubectl config view --minify --output 'jsonpath={..namespace}')
+        if [ -z $NS ]; then echo "default"; else echo $NS; fi
+    }
+
+    # add \[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] to your PS1 prompt
+    PS1="\[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] $PS1"
+
+    # add kubectl autocomplete
+    if hash kubectl 2>/dev/null; then
+        source <(kubectl completion zsh)
+    fi
+
+    # get a new dashboard key
+    alias dashboard-rekey="aws eks get-token --cluster-name $(kubectl config current-context) | jq -r .status.token | pbcopy"
+
+    ### kubernetes pods lister ###
+    pods() {
+        current_context=`kubectl config current-context`
+        if [ ! -z "$current_context" ]; then
+            current_namespace=`kubectl config view -o=jsonpath="{.contexts[?(@.name==\"$current_context\")].context.namespace}"`
+        else
+            current_namespace=default
+        fi
+        echo "($current_context, $current_namespace) pods:"
+        kubectl get pods | grep -v Completed | rev | cut -d '-' -f2- | rev | uniq | tail -n +2
+    }
+fi
+
+if type "$docker" > /dev/null; then
+    ### docker-machine completions ###
+    fpath=(~/.zsh/completion $fpath)
+    autoload -Uz compinit && compinit -i
+
+
+    function dip() {
+        docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'
+    }
+fi

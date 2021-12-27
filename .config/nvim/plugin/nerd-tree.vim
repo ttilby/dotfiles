@@ -20,3 +20,4 @@ let NERDTreeShowHidden=1
 let g:webdevicons_enable_nerdtree = 1
 " let g:webdevicons_enable_airline_statusline = 1
 let g:NERDTreeWinSize=40
+

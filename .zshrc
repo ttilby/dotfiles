@@ -143,6 +143,7 @@ export EDITOR=nvim
 
 export PATH="/usr/local/go/bin:$PATH"
 export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/sbin:$PATH"
 # export PATH="/usr/local/opt/node@6/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
 # export PATH="/home/todd/.npm-global/bin:$PATH"
@@ -164,50 +165,5 @@ fi
 # Note that the n executable is at $HOME/bin/n
 export N_PREFIX=$HOME/n
 export PATH="$HOME/n/bin:$PATH"
-
-### Kubernetes context prompt ###
-if type "$kubectl" > /dev/null; then
-    get_kube_context() {
-        kubectl config current-context
-    }
-    get_kube_namespace(){
-        NS=$(kubectl config view --minify --output 'jsonpath={..namespace}')
-        if [ -z $NS ]; then echo "default"; else echo $NS; fi
-    }
-
-    # add \[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] to your PS1 prompt
-    PS1="\[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] $PS1"
-
-    # add kubectl autocomplete
-    if hash kubectl 2>/dev/null; then
-        source <(kubectl completion zsh)
-    fi
-
-    # get a new dashboard key
-    alias dashboard-rekey="aws eks get-token --cluster-name $(kubectl config current-context) | jq -r .status.token | pbcopy"
-
-    ### kubernetes pods lister ###
-    pods() {
-        current_context=`kubectl config current-context`
-        if [ ! -z "$current_context" ]; then
-            current_namespace=`kubectl config view -o=jsonpath="{.contexts[?(@.name==\"$current_context\")].context.namespace}"`
-        else
-            current_namespace=default
-        fi
-        echo "($current_context, $current_namespace) pods:"
-        kubectl get pods | grep -v Completed | rev | cut -d '-' -f2- | rev | uniq | tail -n +2
-    }
-fi
-
-if type "$docker" > /dev/null; then
-    ### docker-machine completions ###
-    fpath=(~/.zsh/completion $fpath)
-    autoload -Uz compinit && compinit -i
-
-
-    function dip() {
-        docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'
-    }
-fi
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

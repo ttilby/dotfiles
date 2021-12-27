@@ -175,6 +175,9 @@ augroup CUSTOM
     autocmd BufWritePre * :call TrimWhiteSpace()
 augroup END
 
+" Set registers
+let @x = "        import pdb; pdb.set_trace()"
+
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Document Width
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -279,16 +282,16 @@ set undofile
 " <Plug>VimspectorRunToCursor
 " <Plug>VimspectorBalloonEval
 
-# nnoremap <leader>dd :call vimspector#Launch()<CR>
-# nnoremap <leader>de :call vimspector#Reset()<CR>
-#
-# nmap <leader>dl <Plug>VimspectorStepInto
-# nmap <leader>dj <Plug>VimspectorStepOver
-# nmap <leader>dk <Plug>VimspectorStepOut
-# nmap <leader>d_ <Plug>VimspectorRestart
-# nmap <leader>d5 <Plug>VimspectorContinue
-# nmap <leader>db <Plug>VimspectorToggleBreakpoint
-# nmap <leader>dcb <Plug>VimspectorToggleConditionalBreakpoint
+" nnoremap <leader>dd :call vimspector#Launch()<CR>
+" nnoremap <leader>de :call vimspector#Reset()<CR>
+"
+" nmap <leader>dl <Plug>VimspectorStepInto
+" nmap <leader>dj <Plug>VimspectorStepOver
+" nmap <leader>dk <Plug>VimspectorStepOut
+" nmap <leader>d_ <Plug>VimspectorRestart
+" nmap <leader>d5 <Plug>VimspectorContinue
+" nmap <leader>db <Plug>VimspectorToggleBreakpoint
+" nmap <leader>dcb <Plug>VimspectorToggleConditionalBreakpoint
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " vim-terraform
@@ -301,3 +304,8 @@ augroup custom_terraform
     autocmd!
     autocmd BufRead,BufNewFile *.hcl set filetype=terraform
 augroup END
+
+" after a re-source, fix syntax matching issues (concealing brackets):
+if exists('g:loaded_webdevicons')
+    call webdevicons#refresh()
+endif
