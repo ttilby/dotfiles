@@ -1,0 +1,16 @@
+- apt:
+  - zsh
+  - curl
+  - htop
+  # Libs needed for Tmux 3.2a
+  - build-essential
+  - autoconf
+  - automake
+  - pkg-config
+  - libevent-dev
+  - libncurses5-dev
+  - bison
+  - byacc
+
+- shell:
+  - ['chsh -s $(which zsh) $SUDO_USER', 'Set default shell to zsh']

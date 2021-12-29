@@ -7,7 +7,7 @@
 " vim
 let g:coc_disable_startup_warning = 1
 
-let g:coc_global_extensions = ['coc-json', 'coc-jedi']
+let g:coc_global_extensions = ['coc-json', 'coc-jedi', 'coc-yaml', 'coc-markdownlint']
 
 " TextEdit might fail if hidden is not set.
 set hidden
@@ -84,3 +84,6 @@ endfunction
 
 " Highlight symbol under cursor on CursorHold
 autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
