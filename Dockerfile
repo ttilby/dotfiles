@@ -25,6 +25,7 @@ RUN chown -R tester:tester /home/tester
 
 USER tester
 ENV HOME /home/tester
+ENV XDG_CONFIG_HOME $HOME/.config
 
 WORKDIR $HOME
 

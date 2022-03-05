@@ -10,16 +10,6 @@ host=$(uname -n)
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
-# Anitgen Package Manager
-source $HOME/.antigen.zsh
-antigen use oh-my-zsh
-antigen bundle git
-antigen bundle sudo
-antigen bundle zsh-users/zsh-syntax-highlighting
-# antigen bundle zsh-users/zsh-completions
-antigen theme spaceship-prompt/spaceship-prompt
-antigen apply
-
 # ZPM Package Manager
 # if [[ ! -f ~/.zpm/zpm.zsh ]]; then
 #   git clone --recursive https://github.com/zpm-zsh/zpm ~/.zpm
@@ -32,7 +22,7 @@ antigen apply
 # zpm load spaceship-prompt/spaceship-prompt
 #
 # # Path to your oh-my-zsh installation.
-# export ZSH=$HOME/.oh-my-zsh
+export ZSH=$HOME/.oh-my-zsh
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
@@ -41,7 +31,7 @@ antigen apply
 
 # link the spaceship theme into .oh-my-zsh/custom/themes folder
 # ln -s ~/.themes/zsh-spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
-# ZSH_THEME="spaceship"
+ZSH_THEME="spaceship"
 source ~/.themes/spaceship-prompt
 
 
@@ -109,9 +99,9 @@ export HISTSIZE=1000000000
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-# plugins=(git sudo zsh-syntax-highlighting)
+plugins=(git sudo zsh-syntax-highlighting)
 
-# source $ZSH/oh-my-zsh.sh
+source $ZSH/oh-my-zsh.sh
 
 # User configuration
 

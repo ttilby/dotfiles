@@ -78,6 +78,7 @@ Plug 'chriskempson/base16-vim'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-obsession'
+Plug 'tpope/vim-fugitive'
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
@@ -176,7 +177,7 @@ augroup CUSTOM
 augroup END
 
 " Set registers
-let @x = "        import pdb; pdb.set_trace()"
+call setreg("x", "        import pdb; pdb.set_trace()", "l")
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Document Width
