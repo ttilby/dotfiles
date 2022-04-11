@@ -39,5 +39,6 @@
         "value": "  ",
         "enumMember": "  "
 	},
-    "jedi.executable.command": "/home/todd/.local/bin/jedi-language-server"
+    "jedi.executable.command": "/home/todd/.local/bin/jedi-language-server",
+    "jedi.startupMessage": true
 }

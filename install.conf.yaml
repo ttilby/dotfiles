@@ -29,16 +29,25 @@
     # ~/vim/sessions:
     #   glob: true
     #   path: vim/sessions/*
-    ~/.themes/spaceship-prompt: .themes/spaceship-prompt
-    ~/.tmux/pane-border-format.sh: .tmux/pane-border-format.sh
+    ~/.themes/spaceship-prompt:
+        path: .themes/spaceship-prompt
+    ~/.tmux/pane-border-format.sh:
+        path: .tmux/pane-border-format.sh
     ~/bin/ta: bin/ta
-    ~/.aliases: .aliases
-    ~/.cp_functions: .cp_functions
-    ~/.exports: .exports
-    ~/.functions: .functions
-    ~/.gitconfig: .gitconfig
-    ~/.pgpass: .pgpass
-    ~/.tmux.conf: .tmux.conf
+    ~/.aliases:
+        path: .aliases
+    ~/.cp_functions:
+        path: .cp_functions
+    ~/.exports:
+        path: .exports
+    ~/.functions:
+        path: .functions
+    ~/.gitconfig:
+        path: .gitconfig
+    ~/.pgpass:
+        path: .pgpass
+    ~/.tmux.conf:
+        path: .tmux.conf
     ~/.zshrc:
         path: .zshrc
         force: true # installing oh-my-zsh will create a default .zhsrc file

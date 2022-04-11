@@ -46,7 +46,7 @@ SPACESHIP_PROMPT_SEPARATE_LINE=false
 SPACESHIP_TIME_SHOW=true
 
 # USER
-SPACESHIP_USER_SHOW=true
+SPACESHIP_USER_SHOW=false
 SPACESHIP_USER_PREFIX="" # remove `with` before username
 SPACESHIP_USER_SUFFIX="" # remove space before host
 

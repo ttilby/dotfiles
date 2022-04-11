@@ -15,6 +15,7 @@ autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isT
 
 " show hidden files by default
 let NERDTreeShowHidden=1
+let NERDTreeWinPos="right"
 
 " used by vim-devicons
 let g:webdevicons_enable_nerdtree = 1

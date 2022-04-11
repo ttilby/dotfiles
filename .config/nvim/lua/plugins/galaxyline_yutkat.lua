@@ -86,7 +86,7 @@ local function get_current_file_name()
   local file = vim.api.nvim_exec([[
     if winwidth(0) < 50
       echo expand('%:t')
-    elseif winwidth(0) > 150
+    elseif winwidth(0) > 90
       echo expand('%')
     else
       echo pathshorten(expand('%'))
@@ -308,7 +308,7 @@ local right_1 = {
     DiffAdd = {
       provider = CocDiffAdd,
       condition = checkwidth,
-      icon = '+',
+      icon = '  ',
       highlight = {colors.green, colors.bg}
     }
   },
@@ -316,7 +316,7 @@ local right_1 = {
     DiffModified = {
       provider = CocDiffModified,
       condition = checkwidth,
-      icon = '~',
+      icon = '  ',
       highlight = {colors.orange, colors.bg}
     }
   },
@@ -324,7 +324,7 @@ local right_1 = {
     DiffRemove = {
       provider = CocDiffRemove,
       condition = checkwidth,
-      icon = '-',
+      icon = '  ',
       highlight = {colors.red1, colors.bg}
     }
   },
@@ -334,27 +334,27 @@ local right_1 = {
       highlight = {colors.bg, colors.bg}
     }
   },
-  {
-    GitRoot = {
-      provider = {function() return '  ' end, GetGitRoot, function() return ' ' end},
-      condition = buffer_not_empty and require('galaxyline.condition').check_git_workspace,
-      highlight = {colors.fg, colors.section_bg},
-    }
-  },
-  {
-    GitIcon = {
-      provider = function() return '   ' end,
-      condition = buffer_not_empty and require('galaxyline.condition').check_git_workspace,
-      highlight = {colors.fg, colors.line_bg},
-    }
-  },
-  {
-    GitBranch = {
-      provider = {GetGitBranch, function() return ' ' end},
-      condition = buffer_not_empty and require('galaxyline.condition').check_git_workspace,
-      highlight = {colors.fg, colors.line_bg},
-    }
-  },
+  -- {
+  --   GitRoot = {
+  --     provider = {function() return '  ' end, GetGitRoot, function() return ' ' end},
+  --     condition = buffer_not_empty and require('galaxyline.condition').check_git_workspace,
+  --     highlight = {colors.fg, colors.section_bg},
+  --   }
+  -- },
+  -- {
+  --   GitIcon = {
+  --     provider = function() return '   ' end,
+  --     condition = buffer_not_empty and require('galaxyline.condition').check_git_workspace,
+  --     highlight = {colors.fg, colors.line_bg},
+  --   }
+  -- },
+  -- {
+  --   GitBranch = {
+  --     provider = {GetGitBranch, function() return ' ' end},
+  --     condition = buffer_not_empty and require('galaxyline.condition').check_git_workspace,
+  --     highlight = {colors.fg, colors.line_bg},
+  --   }
+  -- },
   {
     LineInfo = {
       provider = {'LineColumn', function() return ' ' end},
