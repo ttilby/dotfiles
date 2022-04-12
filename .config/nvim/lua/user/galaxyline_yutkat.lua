@@ -1,6 +1,13 @@
 -- https://github.com/yutkat/dotfiles/blob/master/.config/nvim/lua/rc/pluginconfig/galaxyline.lua
 
 local gl = require('galaxyline')
+local diagnostic = require('galaxyline.provider_diagnostic')
+
+-- Diagnostic Provider
+DiagnosticError = diagnostic.get_diagnostic_error
+DiagnosticWarn = diagnostic.get_diagnostic_warn
+DiagnosticHint = diagnostic.get_diagnostic_hint
+DiagnosticInfo = diagnostic.get_diagnostic_info
 
 local function is_buffer_empty()
   return vim.fn.empty(vim.fn.expand('%:t')) == 1
@@ -108,47 +115,16 @@ local function get_current_file_name_short()
   end
 end
 
-local function lsp_status(status)
-  shorter_stat = ''
-  for match in string.gmatch(status, "[^%s]+")  do
-    err_warn = string.find(match, "^[WE]%d+", 0)
-    if not err_warn then
-      shorter_stat = shorter_stat .. ' ' .. match
-    end
-  end
-  return shorter_stat
-end
-
-local function get_coc_lsp()
-  local status = vim.fn['coc#status']()
-  if not status or status == '' then
-    return ''
-  end
-  return lsp_status(status)
-end
-
-local function get_diagnostic_info()
-  if vim.fn.exists('*coc#rpc#start_server') == 1 then
-    return get_coc_lsp()
-  end
-  return ''
-end
-
-local function get_current_func()
-  local has_func, func_name = pcall(vim.api.nvim_buf_get_var,0,'coc_current_function')
-  if not has_func then return end
-  return func_name
-end
-
-local function get_function_info()
-  if vim.fn.exists('*coc#rpc#start_server') == 1 then
-    return get_current_func()
-  end
-  return ''
-end
-
-CocStatus = get_diagnostic_info
-CocFunc = get_current_func
+-- local function lsp_status(status)
+--   local shorter_stat = ''
+--   for match in string.gmatch(status, "[^%s]+")  do
+--     local err_warn = string.find(match, "^[WE]%d+", 0)
+--     if not err_warn then
+--       shorter_stat = shorter_stat .. ' ' .. match
+--     end
+--   end
+--   return shorter_stat
+-- end
 
 local function get_obsession_status()
   if vim.fn.exists('*ObsessionStatus') == 1 then
@@ -204,18 +180,15 @@ gls.left = {
     }
   },
   {
-    CocFunc = {
-      provider = CocFunc,
-      icon = ' λ',
-      highlight = {colors.yellow,colors.section_bg},
-    }
-  },
-  {
     Space = {
       provider = function() return ' ' end,
       highlight = {colors.bg, colors.bg}
     }
   },
+}
+
+-- Mid section
+gls.mid = {
   {
     DiagnosticError = {
       provider = 'DiagnosticError',
@@ -246,40 +219,24 @@ gls.left = {
   }
 }
 
--- Mid section
-gls.mid = {
-  {
-    CocStatus = {
-      provider = CocStatus,
-      highlight = {colors.green, colors.bg},
-      icon = '  '
-    }
-  }
-}
-
-local get_coc_git_status = function()
-  if vim.fn.exists('b:coc_git_status') ~= 1 then
-    return ''
-  end
-  return vim.api.nvim_buf_get_var(0, 'coc_git_status')
+local get_git_status = function()
+    local signs = vim.b.gitsigns_status_dict or {added=0,changed=0,removed=0}
+    return signs
 end
 
-local CocDiffAdd = function()
-  local git_status = get_coc_git_status()
-  local r = string.match(git_status, "%+(%d+)")
-  return r == nil and "" or r
+local DiffAdd = function()
+  local git_status = get_git_status()
+  return git_status.added
 end
 
-local CocDiffModified = function()
-  local git_status = get_coc_git_status()
-  local r =string.match(git_status, "~(%d+)")
-  return r == nil and "" or r
+local DiffModified = function()
+  local git_status = get_git_status()
+  return git_status.changed
 end
 
-local CocDiffRemove = function()
-  local git_status = get_coc_git_status()
-  local r = string.match(git_status, "%-(%d+)")
-  return r == nil and "" or r
+local DiffRemove = function()
+  local git_status = get_git_status()
+  return git_status.removed
 end
 
 local function get_basename(file)
@@ -306,25 +263,25 @@ end
 local right_1 = {
   {
     DiffAdd = {
-      provider = CocDiffAdd,
+      provider = DiffAdd,
       condition = checkwidth,
-      icon = '  ',
+      icon = '   ',
       highlight = {colors.green, colors.bg}
     }
   },
   {
     DiffModified = {
-      provider = CocDiffModified,
+      provider = DiffModified,
       condition = checkwidth,
-      icon = '  ',
+      icon = '   ',
       highlight = {colors.orange, colors.bg}
     }
   },
   {
     DiffRemove = {
-      provider = CocDiffRemove,
+      provider = DiffRemove,
       condition = checkwidth,
-      icon = '  ',
+      icon = '   ',
       highlight = {colors.red1, colors.bg}
     }
   },

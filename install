@@ -16,5 +16,5 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 git -C "${DOTBOT_APT}" submodule sync --quiet --recursive
 git submodule update --init --recursive "${DOTBOT_APT}"
 
-sudo "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" --plugin-dir dotbot-apt -c "${SUDO_CONFIG}" "${@}"
+# sudo "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" --plugin-dir dotbot-apt -c "${SUDO_CONFIG}" "${@}"
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"

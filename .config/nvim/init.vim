@@ -1,7 +1,6 @@
 " ./vimrc
 
 " Required external programs
-" 1. fzf
 "       need to ensure the runtime path (rtp) below is properly set
 " 2. ripgrep
 " 3. flake8
@@ -76,11 +75,12 @@ Plug 'chriskempson/base16-vim'
 " Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'kyazdani42/nvim-web-devicons'
 Plug 'glepnir/galaxyline.nvim'
-Plug 'airblade/vim-gitgutter'
+" Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-obsession'
-Plug 'tpope/vim-fugitive'
+" Plug 'tpope/vim-fugitive'
+Plug 'lewis6991/gitsigns.nvim'
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 Plug 'towolf/vim-helm'
@@ -88,6 +88,16 @@ Plug 'mbbill/undotree'
 " Plug 'puremourning/vimspector'
 Plug 'hashivim/vim-terraform'
 " Plug 'jvirtanen/vim-hcl'
+Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/nvim-lsp-installer'
+" nvim-cpm
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 
 if has("nvim-0.5")
     Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdate'}
@@ -124,29 +134,30 @@ augroup END
 " Save whenever switching windows or leaving vim
 au FocusLost,WinLeave * :silent! wa
 
-set showmode                      " Show current mode at the bottom
-set hlsearch                      " highlight searches
-set incsearch                     " highlight dynamically as pattern is typed
-set ignorecase                    " case insensitive search (unless specified)
-set smartcase                     " override ignorecase if search string has capitals
+" set showmode                      " Show current mode at the bottom
+" set hlsearch                      " highlight searches
+" set incsearch                     " highlight dynamically as pattern is typed
+" set ignorecase                    " case insensitive search (unless specified)
+" set smartcase                     " override ignorecase if search string has capitals
 " set clipboard=unnamed             " Use the OS clipboard by default
-set clipboard+=unnamedplus
-set showmode                      " Show the current mode
-set hidden                        " keeps modified buffers in the background
+" set clipboard+=unnamedplus
+" set showmode                      " Show the current mode
+" set hidden                        " keeps modified buffers in the background
 " set cursorline
 " set cursorcolumn
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
-set shiftround
-set expandtab
-set noswapfile
-set nobackup
-set mouse=a mousemodel=popup
+" set tabstop=4
+" set softtabstop=4
+" set shiftwidth=4
+" set shiftround
+" set expandtab
+" set noswapfile
+" set nobackup
+" set mouse=a mousemodel=popup
 " set ruler
-set wildmenu
-set wildmode=list:longest,full
-set termguicolors
+" set wildmenu
+" set wildmode=list:longest,full
+" set termguicolors
+" set signcolumn=yes
 
 " Stop highlight after searching
 nnoremap <silent> <leader>, :noh<cr>
@@ -224,6 +235,15 @@ highlight Comment cterm=italic gui=italic
 map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans<' . synIDattr(synID(line("."),col("."),0),"name") . "> lo<" . synIDattr(synIDtrans(synID(line("."),col("."),1)),"name") . ">"<CR>
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Lua configs
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+lua require('user.options')
+lua require('user.lsp')
+lua require('user.cmp')
+lua require('user.galaxyline_yutkat')
+lua require('user.gitsigns')
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Treesitter (0.5 only)
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 if has("nvim-0.5")
@@ -240,16 +260,6 @@ require'nvim-treesitter.configs'.setup {
 }
 EOF
 endif
-
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" GalaxyLine Config
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" https://github.com/glepnir/galaxyline.nvim
-lua << EOF
-    -- require('plugins.galaxyline')
-    -- require('plugins.galaxyline_siduck76')
-    require('plugins.galaxyline_yutkat')
-EOF
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Flake (python checking)
