@@ -278,7 +278,7 @@ augroup END
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " https://github.com/mbbill/undotree
 nnoremap <leader>u :UndotreeToggle<CR>
-set undodir=~/.config/nvim/undodir
+set undodir=~/vim/undodir
 set undofile
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
