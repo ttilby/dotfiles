@@ -45,6 +45,7 @@
         path: .functions
     ~/.gitconfig:
         path: .gitconfig
+    ~/.p10k.zsh: .p10k.zsh
     ~/.pgpass:
         path: .pgpass
     ~/.tmux.conf:
