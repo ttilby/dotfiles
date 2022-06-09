@@ -17,6 +17,15 @@ lsp_installer.on_server_ready(function(server)
     end
 
     if server.name == "yamlls" then
+        -- Check if "yaml" file is in a helm directory, and if so,
+        -- disable the language server since helm yaml is not really yaml.
+        local default_on_attach = opts.on_attach
+        opts.on_attach = function(client, bufnr)
+            default_on_attach(client, bufnr)
+            if string.find(vim.api.nvim_buf_get_name(bufnr), "helm") then
+                vim.diagnostic.disable()
+            end
+        end
         local yamlls_opts = require('user.lsp.settings.yamlls')
         opts = vim.tbl_deep_extend('force', yamlls_opts, opts)
     end

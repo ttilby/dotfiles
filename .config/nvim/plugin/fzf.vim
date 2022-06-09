@@ -24,7 +24,7 @@
 
 
 " Search for files
-nnoremap <leader>f :FZF<CR>
+nnoremap <leader>G :FZF<CR>
 " search for content (:Rg will use the built in command, :RG will use the custom function)
 nnoremap <leader>g :Rg <CR>
 " search for content using word under cursor

@@ -78,9 +78,7 @@ Plug 'chriskempson/base16-vim'
 " Plug 'kyazdani42/nvim-tree.lua'
 " Plug 'kyazdani42/nvim-web-devicons'
 Plug 'glepnir/galaxyline.nvim'
-" Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-obsession'
-" Plug 'tpope/vim-fugitive'
 Plug 'lewis6991/gitsigns.nvim'
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -88,9 +86,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 Plug 'towolf/vim-helm'
 Plug 'mbbill/undotree'
-" Plug 'puremourning/vimspector'
 Plug 'hashivim/vim-terraform'
-" Plug 'jvirtanen/vim-hcl'
+Plug 'jvirtanen/vim-hcl'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
 " nvim-cpm
@@ -102,11 +99,10 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 
-if has("nvim-0.5")
-    Plug 'nvim-treesitter/nvim-treesitter', {'branch': '0.5-compat', 'do': ':TSUpdate'}
-else
-    Plug 'vim-python/python-syntax'
-endif
+Plug 'windwp/nvim-autopairs'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+Plug 'whiteinge/diffconflicts'
 
 " Initialize plugin system
 call plug#end()
@@ -136,31 +132,6 @@ augroup END
 
 " Save whenever switching windows or leaving vim
 au FocusLost,WinLeave * :silent! wa
-
-" set showmode                      " Show current mode at the bottom
-" set hlsearch                      " highlight searches
-" set incsearch                     " highlight dynamically as pattern is typed
-" set ignorecase                    " case insensitive search (unless specified)
-" set smartcase                     " override ignorecase if search string has capitals
-" set clipboard=unnamed             " Use the OS clipboard by default
-" set clipboard+=unnamedplus
-" set showmode                      " Show the current mode
-" set hidden                        " keeps modified buffers in the background
-" set cursorline
-" set cursorcolumn
-" set tabstop=4
-" set softtabstop=4
-" set shiftwidth=4
-" set shiftround
-" set expandtab
-" set noswapfile
-" set nobackup
-" set mouse=a mousemodel=popup
-" set ruler
-" set wildmenu
-" set wildmode=list:longest,full
-" set termguicolors
-" set signcolumn=yes
 
 " Stop highlight after searching
 nnoremap <silent> <leader>, :noh<cr>
@@ -245,6 +216,7 @@ lua require('user.lsp')
 lua require('user.cmp')
 lua require('user.galaxyline_yutkat')
 lua require('user.gitsigns')
+lua require('user.autopairs')
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Treesitter (0.5 only)
