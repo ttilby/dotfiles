@@ -1,4 +1,8 @@
 -- https://github.com/lewis6991/gitsigns.nvim
+local gitsigns_status_ok, gitsigns = pcall(require, "gitsigns")
+if not gitsigns_status_ok then
+    return
+end
 
 require('gitsigns').setup {
   signs = {

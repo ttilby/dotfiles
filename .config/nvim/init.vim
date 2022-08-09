@@ -1,16 +1,7 @@
-" ./vimrc
-
 " Required external programs
 "       need to ensure the runtime path (rtp) below is properly set
 " 2. ripgrep
 " 3. flake8
-
-" NeoVim---------------
-" If switching to neovim, run these commands to link up original vim configs
-" ln -s ~/.vimrc ~/.config/nvim/init.vim
-" ln -s ~/.vim/bundle ~/.config/nvim/bundle
-" ln -s ~/.vim/autoload ~/.config/nvim/autoload
-" ln -s ~/.vim/colors ~/.config/nvim/colors
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Upgrading to latest nightly NeoVim
@@ -69,8 +60,11 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'jlanzarotta/bufexplorer'
 Plug 'nvie/vim-flake8'
+
+" Fuzzy finders
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'gruvbox-community/gruvbox'
@@ -79,7 +73,7 @@ Plug 'chriskempson/base16-vim'
 " Plug 'kyazdani42/nvim-web-devicons'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'tpope/vim-obsession'
-Plug 'lewis6991/gitsigns.nvim'
+" Plug 'lewis6991/gitsigns.nvim' " removed on 2022-06-15 due to TOO MANY FILES OPEN error
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
@@ -90,6 +84,8 @@ Plug 'hashivim/vim-terraform'
 Plug 'jvirtanen/vim-hcl'
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
+Plug 'airblade/vim-gitgutter'
+
 " nvim-cpm
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
@@ -98,7 +94,6 @@ Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
-
 Plug 'windwp/nvim-autopairs'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 

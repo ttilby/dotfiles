@@ -34,7 +34,7 @@
     # =========================[ Line #1 ]=========================
     os_icon                 # os identifier
     dir                     # current directory
-    vcs                     # git status
+    # vcs                   # git status # removed 2022-06-13 due to too many open files (used by gitstatusd)
     # =========================[ Line #2 ]=========================
     newline                 # \n
     prompt_char             # prompt symbol

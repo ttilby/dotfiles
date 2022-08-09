@@ -5,17 +5,21 @@
 	tool = vimdiff
 [difftool "vimdiff"]
     path = nvim
-[difftool "bc3"]
-	trustExitCode = true
+# Not sure if this works yet, needs testing
+# [difftool "nvimdiff"]
+#     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
 [merge]
-	tool = vimdiff
-    conflictstyle = diff3
+	tool = diffconflicts
+    # conflictstyle = diff3
 [mergetool "vimdiff"]
     path = nvim
-[mergetool "bc3"]
-	trustExitCode = true
+[mergetool "diffconflicts"]
+    # https://github.com/whiteinge/diffconflicts
+    cmd = "nvim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\""
+    trustExitCode = true
 [mergetool]
 	prompt = false
+    keepBackup = false
 [core]
 	pager = diff-so-fancy | less --tabs=4 -RFX
 	excludesFile = ~/.gitignore
