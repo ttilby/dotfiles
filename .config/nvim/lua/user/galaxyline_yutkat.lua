@@ -18,7 +18,7 @@ local function has_width_gt(cols)
 end
 
 local gls = gl.section
-gl.short_line_list = {'defx', 'packager', 'vista', 'NvimTree', 'nerdtree', 'coc-explorer'}
+gl.short_line_list = {'defx', 'packager', 'vista', 'NvimTree', 'nerdtree', 'coc-explorer', 'neo-tree'}
 
 local colors = {
   bg = '#32302f',
@@ -239,7 +239,7 @@ local DiffRemove = function()
   return git_status.removed
 end
 
-local function get_basename(file)
+local get_basename = function(file)
   return file:match("^.+/(.+)$")
 end
 

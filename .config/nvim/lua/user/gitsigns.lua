@@ -4,7 +4,7 @@ if not gitsigns_status_ok then
     return
 end
 
-require('gitsigns').setup {
+gitsigns.setup {
   signs = {
     add = {
       hl = "DiffAdd",

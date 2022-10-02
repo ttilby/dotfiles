@@ -60,20 +60,38 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'jlanzarotta/bufexplorer'
 Plug 'nvie/vim-flake8'
+Plug 'gruvbox-community/gruvbox'
+Plug 'chriskempson/base16-vim'
+Plug 'glepnir/galaxyline.nvim'
+" Dims inactive windows
+" Plug 'sunjon/shade.nvim'
+Plug 'folke/which-key.nvim'
+Plug 'folke/trouble.nvim'
+
+" Libraries - these are commonly used by other plugins
+" neo-tree, mason
+Plug 'nvim-lua/plenary.nvim'
+" nvim-tree, neo-tree
+Plug 'kyazdani42/nvim-web-devicons'
+" neo-tree
+Plug 'MunifTanjim/nui.nvim'
 
 " Fuzzy finders
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-Plug 'preservim/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'gruvbox-community/gruvbox'
-Plug 'chriskempson/base16-vim'
+" File Browsers
+" Plug 'preservim/nerdtree'
+" Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plug 'kyazdani42/nvim-tree.lua'
-" Plug 'kyazdani42/nvim-web-devicons'
-Plug 'glepnir/galaxyline.nvim'
+Plug 'nvim-neo-tree/neo-tree.nvim', {'branch': 'v2.x'}
+
 Plug 'tpope/vim-obsession'
-" Plug 'lewis6991/gitsigns.nvim' " removed on 2022-06-15 due to TOO MANY FILES OPEN error
+" 2022-09-09 Noticed that things started running very slowly with this,
+" removing again.
+" Plug 'lewis6991/gitsigns.nvim' " disable if seeing TOO MANY FILES OPEN error
+Plug 'airblade/vim-gitgutter'
+
 Plug 'christoomey/vim-tmux-navigator'
 " Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
@@ -82,9 +100,10 @@ Plug 'towolf/vim-helm'
 Plug 'mbbill/undotree'
 Plug 'hashivim/vim-terraform'
 Plug 'jvirtanen/vim-hcl'
+
 Plug 'neovim/nvim-lspconfig'
 Plug 'williamboman/nvim-lsp-installer'
-Plug 'airblade/vim-gitgutter'
+
 
 " nvim-cpm
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -98,6 +117,7 @@ Plug 'windwp/nvim-autopairs'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'whiteinge/diffconflicts'
+Plug 'sindrets/diffview.nvim'
 
 " Initialize plugin system
 call plug#end()
@@ -210,8 +230,12 @@ lua require('user.options')
 lua require('user.lsp')
 lua require('user.cmp')
 lua require('user.galaxyline_yutkat')
-lua require('user.gitsigns')
+" lua require('user.gitsigns')
 lua require('user.autopairs')
+lua require('user.neotree')
+" lua require('user.shade')
+lua require('user.trouble')
+lua require('user.which-key')
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Treesitter (0.5 only)
@@ -235,7 +259,8 @@ endif
 " Flake (python checking)
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " automatically check style when writing python code
-let g:flake8_show_quickfix=1
+" disabling the quickfix window in favor of using trouble (e.g. use <leader>xq)
+let g:flake8_show_quickfix=0
 let g:flake8_show_in_gutter=1
 
 augroup flake
