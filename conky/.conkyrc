@@ -16,12 +16,12 @@ conky.config = {
     uppercase = false,
     cpu_avg_samples = 2,
     override_utf8_locale = true,
- 
+
     -- placement
     alignment = 'top_left',
     gap_x = 0,
     gap_y = 25,
- 
+
     -- default drawing
     draw_shades = false,
     draw_outline = false,
@@ -30,26 +30,26 @@ conky.config = {
     default_bar_width = 150, default_bar_height = 5,
     default_graph_width = 150, default_graph_height = 12,
     default_gauge_width = 20, default_gauge_height = 20,
- 
+
     -- colors
     font = 'Liberation Mono:size=10',
     default_color = 'EEEEEE',
     color1 = 'AABBFF',
     color2 = 'FF993D',
     color3 = 'AAAAAA',
- 
+
     -- layouting
     template0 = [[${font Liberation Sans:bold:size=11}${color2}\1 ${color3}${hr 2}${font}]],
     template1 = [[${color1}\1]],
     template2 = [[${goto 100}${color}]],
     template3 = [[${goto 180}${color}${alignr}]],
 };
- 
+
 conky.text = [[
 ${template0 Info}
 ${template1 Date}                                                           ${template3}${color3}${time %a,}${color}${time %e %B %G}
 ${template1 Time}                                                           ${template3}${time %T}
- 
+
 ${template0 System}
 ${template1 Hostname}                                                       ${template3}${nodename}
 ${template1 ${sysname}}                                                     ${template3}${kernel}-${machine}
@@ -57,7 +57,7 @@ ${template1 Uptime}                                                         ${te
 ${template1 CPU}                                                            ${template3}${freq_g}GHz
 ${template1 CPU\ Temperature}                                               ${template3}${acpitemp}°C
 ${template1 HDD\ Temperature}                                               ${template3}${execi 5 hddtemp /dev/sda | cut -c 35-39}
- 
+
 ${template0 Processors}
 ${template1 Load}               ${template2}${loadavg 1}                    ${template3}${loadgraph}
 ${template1 Core\ 1}            ${template2}${cpu cpu1}%                    ${template3}${cpubar cpu1}
@@ -65,19 +65,19 @@ ${template1 Core\ 2}            ${template2}${cpu cpu2}%                    ${te
 ${template1 Core\ 3}            ${template2}${cpu cpu3}%                    ${template3}${cpubar cpu3}
 ${template1 Core\ 4}            ${template2}${cpu cpu4}%                    ${template3}${cpubar cpu4}
 ${template1 Top}                ${template2}${top name 1}                   ${template3}${top cpu 1}
- 
+
 ${template0 Memory}
 ${template1 Memory}             ${template2}${memperc}% used                ${template3}${mem} / ${memmax}
                                                                             ${template3}${membar}
 ${template1 Top}                ${template2}${top_mem name 1}               ${template3}${top_mem mem_vsize 1}
- 
+
 ${template0 Filesystem}
 ${template1 /}                  ${template2}${fs_free /} free               ${template3}${fs_used /} / ${fs_size /}
                                                                             ${template3}${fs_bar /}
 ${template1 IO\ Read}           ${template2}${diskio_read}                  ${template3}${diskiograph_read}
 ${template1 IO\ Write}          ${template2}$diskio_write                   ${template3}$diskiograph_write
 ${template1 Top}                ${template2}${top_io name 1}                ${template3}${top_io io_perc 1}%
- 
+
 ${template0 Networking}
 ${if_existing /proc/net/route wlan0}\
 ${template1 IP}                                                             ${template3}${addr wlan0}
@@ -92,6 +92,6 @@ ${template1 Download}           ${template2}${downspeed enp5so}               ${
 ${template1 Upload}             ${template2}${upspeed enp5so}                 ${template3}${upspeedgraph enp5so}
 ${template1 Total Down/Up}                                                  ${template3}${totaldown enp5so}↓ / ${totalup enp5so}↑
 ${endif}${endif}\
- 
- 
+
+
 ]];

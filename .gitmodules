@@ -10,10 +10,3 @@
 [submodule "apps/diff-so-fancy"]
 	path = apps/diff-so-fancy
 	url = https://github.com/so-fancy/diff-so-fancy.git
-[submodule "dotbot"]
-	path = dotbot
-	url = https://github.com/anishathalye/dotbot
-	ignore = dirty
-[submodule "dotbot-apt"]
-	path = dotbot-apt
-	url = https://github.com/bryant1410/dotbot-apt

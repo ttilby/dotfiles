@@ -1,2 +1,2 @@
 # These exports are not sensitive and can be in source control
-export EDITOR='vim'
+export EDITOR='nvim'

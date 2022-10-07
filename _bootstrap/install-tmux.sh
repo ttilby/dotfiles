@@ -22,25 +22,3 @@ else
     echo "Installing Tmux Plugin Manager"
     git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
 fi
-
-#### NeoVim
-if type nvim 2>/dev/null;
-then
-    echo "nvim already installed"
-else
-    echo "Installing NeoVim"
-    CURRENT_VERSION='v0.5.0' # or 'nightly'
-    curl -L https://github.com/neovim/neovim/releases/download/$CURRENT_VERSION/nvim.appimage -o $HOME/Downloads/nvim-$CURRENT_VERSION
-    chmod u+x ~/Downloads/nvim-$CURRENT_VERSION
-    mv $HOME/Downloads/nvim-$CURRENT_VERSION $HOME/bin/nvim
-    # Should vim-plug be manually installed here?
-fi
-
-if type fzf 2>/dev/null;
-then
-    echo "fzf already installed"
-else
-    echo "Installing FZF"
-    git clone --depth 1 https://github.com/junegunn/fzf.git $HOME/.fzf
-    sh $HOME/.fzf/install
-fi
