@@ -38,6 +38,24 @@ If on macos
 
 ## Third-party
 
+### True color in Tmux / Vim / Alacritty
+
+After installing these tools, the `$TERM` value should be as follows:
+
+    ```bash
+    # Alacritty on primary machine
+    $ echo $TERM     # alacritty
+
+    # ssh to dev machine
+    $ echo $TERM     # alacritty
+
+    # tmux session on dev machine
+    $ echo $TERM     # tmux-256color
+    ```
+
+See [alacritty-tmux-vim_truecolor.md](https://gist.github.com/Pocco81/2ea37d5b1e31ce068d98774e907096d0)
+for more info on how to properly set up the environments to achieve this.
+
 ### Misc
 
 1. [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
