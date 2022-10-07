@@ -9,5 +9,5 @@ brew upgrade
 brew install bash
 
 # Update built-in tools on mac os
-brew install vim
 brew install git
+brew install stow
