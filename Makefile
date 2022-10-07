@@ -52,3 +52,6 @@ get_common_apps:
 
 get_neovim:
 	_bootstrap/install-nvim.sh
+
+get_fonts:
+	_bootstrap/install-fonts.sh
