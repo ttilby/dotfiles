@@ -1,8 +1,8 @@
 # Main targets
 
-personal-mac: common_dots mac_dots mac_apps
+personal-mac: common_dots mac_dots
 
-work-mac: common_dots mac_dots mac_apps
+work-mac: common_dots mac_dots
 	echo "todo"
 
 work-ubuntu: common_dots _sh-ubuntu
