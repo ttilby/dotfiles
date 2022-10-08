@@ -11,3 +11,6 @@ brew install bash
 # Update built-in tools on mac os
 brew install git
 brew install stow
+
+brew install zsh-syntax-highlighting
+brew install tmux

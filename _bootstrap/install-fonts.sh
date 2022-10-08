@@ -10,7 +10,7 @@ curl -fLo "MesloLGS NF Bold Italic.ttf"  https://github.com/romkatv/powerlevel10
 OS=$(uname -s)
 
 if [[ $OS == "Darwin" ]]; then
-    cp ~/.local/share/fonts/* ~/Library/Fonts
+    cp --update ~/.local/share/fonts/* ~/Library/Fonts
 elif [[ $OS == "Linux" ]]; then
     fc-cache -f -v
 fi

@@ -11,7 +11,7 @@ sudo -v
 while true; do sudo -n true; sleep 60; kill -0 "$$" || exit; done 2>/dev/null &
 
 # Install the Solarized Dark theme for iTerm
-open "${HOME}/dotfiles/solarized-dark.itermcolors"
+# open "${HOME}/dotfiles/solarized-dark.itermcolors"
 
 # Don’t display the annoying prompt when quitting iTerm
 defaults write com.googlecode.iterm2 PromptOnQuit -bool false

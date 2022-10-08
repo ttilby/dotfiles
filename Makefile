@@ -1,18 +1,19 @@
 # Main targets
 
-personal-mac:
+personal-mac: common_dots mac_dots mac_apps
+
+work-mac: common_dots mac_dots mac_apps
 	echo "todo"
 
-work-mac:
-	echo "todo"
-
-work-ubuntu: _common _sh-ubuntu
+work-ubuntu: common_dots _sh-ubuntu
 
 
 
 ##### Supporting targets
 
-# Stow
+##############################################
+# dotfiles (using GNU Stow)
+##############################################
 
 STOW_TARGET ?= ${HOME}
 STOW_VERBOSE ?= false
@@ -35,23 +36,28 @@ endif
 
 STOW_ARGS ?= ${_STOW_TARGET} ${_STOW_RESTOW} ${_STOW_VERBOSE} ${_STOW_SIMULATE}
 
-_common: _bin _apps _tmux _neovim _flake8 _git _zsh _sh-common
+common_dots: _misc _tmux _neovim _flake8 _git _zsh _sh-common
+mac_dots: _alacritty
 
 _%:
 	stow ${STOW_ARGS} $*
 
+##############################################
 # Install apps
+##############################################
 OS=$(uname -s)
 HOSTNAME=$(uname -n)
-get_common_apps:
-	ifeq (${OS}, Linux)
-		echo "todo Linux"
-	else
-		ehco "todo mac"
-	endif
 
-get_neovim:
+linux_apps:
+	_bootstrap/install-nvim.sh
+	_bootstrap/install-tmux.sh
+
+mac_apps:
+	_bootstrap/macos-defaults.sh
+	_bootstrap/install-fonts.sh
+	_bootstrap/brew.sh
 	_bootstrap/install-nvim.sh
 
-get_fonts:
-	_bootstrap/install-fonts.sh
+# Specific apps
+diff_so_fancy:
+	_bootstrap/install-diff-so-fancy.sh
