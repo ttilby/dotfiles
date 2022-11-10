@@ -76,7 +76,7 @@ export HISTSIZE=1000000000
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git sudo zsh-syntax-highlighting)
+plugins=(git sudo asdf zsh-syntax-highlighting)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -129,30 +129,12 @@ export EDITOR=nvim
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH="/usr/local/go/bin:$PATH"
-export PATH="/usr/local/sbin:$PATH"
-export PATH="/usr/sbin:$PATH"
-# export PATH="/usr/local/opt/node@6/bin:$PATH"
 export PATH="$PATH:$HOME/bin"
-# export PATH="/home/todd/.npm-global/bin:$PATH"
-# this was added for global npm packages
-# export PATH="/usr/local/bin/lib/node_modules:$PATH"
-# also for global npm packages
-# export PATH="/usr/local/bin/bin:$PATH"
-export PATH="/home/todd/.local/bin:$PATH"
 
-# this was added for pyenv, not needed on silverbullet
-if [[ "$host" == "toddt-SH370"* || "$host" == "Precision-3240" ]]; then
-    export PYENV_ROOT="$HOME/.pyenv"
-    export PATH="/home/todd/.pyenv/bin:$PATH"
-    eval "$(pyenv init -)"
-    eval "$(pyenv virtualenv-init -)"
+# set PATH so it includes user's private bin if it exists
+if [ -d "$HOME/.local/bin" ] ; then
+    PATH="$HOME/.local/bin:$PATH"
 fi
-
-# used to define where global npm packages are installed
-# Note that the n executable is at $HOME/bin/n
-export N_PREFIX=$HOME/n
-export PATH="$HOME/n/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

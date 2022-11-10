@@ -10,10 +10,14 @@ then
     echo "nvim already installed"
 else
     echo "Installing NeoVim"
-    CURRENT_VERSION='v0.7.0' # or 'nightly'
-    curl -L https://github.com/neovim/neovim/releases/download/$CURRENT_VERSION/nvim.appimage -o $HOME/Downloads/nvim-$CURRENT_VERSION
-    chmod u+x ~/Downloads/nvim-$CURRENT_VERSION
-    mv $HOME/Downloads/nvim-$CURRENT_VERSION $HOME/bin/nvim
-    # Should vim-plug be manually installed here?
+    CURRENT_VERSION='v0.8.0' # or 'nightly'
+
+    # Use the tar.gz file and place in apps directory
+    pushd ~/apps
+    wget https://github.com/neovim/neovim/releases/download/$CURRENT_VERSION/nvim-linux64.tar.gz
+    tar xzfv nvim-linux64.tar.gz
+    ln -s ~/apps/nvim-linux64/bin/nvim ~/bin/nvim
+    rm nvim-linux64.tar.gz
+    popd
 fi
 

@@ -4,21 +4,6 @@
 " 3. flake8
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-" Upgrading to latest nightly NeoVim
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
-"
-" curl -L https://github.com/neovim/neovim/releases/download/nightly/nvim.appimage -o ~/Downloads/nvim-nightly
-"  or
-" curl -L https://github.com/neovim/neovim/releases/download/v0.5.0/nvim.appimage -o ~/Downloads/nvim-stable
-"
-" chmod u+x nvim-nightly
-" ./nvim-nightly --version
-" rm /usr/local/bin/nvim
-" mv nvim-nightly /usr/local/bin/nvim_0.5.0-dev1354
-" cp /usr/local/bin/nvim_0.5.0-dev1354 /usr/local/bin/nvim
-" nvim --version
-
-" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Useful info
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " https://github.com/nanotee/nvim-lua-guide
@@ -31,18 +16,10 @@
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " See https://github.com/deoplete-plugins/deoplete-jedi/wiki/Setting-up-Python-for-Neovim
 "
-" $ pyenv install 2.7.18
-" $ pyenv virtualenv 2.7.18 neovim2
-" $ pyenv activate neovim2
-" $ pip install neovim
-" $ pyenv which python
-let g:python_host_prog = '/home/todd/.pyenv/versions/neovim2/bin/python'
-" $ pyenv install 3.7.8
-" $ pyenv virutalenv 3.7.8 neovim3
-" $ pyenv activate neovim3
-" $ pip install neovim
-" $ pyenv which python
-let g:python3_host_prog = '/home/todd/.pyenv/versions/neovim3/bin/python'
+" Ubuntu 22.04 only has python3, so install neovim to system python
+" installation
+"
+" pip install neovim
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " vim-plug

@@ -48,15 +48,17 @@ _%:
 OS=$(uname -s)
 HOSTNAME=$(uname -n)
 
-linux_apps:
+common_apps:
+	_bootstrap/install-zsh.sh
 	_bootstrap/install-nvim.sh
+
+linux_apps: common_apps
 	_bootstrap/install-tmux.sh
 
-mac_apps:
+mac_apps: common_apps
 	_bootstrap/macos-defaults.sh
 	_bootstrap/install-fonts.sh
 	_bootstrap/brew.sh
-	_bootstrap/install-nvim.sh
 
 # Specific apps
 diff_so_fancy:
