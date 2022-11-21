@@ -5,7 +5,7 @@ personal-mac: common_dots mac_dots
 work-mac: common_dots mac_dots
 	echo "todo"
 
-work-ubuntu: common_dots _sh-ubuntu
+work-ubuntu: linux_apps common_dots _sh-ubuntu
 
 
 

@@ -4,15 +4,15 @@
 # To see the state of the container:
 # $ docker run -it <image>
 
-FROM ubuntu:18.04
+FROM ubuntu:22.04
 MAINTAINER Todd Tilby
 
 # OS updates and installation
 RUN apt update
-RUN apt install git sudo software-properties-common locales locales-all -y
+RUN apt install git sudo software-properties-common locales locales-all make stow -y
 RUN sudo add-apt-repository ppa:deadsnakes/ppa
 RUN sudo apt update
-RUN sudo apt install python3.8 -y
+RUN sudo apt install python3.9 -y
 
 # Create test user
 RUN useradd -m tester
@@ -40,7 +40,7 @@ ENV APPIMAGE_EXTRACT_AND_RUN=1
 # RUN cd $HOME && \
 #     git clone https://github.com/ttilby/dotfiles -b dotbot $HOME/.dotfiles --depth 1
 
-RUN cd $HOME/.dotfiles && ./install
+RUN cd $HOME/.dotfiles && make work_ubuntu
 
 # CMD ["/bin/bash"]
 CMD ["/usr/bin/zsh"]
