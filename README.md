@@ -2,15 +2,12 @@
 
 ## Install
 
-    yadm submodule update --init --recursive
-
-If there are errors with the submodules, these can usually be fixed by deleting
-the submodules locally and re-running the command above.
-
-Submodules are in the following directories
-
-1. ~/apps/
-2. ~/.tmux/plugins/
+```bash
+sudo apt get make zsh git stow
+# <clone repo>
+make common-apps
+make work-ubuntu
+```
 
 ## Fonts
 
@@ -75,6 +72,20 @@ file to `Documents/alacritty.info` if needed.
     sudo tic -xe alacritty,alacritty-direct Documents/alacritty.info
     ```
 
+### ASDF
+
+Used for managing multiple apps
+
+    ```bash
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
+    asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
+    asdf install terraform 1.0.8
+    asdf global terraform 1.0.8
+    asdf plugin-add terragrunt https://github.com/ohmer/asdf-terragrunt
+    asdf plugin-add tflint https://github.com/skyzyx/asdf-tflint
+    asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+    asdf current
+    ```
 ### Cmake
 
     ```bash
@@ -139,51 +150,24 @@ Requires cmake to be installed.
     make install
     ```
 
-#### Rust
-
-Installed to support [tmux-thumbs](https://github.com/fcsonline/tmux-thumbs).
-
-Instructions can be found on [rustup.rs](rustup.rs).
-
-    ```bash
-    curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
-    ```
-
-### Node
-
-Use the [n](https://www.npmjs.com/package/n) Node version manager
-
-    ```bash
-    cd ~/bin
-    curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n
-    chmod +x n
-    n lts
-    ```
-
 ### Neovim
 
-    ```bash
-    curl -L https://github.com/neovim/neovim/releases/download/v0.5.0/nvim.appimage -o ~/Downloads/nvim-stable
-    chmod u+x nvim-stable
-    mv nvim-stable /usr/local/bin/nvim
-    nvim --version
+#### LSP info [WIP]
+
+##### bashls
+
+This was failing because `node` was installed via `asdf` and so couldn't be
+found:
+
+    ```
+    "bash-language-server"	"stderr"	"/usr/bin/env: ‘node’: No such file or directory\n"
     ```
 
-Install [flake8](https://github.com/nvie/vim-flake8)
-
-#### jedi (python completion)
-
-This should be managed by coc-nvim but sometimes it doesn't work, so here is a
-workaround
+To fix, I symlinked the `asdf` `node` to `/usr/bin`.
 
     ```bash
-    pip -U install jedi
-    pip -U install jedi-language-server
-    which jedi-language-server
-
-    # in nvim
-    :CocConfig
-    # update 'jedi.executable.command' with the correct path
+    which node
+    sudo ln -s /home/todd/.asdf/shims/node /usr/bin/node
     ```
 
 #### terraform-ls

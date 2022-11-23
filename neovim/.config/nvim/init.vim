@@ -1,7 +1,6 @@
 " Required external programs
 "       need to ensure the runtime path (rtp) below is properly set
 " 2. ripgrep
-" 3. flake8
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Useful info
@@ -36,14 +35,13 @@ endif
 call plug#begin('~/.vim/plugged')
 
 Plug 'jlanzarotta/bufexplorer'
-Plug 'nvie/vim-flake8'
+" Plug 'nvie/vim-flake8' " using the plugins in pylsp instead 2022/11/22
 Plug 'gruvbox-community/gruvbox'
 Plug 'chriskempson/base16-vim'
 Plug 'glepnir/galaxyline.nvim'
-" Dims inactive windows
-" Plug 'sunjon/shade.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'folke/trouble.nvim'
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " Libraries - these are commonly used by other plugins
 " neo-tree, mason
@@ -70,7 +68,6 @@ Plug 'tpope/vim-obsession'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'christoomey/vim-tmux-navigator'
-" Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'ryanoasis/vim-devicons'
 Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 Plug 'towolf/vim-helm'
@@ -78,9 +75,10 @@ Plug 'mbbill/undotree'
 Plug 'hashivim/vim-terraform'
 Plug 'jvirtanen/vim-hcl'
 
+" lsp
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 Plug 'neovim/nvim-lspconfig'
-Plug 'williamboman/nvim-lsp-installer'
-
 
 " nvim-cpm
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -90,7 +88,6 @@ Plug 'hrsh7th/nvim-cmp'
 Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'windwp/nvim-autopairs'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 Plug 'whiteinge/diffconflicts'
 Plug 'sindrets/diffview.nvim'
@@ -205,6 +202,7 @@ map <F10> :echo "hi<" . synIDattr(synID(line("."),col("."),1),"name") . '> trans
 lua require('user.options')
 lua require('user.lsp')
 lua require('user.cmp')
+lua require('user.luasnip')
 lua require('user.galaxyline_yutkat')
 " lua require('user.gitsigns')
 lua require('user.autopairs')
@@ -234,15 +232,16 @@ endif
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Flake (python checking)
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" Removed 2022/11/22 in favor of pylsp
 " automatically check style when writing python code
 " disabling the quickfix window in favor of using trouble (e.g. use <leader>xq)
-let g:flake8_show_quickfix=0
-let g:flake8_show_in_gutter=1
-
-augroup flake
-    autocmd!
-    autocmd BufWritePost *.py call Flake8()
-augroup END
+" let g:flake8_show_quickfix=0
+" let g:flake8_show_in_gutter=1
+"
+" augroup flake
+"     autocmd!
+"     autocmd BufWritePost *.py call Flake8()
+" augroup END
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " UndoTree
