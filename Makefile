@@ -54,6 +54,8 @@ common_apps:
 
 linux_apps: common_apps
 	_bootstrap/install-tmux.sh
+	_bootstrap/install-fzf.sh
+	_bootstrap/install-diff-so-fancy.sh
 
 mac_apps: common_apps
 	_bootstrap/macos-defaults.sh
