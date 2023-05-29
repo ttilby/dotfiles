@@ -68,6 +68,7 @@ Plug 'tpope/vim-obsession'
 Plug 'airblade/vim-gitgutter'
 
 Plug 'christoomey/vim-tmux-navigator'
+Plug 'RyanMillerC/better-vim-tmux-resizer'
 Plug 'ryanoasis/vim-devicons'
 Plug 'vwxyutarooo/nerdtree-devicons-syntax'
 Plug 'towolf/vim-helm'
@@ -89,6 +90,13 @@ Plug 'L3MON4D3/LuaSnip'
 Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'windwp/nvim-autopairs'
 
+" Debugging
+Plug 'mfussenegger/nvim-dap'
+Plug 'rcarriga/nvim-dap-ui'
+Plug 'theHamsta/nvim-dap-virtual-text'
+Plug 'mfussenegger/nvim-dap-python'
+
+" Git Conflict Resolving
 Plug 'whiteinge/diffconflicts'
 Plug 'sindrets/diffview.nvim'
 
@@ -210,6 +218,8 @@ lua require('user.neotree')
 " lua require('user.shade')
 lua require('user.trouble')
 lua require('user.which-key')
+" This must be loaded after 'user.lsp'
+lua require('user.dap')
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Treesitter (0.5 only)

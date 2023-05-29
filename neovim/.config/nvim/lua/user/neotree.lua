@@ -23,6 +23,7 @@ vim.fn.sign_define("DiagnosticSignHint",
 
 neotree.setup({
     close_if_last_window = true,
+    popup_border_style = "rounded",
     window = {
         position = "right"
     },
@@ -33,9 +34,12 @@ neotree.setup({
             hide_gitignored = false,
         },
         use_libuv_file_watcher = true,
+    },
+    buffers = {
+        show_unloaded = true,
     }
 })
 
 -- mappings
 vim.cmd([[nnoremap <leader>p :Neotree toggle reveal_force_cwd<cr>]])
-vim.cmd([[nnoremap <leader>b :Neotree float buffers<cr>]])
+vim.cmd([[nnoremap <leader>o :Neotree float buffers<cr>]])
