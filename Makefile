@@ -1,3 +1,7 @@
+# Variables
+NEOVIM_INSTALL_LOCATION=$HOME/apps/nvims
+NEOVIM_VERSION="v0.9.1" # v0.8.0 or nightly
+
 # Main targets
 
 personal-mac: common_dots mac_dots
@@ -15,9 +19,13 @@ work-ubuntu: linux_apps common_dots _sh-ubuntu
 # dotfiles (using GNU Stow)
 ##############################################
 
+# Desired target (if not supplied the target is the parent dir)
 STOW_TARGET ?= ${HOME}
+# Verbose output, useful with simlulate for troubleshooting
 STOW_VERBOSE ?= false
+# Useful for pruning obsolete links
 STOW_RESTOW ?= true
+# Do not perform operations, useful for troubleshooting
 STOW_SIMULATE ?= false
 
 _STOW_TARGET = --target=${STOW_TARGET}

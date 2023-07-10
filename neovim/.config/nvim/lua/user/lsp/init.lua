@@ -27,7 +27,7 @@ mason_lspconfig.setup({
         "pylsp",
         "jsonls",
         "marksman", -- markdown
-        "sumneko_lua",
+        "lua_ls",
         "terraformls",
         "yamlls"
     }
@@ -62,10 +62,10 @@ mason_lspconfig.setup_handlers({
         opts = vim.tbl_deep_extend('force', pylsp_opts, opts)
         lspconfig.pylsp.setup(opts)
     end,
-    ["sumneko_lua"] = function()
-        local sumneko_opts = require('user.lsp.settings.sumneko_lua')
-        opts = vim.tbl_deep_extend('force', sumneko_opts, opts)
-        lspconfig.sumneko_lua.setup(opts)
+    ["lua_ls"] = function()
+        local lua_opts = require('user.lsp.settings.lua_ls')
+        opts = vim.tbl_deep_extend('force', lua_opts, opts)
+        lspconfig.lua_ls.setup(opts)
     end,
     ['yamlls'] = function()
         -- Check if "yaml" file is in a helm directory, and if so,
