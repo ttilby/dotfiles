@@ -85,10 +85,18 @@ source $ZSH/oh-my-zsh.sh
 source $HOME/.exports
 if [[ "$host" == "toddt-SH370"* || "$host" == "Precision-3240" ]]; then
     # source $HOME/.exports_cp
-    source $HOME/CProjects/environ/default.env
     # source $HOME/.confluent.env
     source $HOME/.cp_functions
 fi
+
+[ -d "$HOME/.env-cp.d" ] && for f in $HOME/.env-cp.d/*.env; do source $f; done
+# zsh hook to run the specified function(s) whenever the PWD changes
+chpwd_functions+=("ws-reload")
+# tmux will open a new pane in the current directory. If in a "workspace", this
+# will ensure the new pane has the expected "workspace" environment as well.
+# The output is redirected to `/dev/null` to prevent the warnings about "slow"
+# zsh initialization.
+cd . > /dev/null
 
 # These can be in source control
 for file in ~/.{extra,bash_prompt,exports,aliases,functions}; do

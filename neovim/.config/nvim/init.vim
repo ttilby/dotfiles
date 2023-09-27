@@ -60,8 +60,9 @@ Plug 'junegunn/fzf.vim'
 " Plug 'Xuyuanp/nerdtree-git-plugin'
 " Plug 'kyazdani42/nvim-tree.lua'
 Plug 'nvim-neo-tree/neo-tree.nvim', {'branch': 'v2.x'}
-
 Plug 'tpope/vim-obsession'
+Plug 'echasnovski/mini.cursorword', { 'branch': 'stable' }
+
 " 2022-09-09 Noticed that things started running very slowly with this,
 " removing again.
 " Plug 'lewis6991/gitsigns.nvim' " disable if seeing TOO MANY FILES OPEN error
@@ -220,6 +221,13 @@ lua require('user.trouble')
 lua require('user.which-key')
 " This must be loaded after 'user.lsp'
 lua require('user.dap')
+lua require('mini.cursorword').setup()
+
+
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+" mini.cursorword Custom highlight color
+" =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+hi! MiniCursorword guibg=#3e4451 gui=NONE cterm=NONE
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Treesitter (0.5 only)

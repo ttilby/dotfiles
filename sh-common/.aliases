@@ -1,3 +1,6 @@
-
+alias ll='ls -lh'
+alias la='ls -lAh'
 alias tls="tmux ls"
 alias ifconfig="echo use ip -c a instead"
+# alias ..='cd ..'
+# alias ...='cd ../..'
