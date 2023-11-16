@@ -16,6 +16,13 @@ ecrlogin() {
     aws ecr get-login-password | docker login -u AWS --password-stdin 737819302384.dkr.ecr.us-west-2.amazonaws.com
 }
 
+ca() {
+    ecrlogin
+    export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain cradlepoint --domain-owner 737819302384 --query authorizationToken --output text`
+    export PIP_INDEX_URL=https://aws:${CODEARTIFACT_AUTH_TOKEN}@cradlepoint-737819302384.d.codeartifact.us-west-2.amazonaws.com/pypi/cp-pypi-cache/simple/
+    echo "Logged in to Codeartifact"
+}
+
 offline-db() {
     awsume offline-db-session-manager-prod
     aws ssm start-session --target "$(aws ec2 describe-instances --filters Name=tag:Name,Values=offline-db-prod Name=instance-state-name,Values=running --query 'Reservations[0].Instances[0].InstanceId' --output text)" --document-name offline-db-session-manager-prod
