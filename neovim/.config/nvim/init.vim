@@ -119,7 +119,7 @@ endif
 
 " hybrid line numbers
 " use `set ft?` to see filetype of current buffer
-let nu_blacklist = ['NvimTree', 'nerdtree']
+let nu_blacklist = ['NvimTree', 'nerdtree', 'neo-tree', 'Trouble']
 set number relativenumber
 augroup numbertoggle
     autocmd!
