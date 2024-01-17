@@ -67,6 +67,7 @@ Plug 'echasnovski/mini.cursorword', { 'branch': 'stable' }
 " removing again.
 " Plug 'lewis6991/gitsigns.nvim' " disable if seeing TOO MANY FILES OPEN error
 Plug 'airblade/vim-gitgutter'
+Plug 'APZelos/blamer.nvim'
 
 Plug 'christoomey/vim-tmux-navigator'
 Plug 'RyanMillerC/better-vim-tmux-resizer'
@@ -222,6 +223,7 @@ lua require('user.which-key')
 " This must be loaded after 'user.lsp'
 lua require('user.dap')
 lua require('mini.cursorword').setup()
+lua require('user.blamer')
 
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
