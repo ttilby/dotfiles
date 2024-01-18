@@ -1,7 +1,3 @@
-# Variables
-NEOVIM_INSTALL_LOCATION=$HOME/apps/nvims
-NEOVIM_VERSION="v0.9.1" # v0.8.0 or nightly
-
 # Main targets
 
 personal-mac: common_dots mac_dots
@@ -71,3 +67,6 @@ mac_apps: common_apps
 # Specific apps
 diff_so_fancy:
 	_bootstrap/install-diff-so-fancy.sh
+
+nvim:
+	_bootstrap/install-nvim.sh

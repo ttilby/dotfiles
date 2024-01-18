@@ -7,6 +7,6 @@ end
 
 trouble.setup({})
 
-vim.cmd([[nnoremap <leader>xx :TroubleToggle<cr>]])
-vim.cmd([[nnoremap <leader>xq :TroubleToggle quickfix<cr>]])
-vim.cmd([[nnoremap gr :TroubleToggle lsp_references<cr>]])
+vim.cmd([[nnoremap <leader>tt :TroubleToggle<cr>]])
+vim.cmd([[nnoremap <leader>tq :TroubleToggle quickfix<cr>]])
+vim.cmd([[nnoremap gr :Trouble lsp_references<cr>]])
