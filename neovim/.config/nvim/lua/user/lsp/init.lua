@@ -29,7 +29,8 @@ mason_lspconfig.setup({
         "marksman", -- markdown
         "lua_ls",
         "terraformls",
-        "yamlls"
+        "yamlls",
+        "helm_ls"
     }
 })
 
@@ -76,6 +77,9 @@ mason_lspconfig.setup_handlers({
             if string.find(vim.api.nvim_buf_get_name(bufnr), "helm") then
                 vim.diagnostic.disable()
             end
+            -- if string.find(vim.api.nvim_buf_get_name(bufnr), "service-framework") then
+            --     vim.diagnostic.disable()
+            -- end
         end
         local yamlls_opts = require('user.lsp.settings.yamlls')
         opts = vim.tbl_deep_extend('force', yamlls_opts, opts)

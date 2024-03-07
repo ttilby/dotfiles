@@ -160,7 +160,7 @@ augroup CUSTOM
 augroup END
 
 " Set registers
-call setreg("x", "        import pdb; pdb.set_trace()", "l")
+call setreg("x", "        breakpoint()", "l")
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " Document Width

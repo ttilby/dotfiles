@@ -1,40 +1,67 @@
 [user]
 	name = todd.tilby
 	email = todd.tilby@cradlepoint.com
+
+[include]
+    path = ~/.config/git/themes.gitconfig   # Needed for delta themes
+
 [diff]
 	tool = vimdiff
+    colorMoved = default
+
 [difftool "vimdiff"]
     path = nvim
+
 # Not sure if this works yet, needs testing
 # [difftool "nvimdiff"]
 #     cmd = "nvim -d \"$LOCAL\" \"$REMOTE\""
+
 [merge]
 	tool = diffconflicts
-    # conflictstyle = diff3
+    conflictstyle = diff3
+
 [mergetool "vimdiff"]
     path = nvim
+
 [mergetool "diffconflicts"]
     # https://github.com/whiteinge/diffconflicts
     cmd = "nvim -c DiffConflicts \"$MERGED\" \"$BASE\" \"$LOCAL\" \"$REMOTE\""
     trustExitCode = true
+
 [mergetool]
 	prompt = false
     keepBackup = false
+
 [core]
-	pager = diff-so-fancy | less --tabs=4 -RFX
+    # pager = diff-so-fancy | less --tabs=4 -RFX
+    pager = delta
 	excludesFile = ~/.gitignore
-[color]
-	ui = true
-[color "diff-highlight"]
-	oldNormal = red bold
-	oldHighlight = red bold 52
-	newNormal = green bold
-	newHighlight = green bold 22
-[color "diff"]
-	meta = 11
-	frag = magenta bold
-    func = 146 bold
-	commit = yellow bold
-	old = red bold
-	new = green bold
-	whitespace = red reverse
+
+# delta configs
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true   # use n and N to move between diff sections
+    dark = true
+    features = Coldark-Dark
+    line-numbers = true
+# End delta configs
+
+# diff-so-fancy configs
+# [color]
+# 	ui = true
+# [color "diff-highlight"]
+# 	oldNormal = red bold
+# 	oldHighlight = red bold 52
+# 	newNormal = green bold
+# 	newHighlight = green bold 22
+# [color "diff"]
+# 	meta = 11
+# 	frag = magenta bold
+#     func = 146 bold
+# 	commit = yellow bold
+# 	old = red bold
+# 	new = green bold
+# 	whitespace = red reverse
+# End diff-so-fancy configs

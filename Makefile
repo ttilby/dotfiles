@@ -1,5 +1,9 @@
 # Main targets
 
+# TODO
+# * need to link .gitconfig file to $HOME
+
+
 personal-mac: common_dots mac_dots
 
 work-mac: common_dots mac_dots
