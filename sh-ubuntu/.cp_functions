@@ -16,6 +16,10 @@ ecrlogin() {
     aws ecr get-login-password | docker login -u AWS --password-stdin 737819302384.dkr.ecr.us-west-2.amazonaws.com
 }
 
+tshlogin() {
+    tsh login --proxy=teleport.utility-prod.cradlepointecm.com:443 --bind-addr=127.0.0.1:38607
+}
+
 ca() {
     ecrlogin
     export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain cradlepoint --domain-owner 737819302384 --query authorizationToken --output text`
