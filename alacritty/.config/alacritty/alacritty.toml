@@ -1,0 +1,185 @@
+[colors]
+draw_bold_text_with_bright_colors = false
+
+[colors.bright]
+black = "0x545862"
+blue = "0x565c64"
+cyan = "0xbe5046"
+green = "0x353b45"
+magenta = "0xb6bdca"
+red = "0xd19a66"
+white = "0xc8ccd4"
+yellow = "0x3e4451"
+
+[colors.cursor]
+cursor = "0xabb2bf"
+text = "0x282c34"
+
+[colors.normal]
+black = "0x282c34"
+blue = "0x61afef"
+cyan = "0x56b6c2"
+green = "0x98c379"
+magenta = "0xc678dd"
+red = "0xe06c75"
+white = "0xabb2bf"
+yellow = "0xe5c07b"
+
+[colors.primary]
+background = "0x282c34"
+foreground = "0xabb2bf"
+
+[font]
+size = 16.0
+
+[font.bold]
+family = "MesloLGS NF"
+style = "Regular"
+
+[font.bold_italic]
+family = "MesloLGS NF"
+style = "Bold Italic"
+
+[font.italic]
+family = "MesloLGS NF"
+style = "Italic"
+
+[font.normal]
+family = "MesloLGS NF"
+style = "Regular"
+
+[font.offset]
+x = 0
+y = 1
+
+[[keyboard.bindings]]
+chars = "\u001Bj"
+key = "J"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bk"
+key = "K"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bh"
+key = "H"
+mods = "Alt"
+
+[[keyboard.bindings]]
+chars = "\u001Bl"
+key = "L"
+mods = "Alt"
+
+[schemes.base16-onedark.bright]
+black = "0x545862"
+blue = "0x565c64"
+cyan = "0xbe5046"
+green = "0x353b45"
+magenta = "0xb6bdca"
+red = "0xd19a66"
+white = "0xc8ccd4"
+yellow = "0x3e4451"
+
+[schemes.base16-onedark.cursor]
+cursor = "0xabb2bf"
+text = "0x282c34"
+
+[schemes.base16-onedark.normal]
+black = "0x282c34"
+blue = "0x61afef"
+cyan = "0x56b6c2"
+green = "0x98c379"
+magenta = "0xc678dd"
+red = "0xe06c75"
+white = "0xabb2bf"
+yellow = "0xe5c07b"
+
+[schemes.base16-onedark.primary]
+background = "0x282c34"
+foreground = "0xabb2bf"
+
+[schemes.themer-dark.bright]
+black = "#747475"
+blue = "#7F99C0"
+cyan = "#8EB18F"
+green = "#A8C078"
+magenta = "#B98974"
+red = "#CE7682"
+white = "#edebee"
+yellow = "#E7C757"
+
+[schemes.themer-dark.cursor]
+cursor = "#995785"
+text = "#1a1a1b"
+
+[schemes.themer-dark.dim]
+black = "#383839"
+blue = "#556F96"
+cyan = "#648865"
+green = "#7E964D"
+magenta = "#8F6049"
+red = "#A44C58"
+white = "#b1afb2"
+yellow = "#BC9D2D"
+
+[schemes.themer-dark.normal]
+black = "#565657"
+blue = "#6484b5"
+cyan = "#76a377"
+green = "#97b55a"
+magenta = "#ac7155"
+red = "#c65967"
+white = "#cfcdd0"
+yellow = "#e5be31"
+
+[schemes.themer-dark.primary]
+background = "#1a1a1b"
+foreground = "#cfcdd0"
+
+[schemes.themer-dark.selection]
+background = "#6484b5"
+text = "#1a1a1b"
+
+[schemes.themer-light.bright]
+black = "#625a5c"
+blue = "#6977AF"
+cyan = "#6FAB85"
+green = "#8FA951"
+magenta = "#B0826F"
+red = "#C45D6B"
+white = "#d1ced1"
+yellow = "#C4A944"
+
+[schemes.themer-light.cursor]
+cursor = "#813d72"
+text = "#edebee"
+
+[schemes.themer-light.dim]
+black = "#2a2021"
+blue = "#424E86"
+cyan = "#48825C"
+green = "#688128"
+magenta = "#895A46"
+red = "#9D3442"
+white = "#999496"
+yellow = "#9D811B"
+
+[schemes.themer-light.normal]
+black = "#463d3e"
+blue = "#485a9f"
+cyan = "#509b6b"
+green = "#78992a"
+magenta = "#a1684f"
+red = "#ba394a"
+white = "#b5b1b3"
+yellow = "#ba991a"
+
+[schemes.themer-light.primary]
+background = "#edebee"
+foreground = "#463d3e"
+
+[schemes.themer-light.selection]
+background = "#485a9f"
+text = "#edebee"

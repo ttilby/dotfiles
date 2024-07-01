@@ -44,7 +44,7 @@ endif
 
 STOW_ARGS ?= ${_STOW_TARGET} ${_STOW_RESTOW} ${_STOW_VERBOSE} ${_STOW_SIMULATE}
 
-common_dots: _misc _tmux _neovim _flake8 _git _zsh _sh-common
+common_dots: _alacritty _misc _tmux _neovim _flake8 _git _zsh _sh-common
 mac_dots: _alacritty
 
 _%:
@@ -62,6 +62,7 @@ common_apps:
 
 linux_apps: common_apps
 	_bootstrap/install-tmux.sh
+	_bootstrap/install-fonts.sh
 
 mac_apps: common_apps
 	_bootstrap/macos-defaults.sh

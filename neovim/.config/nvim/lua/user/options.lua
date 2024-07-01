@@ -24,3 +24,13 @@ local options = {
 for k, v in pairs(options) do
     vim.opt[k] = v
 end
+
+local python_indent = {
+  disable_parentheses_indenting = false,
+  closed_paren_align_last_line = false,    -- default: true
+  searchpair_timeout = 150,
+  continue = 'shiftwidth() * 2',
+  open_paren = 'shiftwidth()',             -- default: 'shiftwidth() * 2'
+  nested_paren = 'shiftwidth()'
+}
+vim.g.python_indent = python_indent
