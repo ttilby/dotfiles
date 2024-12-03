@@ -65,6 +65,7 @@ Plug 'echasnovski/mini.cursorword', { 'branch': 'stable' }
 
 " 2022-09-09 Noticed that things started running very slowly with this,
 " removing again.
+" 2024-07-02 Re-enabled gitsigns
 " Plug 'lewis6991/gitsigns.nvim' " disable if seeing TOO MANY FILES OPEN error
 Plug 'airblade/vim-gitgutter'
 Plug 'APZelos/blamer.nvim'
@@ -93,10 +94,10 @@ Plug 'saadparwaiz1/cmp_luasnip'
 Plug 'windwp/nvim-autopairs'
 
 " Debugging
-Plug 'mfussenegger/nvim-dap'
-Plug 'rcarriga/nvim-dap-ui'
-Plug 'theHamsta/nvim-dap-virtual-text'
-Plug 'mfussenegger/nvim-dap-python'
+" Plug 'mfussenegger/nvim-dap'
+" Plug 'rcarriga/nvim-dap-ui'
+" Plug 'theHamsta/nvim-dap-virtual-text'
+" Plug 'mfussenegger/nvim-dap-python'
 
 " Git Conflict Resolving
 Plug 'whiteinge/diffconflicts'

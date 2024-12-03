@@ -1,0 +1,1 @@
+alias mktemp16='mktemp -u XXXXXXXXXXXXXXXX'

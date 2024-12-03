@@ -1,7 +1,7 @@
 -- https://github.com/mfussenegger/nvim-dap
 local dap_status_ok, dap = pcall(require, "dap")
 if not dap_status_ok then
-    print("failed to import dap")
+    -- print("failed to import dap")
     return
 end
 

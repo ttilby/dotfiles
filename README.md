@@ -9,6 +9,10 @@ make common-apps
 make work-ubuntu
 ```
 
+## Windows host
+
+* use Windows Terminal (alacritty doesn't send mouse events)
+
 ## Fonts
 
 NOTE: These need to be installed on the primary system only. For example, if

@@ -87,6 +87,7 @@ if [[ "$host" == "toddt-SH370"* || "$host" == "Precision-3240" ]]; then
     # source $HOME/.exports_cp
     # source $HOME/.confluent.env
     source $HOME/.cp_functions
+    source $HOME/.cp_aliases
 fi
 
 [ -d "$HOME/.env-cp.d" ] && for f in $HOME/.env-cp.d/*.env; do source $f; done
@@ -137,12 +138,13 @@ export EDITOR=nvim
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-export PATH="$PATH:$HOME/bin"
-
 # set PATH so it includes user's private bin if it exists
 if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
+
+export PATH="$PATH:$HOME/bin"
+export PATH="$PATH:/usr/local/go/bin"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

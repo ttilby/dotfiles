@@ -22,7 +22,7 @@ tshlogin() {
 
 ca() {
     ecrlogin
-    export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain cradlepoint --domain-owner 737819302384 --query authorizationToken --output text`
+    export CODEARTIFACT_AUTH_TOKEN=`aws codeartifact get-authorization-token --domain cradlepoint --region us-west-2 --domain-owner 737819302384 --query authorizationToken --output text`
     export PIP_INDEX_URL=https://aws:${CODEARTIFACT_AUTH_TOKEN}@cradlepoint-737819302384.d.codeartifact.us-west-2.amazonaws.com/pypi/cp-pypi-cache/simple/
     echo "Logged in to Codeartifact"
 }
