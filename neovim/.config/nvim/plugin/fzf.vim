@@ -30,3 +30,5 @@ nnoremap <leader>g :Rg <CR>
 " search for content using word under cursor
 " nnoremap <leader>d :Rg <C-R><C-W><CR>
 let g:fzf_layout = { 'down': '40%' }
+
+

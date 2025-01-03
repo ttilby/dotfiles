@@ -146,5 +146,7 @@ fi
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:/usr/local/go/bin"
 
+export TERM=alacritty
+
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

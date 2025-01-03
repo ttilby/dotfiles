@@ -42,6 +42,7 @@ Plug 'glepnir/galaxyline.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-context'
 
 " Libraries - these are commonly used by other plugins
 " neo-tree, mason
@@ -54,6 +55,7 @@ Plug 'MunifTanjim/nui.nvim'
 " Fuzzy finders
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+" Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 
 " File Browsers
 " Plug 'preservim/nerdtree'
@@ -225,6 +227,9 @@ lua require('user.which-key')
 lua require('user.dap')
 lua require('mini.cursorword').setup()
 lua require('user.blamer')
+" This is for fzf.lua, which has weird behaviors and I am not able to find
+" what I need most of the time. Will need more configuration when I have time.
+" lua require('user.fzf')
 
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
@@ -247,6 +252,7 @@ require'nvim-treesitter.configs'.setup {
         enable = false,             -- removed to fix python indentation 08/04/2021
     },
 }
+require'treesitter-context'
 EOF
 endif
 
