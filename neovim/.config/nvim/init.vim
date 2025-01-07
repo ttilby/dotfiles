@@ -36,8 +36,9 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'jlanzarotta/bufexplorer'
 " Plug 'nvie/vim-flake8' " using the plugins in pylsp instead 2022/11/22
-Plug 'gruvbox-community/gruvbox'
-Plug 'chriskempson/base16-vim'
+" Plug 'gruvbox-community/gruvbox'
+" Plug 'chriskempson/base16-vim'
+Plug 'navarasu/onedark.nvim'
 Plug 'glepnir/galaxyline.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'folke/trouble.nvim'
@@ -55,7 +56,7 @@ Plug 'MunifTanjim/nui.nvim'
 " Fuzzy finders
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-" Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
+Plug 'ibhagwan/fzf-lua', {'branch': 'main'}
 
 " File Browsers
 " Plug 'preservim/nerdtree'
@@ -198,8 +199,11 @@ set background=dark
 
 " colorscheme ThemerVim
 " colorscheme gruvbox
-colorscheme base16-onedark
-
+" colorscheme base16-onedark
+" let g:onedark_config = {
+"     \ 'style': 'warm',
+" \}
+colorscheme onedark  " 'navarasu/onedark.nvim'
 
 " Make comments italic (must be after any theme settings)
 highlight Comment cterm=italic gui=italic
@@ -229,7 +233,7 @@ lua require('mini.cursorword').setup()
 lua require('user.blamer')
 " This is for fzf.lua, which has weird behaviors and I am not able to find
 " what I need most of the time. Will need more configuration when I have time.
-" lua require('user.fzf')
+lua require('user.fzf')
 
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
