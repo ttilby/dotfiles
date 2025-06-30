@@ -145,8 +145,13 @@ fi
 
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:/usr/local/go/bin"
+export PATH="$PATH:$HOME/.asdf/shims"
 
 export TERM=alacritty
+
+# Allows 'granted' to use 'pass' for the keyring
+# See http://docs.commonfate.io/granted/recipes/pass/#_top
+export GPG_TTY=$(tty)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 

@@ -12,10 +12,15 @@ export PGHOST=localhost
 
 # works with aws cli v2
 ecrlogin() {
-    awsume cp-ecr
+    # Need to call 'assume sso-cp-ecr' before using this function
+    # assume sso-cp-ecr
     aws ecr get-login-password | docker login -u AWS --password-stdin 737819302384.dkr.ecr.us-west-2.amazonaws.com
 }
 
+# Allows for use of the cp-teleport-.*.sh scripts on a headless system
+export TELEPORT_LOGIN_BIND_ADDR=127.0.0.1:38607
+
+# This is no longer needed when using the cp-teleport-*.sh scripts
 tshlogin() {
     tsh login --proxy=teleport.utility-prod.cradlepointecm.com:443 --bind-addr=127.0.0.1:38607
 }
@@ -36,48 +41,3 @@ offline-db-f() {
     awsume offline-db-session-manager-prod
     aws ssm start-session --target "$(aws ec2 describe-instances --filters Name=tag:Name,Values=offline-db-prod Name=instance-state-name,Values=running --query 'Reservations[0].Instances[0].InstanceId' --output text)" --document-name port-forwarding-offline-db-session-manager-prod --parameters '{"portNumber":["22"],"localPortNumber":["2222"]}'
 }
-
-### Kubernetes context prompt ###
-if type "$kubectl" > /dev/null; then
-    get_kube_context() {
-        kubectl config current-context
-    }
-    get_kube_namespace(){
-        NS=$(kubectl config view --minify --output 'jsonpath={..namespace}')
-        if [ -z $NS ]; then echo "default"; else echo $NS; fi
-    }
-
-    # add \[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] to your PS1 prompt
-    PS1="\[\033[36m\][\$(get_kube_context)|\$(get_kube_namespace)] $PS1"
-
-    # add kubectl autocomplete
-    if hash kubectl 2>/dev/null; then
-        source <(kubectl completion zsh)
-    fi
-
-    # get a new dashboard key
-    alias dashboard-rekey="aws eks get-token --cluster-name $(kubectl config current-context) | jq -r .status.token | pbcopy"
-
-    ### kubernetes pods lister ###
-    pods() {
-        current_context=`kubectl config current-context`
-        if [ ! -z "$current_context" ]; then
-            current_namespace=`kubectl config view -o=jsonpath="{.contexts[?(@.name==\"$current_context\")].context.namespace}"`
-        else
-            current_namespace=default
-        fi
-        echo "($current_context, $current_namespace) pods:"
-        kubectl get pods | grep -v Completed | rev | cut -d '-' -f2- | rev | uniq | tail -n +2
-    }
-fi
-
-if type "$docker" > /dev/null; then
-    ### docker-machine completions ###
-    fpath=(~/.zsh/completion $fpath)
-    autoload -Uz compinit && compinit -i
-
-
-    function dip() {
-        docker ps -q | xargs -n 1 docker inspect --format '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}} {{ .Name }}' | sed 's/ \// /'
-    }
-fi

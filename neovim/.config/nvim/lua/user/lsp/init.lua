@@ -75,7 +75,7 @@ mason_lspconfig.setup_handlers({
         opts.on_attach = function(client, bufnr)
             default_on_attach(client, bufnr)
             if string.find(vim.api.nvim_buf_get_name(bufnr), "helm") then
-                vim.diagnostic.disable()
+                vim.diagnostic.enable(false)
             end
             -- if string.find(vim.api.nvim_buf_get_name(bufnr), "service-framework") then
             --     vim.diagnostic.disable()

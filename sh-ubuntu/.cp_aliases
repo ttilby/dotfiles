@@ -1,1 +1,2 @@
 alias mktemp16='mktemp -u XXXXXXXXXXXXXXXX'
+alias assume='. assume'

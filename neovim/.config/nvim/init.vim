@@ -133,7 +133,7 @@ augroup numbertoggle
 augroup END
 
 " Save whenever switching windows or leaving vim
-au FocusLost,WinLeave * :silent! wa
+au FocusLost,WinLeave,BufLeave * :silent! wa
 
 " Stop highlight after searching
 nnoremap <silent> <leader>, :noh<cr>
