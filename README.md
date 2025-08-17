@@ -3,7 +3,14 @@
 ## Install
 
 ```bash
-sudo apt get make zsh git stow
+sudo apt update && sudo apt install make zsh git stow build-essential nodejs npm python3 python3-venv unzip
+
+# create nvim virtual venv
+mkdir ~/.virtualvenvs
+python3 -m venv ~/.virtualvenvs/nvimvenv
+source ~/.virtualvenvs/nvimvenv/bin/activate
+pip install neovim
+
 # <clone repo>
 make common-apps
 make work-ubuntu
