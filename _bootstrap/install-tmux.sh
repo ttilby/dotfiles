@@ -12,7 +12,7 @@ else
     rm -rf /tmp/tmux
     git clone https://github.com/tmux/tmux.git /tmp/tmux
     pushd /tmp/tmux
-    git checkout 3.2a
+    git checkout 3.5a
     sh autogen.sh
     ./configure && make
     sudo make install

@@ -19,6 +19,7 @@
 " installation
 "
 " pip install neovim
+let g:python3_host_prog = '/home/todd/.virtualenvs/nvimvenv/bin/python'
 
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 " vim-plug

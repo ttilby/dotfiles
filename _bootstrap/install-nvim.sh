@@ -5,9 +5,10 @@
 
 set +x
 
-_NEOVIM_VERSION="${NEOVIM_VERSION:-v0.9.5}" # v0.8.0 or nightly
+_NEOVIM_VERSION="${NEOVIM_VERSION:-v0.11.2}" # v0.8.0 or nightly
 _NEOVIM_INSTALL_LOCATION="${NEOVIM_INSTALL_LOCATION:-$HOME/apps/nvims}"
 _NEOVIM_LOCATION="${NEOVIM_LOCATION:-$HOME/bin}"
+_NEOVIM_DOWNLOAD_FILE_NAME="nvim-linux-x86_64"
 _NAME="nvim-${_NEOVIM_VERSION}"
 
 if [ ! -d "${_NEOVIM_INSTALL_LOCATION}" ];
@@ -26,10 +27,10 @@ then
     echo "Found version: ${_NEOVIM_PATH}"
 else
     pushd ${_NEOVIM_INSTALL_LOCATION} || exit
-    wget https://github.com/neovim/neovim/releases/download/$_NEOVIM_VERSION/nvim-linux64.tar.gz
-    tar xzf nvim-linux64.tar.gz
-    mv nvim-linux64/ "${_NAME}/"
-    rm nvim-linux64.tar.gz
+    wget https://github.com/neovim/neovim/releases/download/$_NEOVIM_VERSION/$_NEOVIM_DOWNLOAD_FILE_NAME.tar.gz
+    tar xzf $_NEOVIM_DOWNLOAD_FILE_NAME.tar.gz
+    mv $_NEOVIM_DOWNLOAD_FILE_NAME/ "${_NAME}/"
+    rm $_NEOVIM_DOWNLOAD_FILE_NAME.tar.gz
     popd || exit
     echo "Downloaded new version: ${_NEOVIM_PATH}"
 fi
