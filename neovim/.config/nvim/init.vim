@@ -249,7 +249,7 @@ if has("nvim-0.5")
 lua << EOF
 require'nvim-treesitter.configs'.setup {
     -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = {"python", "bash", "json", "lua", "dockerfile", "yaml"},
+    ensure_installed = {"python", "bash", "json", "lua", "dockerfile", "yaml", "java"},
     highlight = {
         enable = true,              -- false will disable the whole extension
     },

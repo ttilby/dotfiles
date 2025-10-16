@@ -1,3 +1,5 @@
+# Amazon Q pre block. Keep at the top of this file.
+[[ -f "${HOME}/.local/share/amazon-q/shell/zshrc.pre.zsh" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/zshrc.pre.zsh"
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -146,6 +148,7 @@ fi
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/.asdf/shims"
+export PATH="$PATH:$HOME/.local/pipx/venvs"
 
 export TERM=alacritty
 
@@ -155,3 +158,5 @@ export GPG_TTY=$(tty)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
+# Amazon Q post block. Keep at the bottom of this file.
+[[ -f "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/.local/share/amazon-q/shell/zshrc.post.zsh"

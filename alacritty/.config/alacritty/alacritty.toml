@@ -3,13 +3,13 @@ draw_bold_text_with_bright_colors = false
 
 [colors.bright]
 black = "0x545862"
-blue = "0x565c64"
+blue = "0x61afef" # blue = "0x565c64"
 cyan = "0xbe5046"
-green = "0x353b45"
+green = "0x98c379" # green = "0x353b45"
 magenta = "0xb6bdca"
 red = "0xd19a66"
 white = "0xc8ccd4"
-yellow = "0x3e4451"
+yellow = "0xe5c07b" # yellow = "0x3e4451"
 
 [colors.cursor]
 cursor = "0xabb2bf"
