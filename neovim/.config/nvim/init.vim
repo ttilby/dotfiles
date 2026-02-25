@@ -40,7 +40,7 @@ Plug 'jlanzarotta/bufexplorer'
 " Plug 'gruvbox-community/gruvbox'
 " Plug 'chriskempson/base16-vim'
 Plug 'navarasu/onedark.nvim'
-Plug 'glepnir/galaxyline.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 Plug 'folke/which-key.nvim'
 Plug 'folke/trouble.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
@@ -221,7 +221,7 @@ lua require('user.options')
 lua require('user.lsp')
 lua require('user.cmp')
 lua require('user.luasnip')
-lua require('user.galaxyline_yutkat')
+lua require('user.lualine')
 " lua require('user.gitsigns')
 lua require('user.autopairs')
 lua require('user.neotree')

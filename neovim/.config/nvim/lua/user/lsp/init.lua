@@ -18,7 +18,7 @@ if not mason_lspconfig_status_ok then
     return
 end
 
-vim.lsp.config('lua_ls', {
+lspconfig.lua_ls.setup({
     on_attach = require('user.lsp.handlers').on_attach,
     capabilities = require('user.lsp.handlers').capabilities,
 	settings = {
@@ -38,7 +38,7 @@ vim.lsp.config('lua_ls', {
 
 -- Configuration options
 -- https://github.com/python-lsp/python-lsp-server/blob/develop/CONFIGURATION.md
-vim.lsp.config('pylsp', {
+lspconfig.pylsp.setup({
     on_attach = require('user.lsp.handlers').on_attach,
     capabilities = require('user.lsp.handlers').capabilities,
     settings = {
@@ -63,7 +63,7 @@ vim.lsp.config('pylsp', {
     }
 })
 
-vim.lsp.config('yamlls', {
+lspconfig.yamlls.setup({
     on_attach = require('user.lsp.handlers').on_attach,
     capabilities = require('user.lsp.handlers').capabilities,
     settings = {
@@ -76,12 +76,10 @@ vim.lsp.config('yamlls', {
     }
 })
 
-vim.lsp.config('terraformls', {
+lspconfig.terraformls.setup({
     on_attach = require('user.lsp.handlers').on_attach,
     capabilities = require('user.lsp.handlers').capabilities,
-    settings = {
-        filetypes = {"*.tf", "*.tfvars"}
-    }
+    filetypes = {"terraform", "tf", "terraform-vars"}
 })
 
 mason.setup()

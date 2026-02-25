@@ -1,22 +1,18 @@
-M = {}
+local M = {}
 
 M.setup = function()
-  local signs = {
-    { name = "DiagnosticSignError", text = "" },
-    { name = "DiagnosticSignWarn", text = "" },
-    { name = "DiagnosticSignHint", text = "" },
-    { name = "DiagnosticSignInfo", text = "" },
-  }
-
-  for _, sign in ipairs(signs) do
-    vim.fn.sign_define(sign.name, { texthl = sign.name, text = sign.text, numhl = "" })
-  end
-
   local config = {
     -- disable virtual text
     virtual_text = false,
     -- show signs
-    signs = true,
+    signs = {
+      text = {
+        [vim.diagnostic.severity.ERROR] = "",
+        [vim.diagnostic.severity.WARN] = "",
+        [vim.diagnostic.severity.HINT] = "",
+        [vim.diagnostic.severity.INFO] = "",
+      }
+    },
     update_in_insert = true,
     underline = true,
     severity_sort = true,
@@ -32,13 +28,22 @@ M.setup = function()
 
   vim.diagnostic.config(config)
 
-  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    border = "rounded",
-  })
+  vim.lsp.handlers["textDocument/hover"] = function(_, result, ctx, config)
+    config = vim.tbl_deep_extend("force", {
+      border = "rounded",
+    }, config or {})
+    return vim.lsp.util.open_floating_preview(result.contents, "markdown", config)
+  end
 
-  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
-    border = "rounded",
-  })
+  vim.lsp.handlers["textDocument/signatureHelp"] = function(_, result, ctx, config)
+    config = vim.tbl_deep_extend("force", {
+      border = "rounded",
+    }, config or {})
+    if not (result and result.signatures and result.signatures[1]) then
+      return
+    end
+    return vim.lsp.util.open_floating_preview(result.signatures[1].label, "markdown", config)
+  end
 
   -- global keymappings
   local opts = { noremap=true, silent=true }
@@ -85,7 +90,7 @@ local function lsp_keymaps(bufnr)
     vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     -- moved this to 'trouble', see lua/user/trouble.lua
     -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+    vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.format()<CR>', opts)
 end
 
 M.on_attach = function(client, bufnr)
