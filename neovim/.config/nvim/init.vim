@@ -248,17 +248,14 @@ hi! MiniCursorword guibg=#3e4451 gui=NONE cterm=NONE
 " =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
 if has("nvim-0.5")
 lua << EOF
-require'nvim-treesitter.config'.setup {
-    -- one of "all", "maintained" (parsers with maintainers), or a list of languages
-    ensure_installed = {"python", "bash", "json", "lua", "dockerfile", "yaml", "java", "latex", "html", "markdown", "markdown_inline"},
-    highlight = {
-        enable = true,              -- false will disable the whole extension
-    },
-    indent = {
-        enable = false,             -- removed to fix python indentation 08/04/2021
-    },
-}
+require'nvim-treesitter.config'.setup {}
 require'treesitter-context'
+require('render-markdown').setup({})
+vim.api.nvim_create_autocmd('FileType', {
+  callback = function()
+    pcall(vim.treesitter.start)
+  end,
+})
 EOF
 endif
 

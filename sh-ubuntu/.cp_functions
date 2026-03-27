@@ -41,3 +41,50 @@ offline-db-f() {
     awsume offline-db-session-manager-prod
     aws ssm start-session --target "$(aws ec2 describe-instances --filters Name=tag:Name,Values=offline-db-prod Name=instance-state-name,Values=running --query 'Reservations[0].Instances[0].InstanceId' --output text)" --document-name port-forwarding-offline-db-session-manager-prod --parameters '{"portNumber":["22"],"localPortNumber":["2222"]}'
 }
+
+####################
+# Telepresence v2
+
+# Rewrites container paths in the telepresence env file to point to local mounts.
+# Strips single quotes and updates the file in place.
+# Requires $DEPLOYMENT to be set. Operates on $HOME/tmp/$DEPLOYMENT.env.
+tpfix() {
+  local mount="/tmp/telepresence-mounts"
+  local envfile="$HOME/tmp/${DEPLOYMENT:?DEPLOYMENT must be set}.env"
+  local tmpfile=$(mktemp)
+  jq -r 'to_entries[] | select(.value | contains("\n") | not) | "\(.key)=\(.value)"' "$envfile" |
+  while IFS= read -r line; do
+    val="${line#*=}"
+    # Rewrite container paths to local mount paths
+    if [[ "$val" == /* ]] && [[ -e "${mount}${val}" ]]; then
+      echo "${line%%=*}=${mount}${val}"
+    else
+      echo "$line"
+    fi
+  done > "$tmpfile"
+  # Replace hostnames with cluster IPs where a matching _SERVICE_HOST var exists
+  while IFS='=' read -r key val; do
+    if [[ "$key" == *_SERVICE_HOST ]]; then
+      # e.g. AUTHZ_REDIS_SERVICE_HOST -> find vars whose value matches the hostname pattern
+      # Derive the service name: AUTHZ_REDIS_SERVICE_HOST -> authz-redis
+      svc=$(echo "${key%_SERVICE_HOST}" | tr '[:upper:]_' '[:lower:]-')
+      sed -i.bak "s|=${svc}$|=${val}|" "$tmpfile"
+    fi
+  done < "$tmpfile"
+  rm -f "${tmpfile}.bak"
+  mv "$tmpfile" "$envfile"
+}
+# Loads the telepresence env file and runs a command with those env vars.
+# Run tpfix first to prepare the file.
+# Requires $DEPLOYMENT to be set. Reads from $HOME/tmp/$DEPLOYMENT.env.
+# Usage: tprun <command> [args...]
+tprun() {
+  local envfile="$HOME/tmp/${DEPLOYMENT:?DEPLOYMENT must be set}.env"
+  local envs=()
+  while IFS= read -r line; do
+    envs+=("$line")
+  done < "$envfile"
+  env "${envs[@]}" "$@"
+}
+# End Telepresence v2
+#######################
