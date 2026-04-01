@@ -1,16 +1,17 @@
+-- Options from both the old init.vim and the original options.lua
 local options = {
-    clipboard = "unnamedplus",            -- allows neovim to use system clipboard
-    hlsearch = true,                      -- highlight searches
-    hidden = true,                        -- keeps modified buffers in the background
-    incsearch = true,                     -- highlight dynamically
-    ignorecase = true,                    -- case insensitive search (unless specified)
-    showmode = false,                     -- hide mode
+    clipboard = "unnamedplus",
+    hlsearch = true,
+    hidden = true,
+    incsearch = true,
+    ignorecase = true,
+    showmode = false,
     shiftwidth = 4,
-    shiftround = true,                    -- rounds indentation to multiples of shiftwidth (applies to < and >)
-    smartcase = true,                     -- override ignorecase if search string has capitals
-    softtabstop = 4,                      --
-    tabstop = 4,                          -- insert x spaces for tabs
-    expandtab = true,                     -- uses the approprate number of spaces to insert a <Tab>
+    shiftround = true,
+    smartcase = true,
+    softtabstop = 4,
+    tabstop = 4,
+    expandtab = true,
     swapfile = false,
     backup = false,
     mouse = "a",
@@ -19,18 +20,39 @@ local options = {
     wildmode = "list:longest,full",
     termguicolors = true,
     signcolumn = "yes",
+    -- from init.vim
+    number = true,
+    relativenumber = true,
+    foldlevelstart = 20,
+    foldmethod = "expr",
+    foldexpr = "nvim_treesitter#foldexpr()",
+    textwidth = 79,
+    wrap = false,
+    colorcolumn = "88",
+    scrolloff = 8,
+    undodir = vim.fn.expand("~/vim/undodir"),
+    undofile = true,
+    background = "dark",
+    guifont = "Hack Regular Nerd Font Complete 13",
 }
 
 for k, v in pairs(options) do
     vim.opt[k] = v
 end
 
-local python_indent = {
-  disable_parentheses_indenting = false,
-  closed_paren_align_last_line = false,    -- default: true
-  searchpair_timeout = 150,
-  continue = 'shiftwidth() * 2',
-  open_paren = 'shiftwidth()',             -- default: 'shiftwidth() * 2'
-  nested_paren = 'shiftwidth()'
+vim.opt.formatoptions:remove("t")
+
+-- Python indent settings
+vim.g.python_indent = {
+    disable_parentheses_indenting = false,
+    closed_paren_align_last_line = false,
+    searchpair_timeout = 150,
+    continue = "shiftwidth() * 2",
+    open_paren = "shiftwidth()",
+    nested_paren = "shiftwidth()",
 }
-vim.g.python_indent = python_indent
+
+-- vim-terraform
+vim.g.hcl_align = 1
+vim.g.terraform_align = 1
+vim.g.terraform_fmt_on_save = 1
