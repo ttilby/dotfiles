@@ -92,6 +92,7 @@ if [[ "$host" == "toddt-SH370"* || "$host" == "Precision-3240" ]]; then
     # source $HOME/.confluent.env
     source $HOME/.cp_functions
     source $HOME/.cp_aliases
+    source $HOME/.cp_kiro
 fi
 
 [ -d "$HOME/.env-cp.d" ] && for f in $HOME/.env-cp.d/*.env; do source $f; done
