@@ -95,6 +95,10 @@ if [[ "$host" == "toddt-SH370"* || "$host" == "Precision-3240" ]]; then
     source $HOME/.cp_kiro
 fi
 
+if [[ "$host" == "EMB-W0FN96TT" ]]; then
+    export DISPLAY=:0
+fi
+
 [ -d "$HOME/.env-cp.d" ] && for f in $HOME/.env-cp.d/*.env; do source $f; done
 # zsh hook to run the specified function(s) whenever the PWD changes
 chpwd_functions+=("ws-reload")
@@ -148,20 +152,22 @@ if [ -d "$HOME/.local/bin" ] ; then
     PATH="$HOME/.local/bin:$PATH"
 fi
 
+if [ -d "/Users/etiltod" ] ; then
+    PATH="/Users/etiltod/apps/homebrew/sbin:$PATH"
+fi
+
+export TERM=alacritty
 export PATH="$PATH:$HOME/bin"
 export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/.asdf/shims"
 export PATH="$PATH:$HOME/.local/pipx/venvs"
 
-export TERM=alacritty
 
 # Allows 'granted' to use 'pass' for the keyring
 # See http://docs.commonfate.io/granted/recipes/pass/#_top
 export GPG_TTY=$(tty)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-
 
 # Kiro CLI post block. Keep at the bottom of this file.
 [[ -f "${HOME}/.local/share/kiro-cli/shell/zshrc.post.zsh" ]] && builtin source "${HOME}/.local/share/kiro-cli/shell/zshrc.post.zsh"
