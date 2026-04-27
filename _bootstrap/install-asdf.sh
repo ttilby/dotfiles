@@ -32,17 +32,15 @@ else
 fi
 
 # Install plugins if missing
-declare -A PLUGINS=(
-    [nodejs]="https://github.com/asdf-vm/asdf-nodejs.git"
-    [terraform]="https://github.com/asdf-community/asdf-hashicorp.git"
-    [terragrunt]="https://github.com/ohmer/asdf-terragrunt"
-    [tflint]="https://github.com/skyzyx/asdf-tflint"
-)
+plugins="nodejs=https://github.com/asdf-vm/asdf-nodejs.git
+terraform=https://github.com/asdf-community/asdf-hashicorp.git
+terragrunt=https://github.com/ohmer/asdf-terragrunt
+tflint=https://github.com/skyzyx/asdf-tflint"
 
-for plugin in "${!PLUGINS[@]}"; do
-    if ! asdf plugin list 2>/dev/null | grep -q "^${plugin}$"; then
-        echo "Adding asdf plugin: ${plugin}..."
-        asdf plugin add "$plugin" "${PLUGINS[$plugin]}"
+echo "$plugins" | while IFS='=' read -r name url; do
+    if ! asdf plugin list 2>/dev/null | grep -q "^${name}$"; then
+        echo "Adding asdf plugin: ${name}..."
+        asdf plugin add "$name" "$url"
     fi
 done
 
