@@ -1,2 +1,2 @@
-tmux/.tmux/*
+tmux/.tmux/plugins/
 **/__pycache__
