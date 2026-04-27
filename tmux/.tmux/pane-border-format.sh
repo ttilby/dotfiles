@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # color variables
 INACTIVE_BORDER_COLOR='#444444'

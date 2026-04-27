@@ -3,7 +3,7 @@
 FG_DEFAULT="#[fg=default]"
 FG_PROD="#[fg=$1]"
 
-if [[ "type kubectx >/dev/null 2>&1" && "type kubens >/dev/null 2>&1" ]]; then
+if command -v kubectx >/dev/null 2>&1 && command -v kubens >/dev/null 2>&1; then
     KUBE_CONTEXT=$(kubectx -c)
     KUBE_NAMESPACE=$(kubens -c)
     if [[ $KUBE_CONTEXT == *"prod"* ]]; then
