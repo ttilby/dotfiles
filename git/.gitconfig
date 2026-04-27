@@ -34,7 +34,6 @@
 
 [core]
     pager = delta
-	excludesFile = ~/.gitignore
 
 # delta configs
 [interactive]

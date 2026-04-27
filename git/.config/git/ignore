@@ -1,4 +1,4 @@
-## ignore for Vim
+## Vim
 ## See https://github.com/github/gitignore/blob/master/Global/Vim.gitignore
 # Swap
 [._]*.s[a-v][a-z]
@@ -19,3 +19,12 @@ Sessionx.vim
 tags
 # Persistent undo
 [._]*.un~
+
+## Python
+.flake8
+
+## asdf
+.tool-versions
+
+## Kiro
+.kiro/settings/lsp.json
