@@ -1,24 +1,36 @@
 #!/bin/bash
+set -euo pipefail
 
-set +x
-#### Tmux
-if type tmux 2>/dev/null;
-then
-    echo "$(tmux -V) already installed"
+# Usage: TMUX_VERSION=3.6a _bootstrap/install-tmux.sh
+
+TMUX_VERSION="${TMUX_VERSION:-3.6a}"
+OS="$(uname -s)"
+
+if tmux -V 2>/dev/null | grep -q "$TMUX_VERSION"; then
+    echo "tmux $TMUX_VERSION already installed"
 else
-    echo "Installing Tmux"
-    sudo apt update
-    sudo apt install -y build-essential autoconf automake pkg-config libevent-dev libncurses5-dev bison byacc
-    rm -rf /tmp/tmux
-    git clone https://github.com/tmux/tmux.git /tmp/tmux
-    pushd /tmp/tmux
-    git checkout 3.5a
-    sh autogen.sh
-    ./configure && make
-    sudo make install
-    popd
+    if [[ "$OS" == "Darwin" ]]; then
+        echo "Installing tmux via Homebrew..."
+        brew install tmux
+    else
+        echo "Installing build dependencies..."
+        sudo apt update
+        sudo apt install -y build-essential autoconf automake pkg-config libevent-dev libncurses5-dev bison byacc
 
-    # https://github.com/tmux-plugins/tpm/blob/master/docs/managing_plugins_via_cmd_line.md
-    echo "Installing Tmux Plugin Manager"
-    git clone https://github.com/tmux-plugins/tpm $HOME/.tmux/plugins/tpm
+        echo "Building tmux $TMUX_VERSION from source..."
+        tmp=$(mktemp -d)
+        trap "rm -rf $tmp" EXIT
+        git clone --branch "$TMUX_VERSION" --depth 1 https://github.com/tmux/tmux.git "$tmp"
+        cd "$tmp"
+        sh autogen.sh
+        ./configure && make -j"$(nproc)"
+        sudo make install
+    fi
+    echo "Installed: $(tmux -V)"
+fi
+
+# Install TPM if not present
+if [ ! -d "$HOME/.tmux/plugins/tpm" ]; then
+    echo "Installing Tmux Plugin Manager..."
+    git clone https://github.com/tmux-plugins/tpm "$HOME/.tmux/plugins/tpm"
 fi

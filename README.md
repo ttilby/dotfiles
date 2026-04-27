@@ -1,225 +1,168 @@
 # dotfiles
 
-## Install
+Cross-platform dotfiles managed with [GNU Stow](https://www.gnu.org/software/stow/).
+
+## Quick Start
+
+### macOS
 
 ```bash
-sudo apt update && sudo apt install make zsh git stow build-essential nodejs npm python3 python3-venv unzip
+# Install Homebrew (https://brew.sh), then:
+brew install make git stow
+git clone <repo-url> ~/.dotfiles
+cd ~/.dotfiles
+make work-mac
+```
 
-# create nvim virtual venv
-mkdir ~/.virtualvenvs
-python3 -m venv ~/.virtualvenvs/nvimvenv
-source ~/.virtualvenvs/nvimvenv/bin/activate
-pip install neovim
+### Ubuntu
 
-# <clone repo>
-make common-apps
+```bash
+sudo apt update && sudo apt install -y make git stow build-essential unzip
+git clone <repo-url> ~/.dotfiles
+cd ~/.dotfiles
 make work-ubuntu
 ```
 
-## Windows host
+## What's Included
 
-* use Windows Terminal (alacritty doesn't send mouse events)
+### Dotfiles (stowed to ~)
 
-## Fonts
+| Package | Contents |
+|---------|----------|
+| alacritty | Terminal config (macOS side) |
+| git | `.gitconfig`, global ignore, delta themes |
+| tmux | `.tmux.conf`, status bar scripts, TPM plugins |
+| neovim | nvim config |
+| zsh | `.zshrc`, oh-my-zsh customizations, p10k config |
+| sh-common | Shared aliases, exports, functions |
+| sh-ubuntu | Ubuntu-specific shell config |
+| flake8 | Python linter config (max-line-length=88) |
+| misc | Misc scripts in ~/bin |
 
-NOTE: These need to be installed on the primary system only. For example, if
-accessing Ubuntu from Macbook via ssh, the fonts only need to be
-installed on the Macbook. If Ubuntu will be used directly, then they will
-need to be installed there as well.
-Install the patched Hack font from [Powerlevel10k](https://github.com/romkatv/powerlevel10k#meslo-nerd-font-patched-for-powerlevel10k)
+### Bootstrap Scripts (`_bootstrap/`)
+
+All scripts are cross-platform (macOS + Linux) and support upgrades.
+
+| Script | macOS | Linux |
+|--------|-------|-------|
+| install-zsh.sh | brew | apt |
+| install-nvim.sh | arm64 tarball | x86_64 tarball |
+| install-tmux.sh | brew | build from source |
+| install-fzf.sh | git clone | git clone |
+| install-delta.sh | brew | .deb package |
+| install-tig.sh | brew | build from source |
+| install-awscli.sh | .pkg installer | zip installer |
+| install-asdf.sh | arm64 binary | amd64 binary |
+| install-fonts.sh | ~/Library/Fonts | fc-cache |
+| brew.sh | Homebrew packages (macOS only) |
+| macos-defaults.sh | macOS system prefs (macOS only) |
+
+Version overrides via env vars: `NVIM_VERSION=v0.12.0`, `TMUX_VERSION=3.6a`, `FZF_VERSION=0.72.0`, etc.
+
+## Make Targets
 
 ```bash
-mkdir -p ~/.local/share/fonts
-cd ~/.local/share/fonts
-curl -fLo "MesloLGS NF Regular.ttf" https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Regular.ttf\?raw\=true
-curl -fLo "MesloLGS NF Bold.ttf"  https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold.ttf\?raw\=true
-curl -fLo "MesloLGS NF Italic.ttf"  https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Italic.ttf\?raw\=true
-curl -fLo "MesloLGS NF Bold Italic.ttf"  https://github.com/romkatv/powerlevel10k-media/raw/master/MesloLGS%20NF%20Bold%20Italic.ttf\?raw\=true
-fc-cache -f -v
+make work-mac       # Full macOS setup (brew, apps, dotfiles)
+make work-ubuntu    # Full Ubuntu setup (apps, dotfiles)
+make common_apps    # Install all tools (cross-platform)
+make common_dots    # Symlink dotfiles via stow
+make nvim           # Install/upgrade neovim only
 ```
 
-#### macOS
+Options: `STOW_SIMULATE=true` (dry-run), `STOW_VERBOSE=true`
+
+## Post-Install
+
+### Neovim
+
+Neovim v0.12+ with native `vim.pack` plugin manager (no lazy.nvim/packer). First launch will clone all plugins automatically.
+
+**Python virtualenv** (required for pynvim provider — created automatically by `install-nvim.sh`):
 
 ```bash
-cp ~/.local/share/fonts/* ~/Library/Fonts
+# Manual setup if needed:
+python3 -m venv ~/.virtualenvs/nvimvenv
+~/.virtualenvs/nvimvenv/bin/pip install pynvim
 ```
 
-## Third-party
+**LSP servers** are managed by Mason. On first launch:
 
-### True color in Tmux / Vim / Alacritty
-
-After installing these tools, the `$TERM` value should be as follows:
-
-```bash
-# Alacritty on primary machine
-$ echo $TERM     # alacritty
-
-# ssh to dev machine
-$ echo $TERM     # alacritty
-
-# tmux session on dev machine
-$ echo $TERM     # tmux-256color
+```vim
+:Mason
 ```
 
-See [alacritty-tmux-vim_truecolor.md](https://gist.github.com/Pocco81/2ea37d5b1e31ce068d98774e907096d0)
-for more info on how to properly set up the environments to achieve this.
+Mason auto-installs: bashls, dockerls, pylsp, jsonls, marksman, lua_ls, terraformls, yamlls, helm_ls.
 
-### Misc
+**Plugin management:**
 
-1. [diff-so-fancy](https://github.com/so-fancy/diff-so-fancy)
-1. [tfenv](https://github.com/tfutils/tfenv)
-1. [tig](https://github.com/jonas/tig)
-1. [fzf](https://github.com/junegunn/fzf)
-1. [tldr](https://tldr.sh/)
-1. [ripgrep](https://github.com/BurntSushi/ripgrep)
-
-### Alacritty
-
-Download latest [alacritty.info](https://github.com/alacritty/alacritty/blob/master/extra/alacritty.info)
-file to `Documents/alacritty.info` if needed.
-
-```bash
-sudo tic -xe alacritty,alacritty-direct Documents/alacritty.info
+```vim
+:lua vim.pack.update()           " Update all plugins
+:lua vim.pack.update("trouble")  " Update a single plugin
 ```
 
-### ASDF
+### Zsh
 
-Used for managing multiple apps
+Zsh with oh-my-zsh, Powerlevel10k prompt, and zsh-syntax-highlighting.
 
+**Components** (installed by `install-zsh.sh`):
+- oh-my-zsh — framework
+- powerlevel10k — prompt theme
+- zsh-syntax-highlighting — command highlighting
+
+**Plugins** (in `.zshrc`): `git`, `sudo`, `asdf`, `zsh-syntax-highlighting`
+
+**Post-install:**
+- Run `p10k configure` to set up the prompt on a new machine
+- The `.p10k.zsh` config is stowed from the repo, so reconfiguring will overwrite it
+
+**Host-specific config:** `.zshrc` sources files from two drop-in directories:
+
+- `~/.zshrc.d/*.zsh` — shell config (functions, aliases, sourcing other files). Sourced in alphabetical order.
+- `~/.env-cp.d/*.env` — plain `KEY=VALUE` env files (no shell logic).
+
+Example `~/.zshrc.d/cradlepoint.zsh`:
 ```bash
-git clone https://github.com/asdf-vm/asdf.git ~/.asdf --branch v0.10.2
-asdf plugin-add terraform https://github.com/asdf-community/asdf-hashicorp.git
-asdf install terraform 1.0.8
-asdf global terraform 1.0.8
-asdf plugin-add terragrunt https://github.com/ohmer/asdf-terragrunt
-asdf plugin-add tflint https://github.com/skyzyx/asdf-tflint
-asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf current
+[ -f "$HOME/.cp_functions" ] && source "$HOME/.cp_functions"
+[ -f "$HOME/.cp_aliases" ] && source "$HOME/.cp_aliases"
 ```
 
-### Cmake
+These directories are not managed by this repo — populate them per-machine or via a separate dotfiles repo (e.g., `~/.dotfiles-cp`).
 
+### tmux-mem-cpu-load
 
-```bash
- # prereqs
- sudo apt install libssl-dev
-
- # download
- curl https://github.com/Kitware/CMake/releases/download/v3.21.4/cmake-3.21.4.tar.gz -L -o cmake-3.21.4.tar.gz
- tar -xvzf cmake-3.21.4.tar.gz
-
- # install
- ./bootstrap
- make
- make install
- ```
-
-### zsh
-
-Install [Zsh](https://gist.github.com/derhuerst/12a1558a4b408b3b2b6e#file-linux-md)
-Set zsh as default shell, then log out and back in
-
-
-```bash
-chsh -s /bin/zsh <user>
-
-# current shell
-echo $0
-
-# current user
-whoami
-```
-
-Install [oh-my-zsh](https://ohmyz.sh/#install)
-Install [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting.git)
-
-#### Spaceship Prompt
-
-Installed by cloning the repo and linking the theme. Follow the `Manual`
-installation instructions at
-[Spaceship Prompt](https://github.com/spaceship-prompt/spaceship-prompt)
-
-To update:
-
-```bash
-cd ~/.themes/zsh-spaceship-prompt
-git pull
-```
-
-To customize, edit the `~/.themes/spaceship-prompt` file.
-
-### Tmux
-
-Use the `~/bin/install-tmux.sh` script from this repo
-
-#### tmux-mem-cpu-load
-
-Requires cmake to be installed.
+Requires cmake. After TPM installs the plugin:
 
 ```bash
 cd ~/.tmux/plugins/tmux-mem-cpu-load
 cmake .
 make
-make install
+sudo make install
 ```
 
-### Neovim
+### Alacritty terminfo
 
-#### LSP info [WIP]
-
-##### bashls
-
-This was failing because `node` was installed via `asdf` and so couldn't be
-found:
+Only needed if `alacritty` terminfo is missing on the remote host:
 
 ```bash
-"bash-language-server"	"stderr"	"/usr/bin/env: ‘node’: No such file or directory\n"
+sudo tic -xe alacritty,alacritty-direct Documents/alacritty.info
 ```
 
-To fix, I symlinked the `asdf` `node` to `/usr/bin`.
+### True Color (Alacritty → SSH → tmux)
 
-```bash
-which node
-sudo ln -s /home/todd/.asdf/shims/node /usr/bin/node
+Expected `$TERM` values:
+
+```
+Local (Alacritty):  alacritty
+SSH session:        alacritty
+tmux session:       tmux-256color
 ```
 
-#### terraform-ls
+See [truecolor setup guide](https://gist.github.com/Pocco81/2ea37d5b1e31ce068d98774e907096d0).
 
-To install, see instructions [here](https://github.com/hashicorp/terraform-ls).
-This will install the `terraform-ls` on the local machine. Check the version by
-running `terraform-ls -v`.
+## Fonts
 
-This is currently installed in the `~/bin` directory.
+MesloLGS NF (for Powerlevel10k) — install on the machine running the terminal emulator, not the remote host. Handled by `install-fonts.sh`.
 
-The configuration can be found in the coc-settings.json file (editable with
-`:CocConfig` inside vim).
+## Windows Host
 
-##### Update
-
-[Releases](https://releases.hashicorp.com/terraform-ls/)
-
-```bash
-terraform-ls -v
-cd ~/terraform-ls
-mv ~/bin/terraform-ls ./terraform-ls_<version>
-wget https://releases.hashicorp.com/terraform-ls/0.21.0/terraform-ls_0.21.0_linux_amd64.zip
-unzip terraform-ls_0.21.0_linux_amd64.zip
-mv terraform-ls ~/bin/terraform-ls
-```
-
-### Python
-
-#### pyenv
-
-See [Documentation](https://github.com/pyenv/pyenv)
-
-```bash
-git clone https://github.com/pyenv/pyenv.git ~/.pyenv
-# builds dynamic bash plugin, ok if this fails
-cd ~/.pyenv && src/configure && make -C src
-
-pyenv install 3.7.8
-pyenv global 3.7.8
-```
-
-May need to run [get-pip.py](https://bootstrap.pypa.io/get-pip.py)
+Use Windows Terminal (Alacritty doesn't send mouse events properly over SSH).

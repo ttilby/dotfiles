@@ -1,5 +1,5 @@
 -- Python virtual env for neovim
-vim.g.python3_host_prog = '/home/todd/.virtualenvs/nvimvenv/bin/python'
+vim.g.python3_host_prog = vim.fn.expand('~/.virtualenvs/nvimvenv/bin/python')
 
 -- ============================================================================
 -- vim.pack — plugin declarations
@@ -80,7 +80,6 @@ require('user.autopairs')
 require('user.neotree')
 require('user.trouble')
 require('user.which-key')
-require('user.dap')
 require('mini.cursorword').setup()
 require('user.blamer')
 require('user.fzf')

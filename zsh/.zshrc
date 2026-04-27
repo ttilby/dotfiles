@@ -24,13 +24,7 @@ export ZSH=$HOME/.oh-my-zsh
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-# ZSH_THEME="powerlevel9k/powerlevel9k"
 ZSH_THEME="powerlevel10k/powerlevel10k"
-
-# link the spaceship theme into .oh-my-zsh/custom/themes folder
-# ln -s ~/.themes/zsh-spaceship-prompt/spaceship.zsh-theme ~/.oh-my-zsh/custom/themes/spaceship.zsh-theme
-# ZSH_THEME="spaceship"
-# source ~/.themes/spaceship-prompt
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -87,14 +81,26 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 
 source $HOME/.exports
-if [[ "$host" == "toddt-SH370"* || "$host" == "Precision-3240" ]]; then
-    # source $HOME/.exports_cp
-    # source $HOME/.confluent.env
-    source $HOME/.cp_functions
-    source $HOME/.cp_aliases
-    source $HOME/.cp_kiro
+
+# Drop-in shell config: ~/.zshrc.d/*.zsh
+# Place .zsh files here to extend the shell without editing .zshrc.
+# Use for company-specific, machine-specific, or experimental config.
+# Files are sourced in glob order (alphabetical).
+#
+# Example: ~/.zshrc.d/cradlepoint.zsh
+#   [ -f "$HOME/.cp_functions" ] && source "$HOME/.cp_functions"
+#   [ -f "$HOME/.cp_aliases" ] && source "$HOME/.cp_aliases"
+#
+# Example: ~/.zshrc.d/personal.zsh
+#   export GITHUB_TOKEN="..."
+#   alias proj="cd ~/src/my-project"
+#
+if [ -d "$HOME/.zshrc.d" ]; then
+    for f in $HOME/.zshrc.d/*.zsh(N); do source "$f"; done
 fi
 
+# Drop-in env vars: ~/.env-cp.d/*.env
+# Same pattern but for plain KEY=VALUE env files (no shell logic).
 [ -d "$HOME/.env-cp.d" ] && for f in $HOME/.env-cp.d/*.env; do source $f; done
 # zsh hook to run the specified function(s) whenever the PWD changes
 chpwd_functions+=("ws-reload")
@@ -153,7 +159,15 @@ export PATH="$PATH:/usr/local/go/bin"
 export PATH="$PATH:$HOME/.asdf/shims"
 export PATH="$PATH:$HOME/.local/pipx/venvs"
 
-export TERM=alacritty
+# Homebrew (macOS)
+if [[ -f /opt/homebrew/bin/brew ]]; then
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# Set TERM only when running directly in Alacritty (not over SSH/tmux)
+if [[ -z "$SSH_CONNECTION" && -z "$TMUX" && "$TERM_PROGRAM" == "alacritty" ]]; then
+    export TERM=alacritty
+fi
 
 # Allows 'granted' to use 'pass' for the keyring
 # See http://docs.commonfate.io/granted/recipes/pass/#_top

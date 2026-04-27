@@ -1,48 +1,50 @@
 #!/bin/bash
+set -euo pipefail
 
-# Usage from project root:
-# NEOVIM_VERSION=v0.9.1 _bootstrap/install-nvim.sh
+# Usage: NVIM_VERSION=v0.12.0 _bootstrap/install-nvim.sh
 
-set +x
+NVIM_VERSION="${NVIM_VERSION:-v0.12.0}"
+NVIM_INSTALL_DIR="${NVIM_INSTALL_DIR:-$HOME/apps/nvims}"
+NVIM_BIN_DIR="${NVIM_BIN_DIR:-$HOME/bin}"
+NVIM_NAME="nvim-${NVIM_VERSION}"
+NVIM_PATH="${NVIM_INSTALL_DIR}/${NVIM_NAME}"
 
-_NEOVIM_VERSION="${NEOVIM_VERSION:-v0.12.0}" # v0.8.0 or nightly
-_NEOVIM_INSTALL_LOCATION="${NEOVIM_INSTALL_LOCATION:-$HOME/apps/nvims}"
-_NEOVIM_LOCATION="${NEOVIM_LOCATION:-$HOME/bin}"
-_NEOVIM_DOWNLOAD_FILE_NAME="nvim-linux-x86_64"
-_NAME="nvim-${_NEOVIM_VERSION}"
-
-if [ ! -d "${_NEOVIM_INSTALL_LOCATION}" ];
-then
-    echo "Creating folder: ${_NEOVIM_INSTALL_LOCATION}"
-    mkdir -p "${_NEOVIM_INSTALL_LOCATION}"
-fi
-
-echo "version: ${_NEOVIM_VERSION}"
-
-# check if desired version is already on this machine
-_NEOVIM_PATH="${_NEOVIM_INSTALL_LOCATION}/${_NAME}"
-echo "looking for ${_NEOVIM_PATH}"
-if [ -d "${_NEOVIM_PATH}" ];
-then
-    echo "Found version: ${_NEOVIM_PATH}"
+OS="$(uname -s)"
+ARCH="$(uname -m)"
+if [[ "$OS" == "Darwin" ]]; then
+    NVIM_ARCHIVE="nvim-macos-arm64"
 else
-    pushd ${_NEOVIM_INSTALL_LOCATION} || exit
-    wget https://github.com/neovim/neovim/releases/download/$_NEOVIM_VERSION/$_NEOVIM_DOWNLOAD_FILE_NAME.tar.gz
-    tar xzf $_NEOVIM_DOWNLOAD_FILE_NAME.tar.gz
-    mv $_NEOVIM_DOWNLOAD_FILE_NAME/ "${_NAME}/"
-    rm $_NEOVIM_DOWNLOAD_FILE_NAME.tar.gz
-    popd || exit
-    echo "Downloaded new version: ${_NEOVIM_PATH}"
+    NVIM_ARCHIVE="nvim-linux-x86_64"
 fi
 
-# Change installed version
-if [ -f "${_NEOVIM_LOCATION}/nvim" ];
-then
-    echo "Removing old neovim link"
-    rm "${_NEOVIM_LOCATION}/nvim"
+current=$(nvim --version 2>/dev/null | head -1 | awk '{print $2}' || true)
+if [[ "$current" == "$NVIM_VERSION" && -L "$NVIM_BIN_DIR/nvim" ]]; then
+    echo "nvim is already ${NVIM_VERSION}"
+    exit 0
 fi
 
-echo "Linking ${_NEOVIM_VERSION} to ${_NEOVIM_LOCATION}/nvim"
-ln -s "${_NEOVIM_PATH}/bin/nvim" "${_NEOVIM_LOCATION}/nvim"
+[[ -n "$current" ]] && echo "Upgrading nvim ${current} → ${NVIM_VERSION}..." || echo "Installing nvim ${NVIM_VERSION}..."
 
-echo "Done"
+mkdir -p "$NVIM_INSTALL_DIR" "$NVIM_BIN_DIR"
+
+if [ ! -d "$NVIM_PATH" ]; then
+    tmp=$(mktemp -d)
+    trap "rm -rf $tmp" EXIT
+    curl -fsSL -o "$tmp/${NVIM_ARCHIVE}.tar.gz" \
+        "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/${NVIM_ARCHIVE}.tar.gz"
+    tar xzf "$tmp/${NVIM_ARCHIVE}.tar.gz" -C "$tmp"
+    mv "$tmp/${NVIM_ARCHIVE}" "$NVIM_PATH"
+fi
+
+ln -sf "$NVIM_PATH/bin/nvim" "$NVIM_BIN_DIR/nvim"
+
+echo "nvim ${NVIM_VERSION} ready: $(nvim --version | head -1)"
+
+# Ensure pynvim virtualenv exists and is up to date
+NVIM_VENV="$HOME/.virtualenvs/nvimvenv"
+if [ ! -d "$NVIM_VENV" ]; then
+    echo "Creating pynvim virtualenv..."
+    mkdir -p "$HOME/.virtualenvs"
+    python3 -m venv "$NVIM_VENV"
+fi
+"$NVIM_VENV/bin/pip" install --quiet --upgrade pynvim

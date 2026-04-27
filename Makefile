@@ -1,15 +1,20 @@
+# Usage:
+#   make work-mac       # Full macOS setup (brew, apps, dotfiles)
+#   make work-ubuntu    # Full Ubuntu setup (apps, dotfiles)
+#   make common_apps    # Install all tools (cross-platform)
+#   make common_dots    # Symlink dotfiles via stow
+#   make nvim           # Install/upgrade neovim only
+#
+# Options:
+#   STOW_SIMULATE=true  # Dry-run stow (no changes)
+#   STOW_VERBOSE=true   # Verbose stow output
+#   NVIM_VERSION=v0.12.0  FZF_VERSION=0.72.0  etc.
+
 # Main targets
 
-# TODO
-# * need to link .gitconfig file to $HOME
+work-mac: mac_apps common_apps common_dots
 
-
-personal-mac: common_dots mac_dots
-
-work-mac: common_dots mac_dots
-	echo "todo"
-
-work-ubuntu: linux_apps common_dots _sh-ubuntu
+work-ubuntu: linux_apps common_apps common_dots _sh-ubuntu
 
 
 
@@ -45,7 +50,6 @@ endif
 STOW_ARGS ?= ${_STOW_TARGET} ${_STOW_RESTOW} ${_STOW_VERBOSE} ${_STOW_SIMULATE}
 
 common_dots: _alacritty _misc _tmux _neovim _flake8 _git _zsh _sh-common
-mac_dots: _alacritty
 
 _%:
 	stow ${STOW_ARGS} $*
@@ -59,19 +63,20 @@ HOSTNAME=$(uname -n)
 common_apps:
 	_bootstrap/install-zsh.sh
 	_bootstrap/install-nvim.sh
-
-linux_apps: common_apps
+	_bootstrap/install-fonts.sh
 	_bootstrap/install-tmux.sh
-	_bootstrap/install-fonts.sh
+	_bootstrap/install-fzf.sh
+	_bootstrap/install-delta.sh
+	_bootstrap/install-tig.sh
+	_bootstrap/install-awscli.sh
+	_bootstrap/install-asdf.sh
 
-mac_apps: common_apps
-	_bootstrap/macos-defaults.sh
-	_bootstrap/install-fonts.sh
+linux_apps:  # placeholder for Linux-only installs
+
+mac_apps:
 	_bootstrap/brew.sh
+	_bootstrap/macos-defaults.sh
 
 # Specific apps
-diff_so_fancy:
-	_bootstrap/install-diff-so-fancy.sh
-
 nvim:
 	_bootstrap/install-nvim.sh

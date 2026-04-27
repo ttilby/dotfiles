@@ -1,4 +1,5 @@
 #!/bin/bash
+set -euo pipefail
 
 mkdir -p ~/.local/share/fonts
 cd ~/.local/share/fonts

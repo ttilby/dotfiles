@@ -1,6 +1,8 @@
 alias ll='ls -lh'
 alias la='ls -lAh'
 alias tls="tmux ls"
-alias ifconfig="echo use ip -c a instead"
+if [[ "$(uname -s)" == "Linux" ]]; then
+    alias ifconfig="echo use ip -c a instead"
+fi
 # alias ..='cd ..'
 # alias ...='cd ../..'
