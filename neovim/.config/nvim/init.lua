@@ -1,6 +1,11 @@
 -- Python virtual env for neovim
 vim.g.python3_host_prog = vim.fn.expand('~/.virtualenvs/nvimvenv/bin/python')
 
+-- Use OSC 52 over SSH (works through tmux to terminal), pbcopy/pbpaste locally on macOS
+if vim.env.SSH_TTY then
+  vim.g.clipboard = 'osc52'
+end
+
 -- ============================================================================
 -- vim.pack — plugin declarations
 -- Update all:    :lua vim.pack.update()
