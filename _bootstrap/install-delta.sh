@@ -14,9 +14,10 @@ fi
 if [[ "$(uname -s)" == "Darwin" ]]; then
     brew install git-delta
 else
+    ARCH=$(dpkg --print-architecture)
     tmp=$(mktemp --suffix=.deb)
     trap "rm -f $tmp" EXIT
-    curl -fsSL -o "$tmp" "https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/git-delta_${DELTA_VERSION}_amd64.deb"
+    curl -fsSL -o "$tmp" "https://github.com/dandavison/delta/releases/download/${DELTA_VERSION}/git-delta_${DELTA_VERSION}_${ARCH}.deb"
     sudo dpkg -i "$tmp"
 fi
 

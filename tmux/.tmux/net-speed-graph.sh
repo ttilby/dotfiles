@@ -9,6 +9,9 @@ HIST_UP="/tmp/tmux-net-speed-up-$IFACE"
 PREV="/tmp/tmux-net-speed-prev-$IFACE"
 WIDTH=10
 SPARKS=(▁ ▂ ▃ ▄ ▅ ▆ ▇ █)
+CLR_DOWN="#98c379"
+CLR_UP="#61afef"
+CLR_MAX="#5c6370"
 
 # Get current cumulative bytes
 if [[ "$(uname -s)" == "Darwin" ]]; then
@@ -61,16 +64,25 @@ sparkline() {
     echo -n "$out"
 }
 
-# Format rate as human readable
+# Format rate as human readable, right-padded to 4 chars
 fmt() {
     local b=$1
+    local s
     if [[ $b -ge 1048576 ]]; then
-        echo -n "$(( b / 1048576 ))M"
+        s="$(( b / 1048576 ))M"
     elif [[ $b -ge 1024 ]]; then
-        echo -n "$(( b / 1024 ))K"
+        s="$(( b / 1024 ))K"
     else
-        echo -n "${b}B"
+        s="${b}B"
     fi
+    printf "%-4s" "$s"
+}
+
+# Get max value from history file
+hist_max() {
+    local file="$1"
+    [[ ! -f "$file" ]] && echo 0 && return
+    sort -n "$file" | tail -1
 }
 
 # Get latest rates for label
@@ -79,4 +91,9 @@ last_up=$(tail -1 "$HIST_UP" 2>/dev/null)
 [[ -z "$last_down" ]] && last_down=0
 [[ -z "$last_up" ]] && last_up=0
 
-echo -n "↓$(fmt $last_down) $(sparkline "$HIST_DOWN") ↑$(fmt $last_up) $(sparkline "$HIST_UP")"
+max_down=$(hist_max "$HIST_DOWN")
+max_up=$(hist_max "$HIST_UP")
+[[ -z "$max_down" ]] && max_down=0
+[[ -z "$max_up" ]] && max_up=0
+
+echo -n "#[fg=${CLR_DOWN}]↓$(fmt $last_down)#[fg=${CLR_MAX}]/$(fmt $max_down)#[fg=${CLR_DOWN}]$(sparkline "$HIST_DOWN") #[fg=${CLR_UP}]↑$(fmt $last_up)#[fg=${CLR_MAX}]/$(fmt $max_up)#[fg=${CLR_UP}]$(sparkline "$HIST_UP")#[default]"

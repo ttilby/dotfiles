@@ -45,3 +45,6 @@
     features = Coldark-Dark
     line-numbers = true
 # End delta configs
+[safe]
+	directory = *
+	directory = /builds/GL/teams_functional/infra/shard-pipeline-library

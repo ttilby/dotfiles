@@ -12,9 +12,9 @@
 
 # Main targets
 
-work-mac: mac_apps common_apps common_dots
+work-mac: mac_apps common_apps common_dots post_stow
 
-work-ubuntu: linux_apps common_apps common_dots _sh-ubuntu
+work-ubuntu: linux_apps common_apps common_dots post_stow _sh-ubuntu
 
 
 
@@ -80,3 +80,6 @@ mac_apps:
 # Specific apps
 nvim:
 	_bootstrap/install-nvim.sh
+
+post_stow:
+	_bootstrap/install-tmux-plugins.sh

@@ -14,12 +14,17 @@ fi
 if [[ "$(uname -s)" == "Darwin" ]]; then
     brew install tig
 else
+    if [[ -d /mnt/lima-cidata ]]; then
+        TIG_PREFIX="/usr/local"
+    else
+        TIG_PREFIX="$HOME"
+    fi
     tmp=$(mktemp -d)
     trap "rm -rf $tmp" EXIT
     curl -fsSL "https://github.com/jonas/tig/releases/download/tig-${TIG_VERSION}/tig-${TIG_VERSION}.tar.gz" | tar xz -C "$tmp" --strip-components=1
     cd "$tmp"
-    make prefix="$HOME" -j"$(nproc)"
-    make prefix="$HOME" install
+    make prefix="$TIG_PREFIX" -j"$(nproc)"
+    sudo make prefix="$TIG_PREFIX" install
 fi
 
 echo "tig v${TIG_VERSION} ready: $(tig --version)"

@@ -4,13 +4,19 @@ set -euo pipefail
 # https://asdf-vm.com/guide/getting-started.html
 
 ASDF_VERSION="${ASDF_VERSION:-0.16.7}"
-ASDF_BIN="$HOME/bin/asdf"
+if [[ -d /mnt/lima-cidata ]]; then
+    ASDF_BIN="/usr/local/bin/asdf"
+else
+    ASDF_BIN="$HOME/bin/asdf"
+fi
 ASDF_DIR="$HOME/.asdf"
 
 OS="$(uname -s)"
 ARCH="$(uname -m)"
 if [[ "$OS" == "Darwin" ]]; then
     PLATFORM="darwin-arm64"
+elif [[ "$ARCH" == "aarch64" ]]; then
+    PLATFORM="linux-arm64"
 else
     PLATFORM="linux-amd64"
 fi
@@ -25,9 +31,11 @@ else
     curl -fsSL -o "$tmp/asdf.tar.gz" \
         "https://github.com/asdf-vm/asdf/releases/download/v${ASDF_VERSION}/asdf-v${ASDF_VERSION}-${PLATFORM}.tar.gz"
     tar xzf "$tmp/asdf.tar.gz" -C "$tmp"
-    mkdir -p "$HOME/bin"
-    mv "$tmp/asdf" "$ASDF_BIN"
-    chmod +x "$ASDF_BIN"
+    SUDO=""
+    [[ -d /mnt/lima-cidata ]] && SUDO="sudo"
+    $SUDO mkdir -p "$(dirname "$ASDF_BIN")"
+    $SUDO mv "$tmp/asdf" "$ASDF_BIN"
+    $SUDO chmod +x "$ASDF_BIN"
     echo "asdf v${ASDF_VERSION} ready: $(asdf --version)"
 fi
 

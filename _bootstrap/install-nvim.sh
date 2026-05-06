@@ -4,8 +4,15 @@ set -euo pipefail
 # Usage: NVIM_VERSION=v0.12.0 _bootstrap/install-nvim.sh
 
 NVIM_VERSION="${NVIM_VERSION:-v0.12.0}"
-NVIM_INSTALL_DIR="${NVIM_INSTALL_DIR:-$HOME/apps/nvims}"
-NVIM_BIN_DIR="${NVIM_BIN_DIR:-$HOME/bin}"
+
+# Use VM-local paths when running inside Lima to avoid conflicts with host binaries
+if [[ -d /mnt/lima-cidata ]]; then
+    NVIM_INSTALL_DIR="${NVIM_INSTALL_DIR:-/usr/local/lib/nvims}"
+    NVIM_BIN_DIR="${NVIM_BIN_DIR:-/usr/local/bin}"
+else
+    NVIM_INSTALL_DIR="${NVIM_INSTALL_DIR:-$HOME/apps/nvims}"
+    NVIM_BIN_DIR="${NVIM_BIN_DIR:-$HOME/bin}"
+fi
 NVIM_NAME="nvim-${NVIM_VERSION}"
 NVIM_PATH="${NVIM_INSTALL_DIR}/${NVIM_NAME}"
 
@@ -13,6 +20,8 @@ OS="$(uname -s)"
 ARCH="$(uname -m)"
 if [[ "$OS" == "Darwin" ]]; then
     NVIM_ARCHIVE="nvim-macos-arm64"
+elif [[ "$ARCH" == "aarch64" ]]; then
+    NVIM_ARCHIVE="nvim-linux-arm64"
 else
     NVIM_ARCHIVE="nvim-linux-x86_64"
 fi
@@ -25,7 +34,11 @@ fi
 
 [[ -n "$current" ]] && echo "Upgrading nvim ${current} → ${NVIM_VERSION}..." || echo "Installing nvim ${NVIM_VERSION}..."
 
-mkdir -p "$NVIM_INSTALL_DIR" "$NVIM_BIN_DIR"
+# Use sudo for system paths
+SUDO=""
+[[ -d /mnt/lima-cidata ]] && SUDO="sudo"
+
+$SUDO mkdir -p "$NVIM_INSTALL_DIR" "$NVIM_BIN_DIR"
 
 if [ ! -d "$NVIM_PATH" ]; then
     tmp=$(mktemp -d)
@@ -33,10 +46,10 @@ if [ ! -d "$NVIM_PATH" ]; then
     curl -fsSL -o "$tmp/${NVIM_ARCHIVE}.tar.gz" \
         "https://github.com/neovim/neovim/releases/download/${NVIM_VERSION}/${NVIM_ARCHIVE}.tar.gz"
     tar xzf "$tmp/${NVIM_ARCHIVE}.tar.gz" -C "$tmp"
-    mv "$tmp/${NVIM_ARCHIVE}" "$NVIM_PATH"
+    $SUDO mv "$tmp/${NVIM_ARCHIVE}" "$NVIM_PATH"
 fi
 
-ln -sf "$NVIM_PATH/bin/nvim" "$NVIM_BIN_DIR/nvim"
+$SUDO ln -sf "$NVIM_PATH/bin/nvim" "$NVIM_BIN_DIR/nvim"
 
 echo "nvim ${NVIM_VERSION} ready: $(nvim --version | head -1)"
 

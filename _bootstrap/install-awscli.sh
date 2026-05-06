@@ -15,7 +15,8 @@ if [[ "$(uname -s)" == "Darwin" ]]; then
     fi
     sudo installer -pkg "$tmp/AWSCLIV2.pkg" -target /
 else
-    curl -fsSL -o "$tmp/awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip"
+    ARCH=$(uname -m)
+    curl -fsSL -o "$tmp/awscliv2.zip" "https://awscli.amazonaws.com/awscli-exe-linux-${ARCH}.zip"
     unzip -q "$tmp/awscliv2.zip" -d "$tmp"
     if command -v aws &>/dev/null; then
         echo "Updating AWS CLI..."

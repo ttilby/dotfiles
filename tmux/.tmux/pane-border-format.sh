@@ -77,7 +77,7 @@ git_status () {
   _STATUS=""
 
   # check status of files
-  _INDEX=$(command git status --porcelain 2> /dev/null)
+  _INDEX=$(command git --no-optional-locks status --porcelain 2> /dev/null)
   if [[ -n "$_INDEX" ]]; then
     if $(echo "$_INDEX" | command grep -q '^[AMRD]. '); then
       _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_STAGED"
@@ -96,7 +96,7 @@ git_status () {
   fi
 
   # check status of local repository
-  _INDEX=$(command git status --porcelain -b 2> /dev/null)
+  _INDEX=$(command git --no-optional-locks status --porcelain -b 2> /dev/null)
   if $(echo "$_INDEX" | command grep -q '^## .*ahead'); then
     _STATUS="$_STATUS$ZSH_THEME_GIT_PROMPT_AHEAD"
   fi
