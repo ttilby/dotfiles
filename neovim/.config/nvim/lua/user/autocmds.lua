@@ -35,6 +35,14 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     end,
 })
 
+-- Helm templates: any yaml/tpl under a helm */templates/ dir
+vim.filetype.add({
+    pattern = {
+        [".*/helm/.*/templates/.*%.yaml"] = "helm",
+        [".*/helm/.*/templates/.*%.tpl"] = "helm",
+    },
+})
+
 -- Terraform filetype for .hcl files
 local terraform_group = vim.api.nvim_create_augroup("custom_terraform", { clear = true })
 vim.api.nvim_create_autocmd({ "BufRead", "BufNewFile" }, {
