@@ -4,5 +4,8 @@ alias tls="tmux ls"
 if [[ "$(uname -s)" == "Linux" ]]; then
     alias ifconfig="echo use ip -c a instead"
 fi
+if [[ "$(uname -s)" == "Darwin" ]]; then
+    alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+fi
 # alias ..='cd ..'
 # alias ...='cd ../..'

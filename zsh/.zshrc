@@ -119,7 +119,18 @@ unset file
 # Sets the path for tmux plugins (tpm)
 export TMUX_PLUGIN_MANAGER_PATH=~/.tmux/plugins
 
-#export JAVA_HOME=$(/usr/libexec/java_home)
+# Java - prefer JDK 17 if available
+if [[ "$OSTYPE" == darwin* ]]; then
+  if [[ -x /usr/libexec/java_home ]]; then
+    export JAVA_HOME=$(/usr/libexec/java_home -v 17 2>/dev/null)
+  fi
+elif [[ -d /usr/lib/jvm/java-17-openjdk-amd64 ]]; then
+  export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+elif [[ -d /usr/lib/jvm/java-17-openjdk ]]; then
+  export JAVA_HOME=/usr/lib/jvm/java-17-openjdk
+fi
+
+[[ -n "$JAVA_HOME" ]] && export PATH="$JAVA_HOME/bin:$PATH"
 
 # export MANPATH="/usr/local/man:$MANPATH"
 
