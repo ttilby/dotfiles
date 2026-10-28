@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Usage: TMUX_VERSION=3.6a _bootstrap/install-tmux.sh
 
-TMUX_VERSION="${TMUX_VERSION:-3.6a}"
+TMUX_VERSION="${TMUX_VERSION:-3.7c}"
 OS="$(uname -s)"
 
 if tmux -V 2>/dev/null | grep -q "$TMUX_VERSION"; then

@@ -48,3 +48,5 @@
 [safe]
 	directory = *
 	directory = /builds/GL/teams_functional/infra/shard-pipeline-library
+# [blame]
+# 	ignoreRevsFile = .git-blame-ignore-revs

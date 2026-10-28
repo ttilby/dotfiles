@@ -47,6 +47,54 @@ neotree.setup({
         },
     },
     filesystem = {
+        components = {
+            -- Simply flag entries that are symlinks (no target path).
+            symlink_marker = function(config, node, state)
+                if node.is_link then
+                    -- U+F0C1 (nf-fa-link) written as explicit UTF-8 bytes so the
+                    -- glyph survives edits that strip PUA codepoints. This lives in
+                    -- the FontAwesome range the configured Nerd Font covers.
+                    return {
+                        text = "\239\131\129 ",
+                        highlight = config.highlight or "NeoTreeSymbolicLinkTarget",
+                    }
+                end
+                return {}
+            end,
+        },
+        renderers = {
+            directory = {
+                { "indent" },
+                { "icon" },
+                { "current_filter" },
+                {
+                    "container",
+                    content = {
+                        { "name", zindex = 10 },
+                        { "symlink_marker", zindex = 10, highlight = "NeoTreeSymbolicLinkTarget" },
+                        { "clipboard", zindex = 10 },
+                        { "diagnostics", errors_only = true, zindex = 20, align = "right", hide_when_expanded = true },
+                        { "git_status", zindex = 20, align = "right", hide_when_expanded = true },
+                    },
+                },
+            },
+            file = {
+                { "indent" },
+                { "icon" },
+                {
+                    "container",
+                    content = {
+                        { "name", zindex = 10 },
+                        { "symlink_marker", zindex = 10, highlight = "NeoTreeSymbolicLinkTarget" },
+                        { "clipboard", zindex = 10 },
+                        { "bufnr", zindex = 10 },
+                        { "modified", zindex = 20, align = "right" },
+                        { "diagnostics", zindex = 20, align = "right" },
+                        { "git_status", zindex = 20, align = "right" },
+                    },
+                },
+            },
+        },
         filtered_items = {
             visible = true,
             hide_dotfiles = false,
@@ -58,6 +106,9 @@ neotree.setup({
         show_unloaded = true,
     }
 })
+
+-- Make symlink targets visually distinct (option 3)
+vim.api.nvim_set_hl(0, "NeoTreeSymbolicLinkTarget", { fg = "#89b4fa", italic = true })
 
 -- mappings
 vim.cmd([[nnoremap <leader>p :Neotree toggle reveal_force_cwd<cr>]])

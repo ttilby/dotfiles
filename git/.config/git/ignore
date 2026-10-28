@@ -28,3 +28,6 @@ tags
 
 ## Kiro
 .kiro/settings/lsp.json
+
+## Graphify
+**/graphify-out/**

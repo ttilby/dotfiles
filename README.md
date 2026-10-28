@@ -96,9 +96,15 @@ Mason auto-installs: bashls, dockerls, pylsp, jsonls, marksman, lua_ls, terrafor
 **Plugin management:**
 
 ```vim
-:lua vim.pack.update()           " Update all plugins
-:lua vim.pack.update("trouble")  " Update a single plugin
+:lua vim.pack.update()             " Check/update all plugins (shows a confirmation buffer first)
+:lua vim.pack.update({ "trouble" }) " Update a single plugin (names must be a list)
+:lua = vim.pack.get()              " Inspect installed plugins (no remote fetch)
 ```
+
+`vim.pack.update()` fetches remote changes and opens a reviewable buffer of pending
+updates; write/confirm it to apply, or close it to skip. There is no separate
+check-only command. The `names` argument must be a list (`string[]`), so a single
+plugin is `{ "trouble" }`, not `"trouble"`.
 
 ### Zsh
 

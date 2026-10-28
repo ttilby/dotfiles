@@ -122,7 +122,7 @@ local servers = {
         settings = {
             pylsp = {
                 plugins = {
-                    pycodestyle = { enabled = true, maxLineLength = 88 },
+                    pycodestyle = { enabled = true, maxLineLength = 120 },
                     pylsp_mypy = {
                         enabled = true, live_mode = false,
                         dmypy = false, strict = false, overrides = true,

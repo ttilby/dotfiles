@@ -30,7 +30,6 @@ vim.pack.add({
     "https://github.com/tpope/vim-obsession",
     "https://github.com/echasnovski/mini.cursorword",
     "https://github.com/lewis6991/gitsigns.nvim",
-    "https://github.com/APZelos/blamer.nvim",
     "https://github.com/christoomey/vim-tmux-navigator",
     "https://github.com/RyanMillerC/better-vim-tmux-resizer",
     "https://github.com/towolf/vim-helm",
@@ -86,7 +85,6 @@ require('user.neotree')
 require('user.trouble')
 require('user.which-key')
 require('mini.cursorword').setup()
-require('user.blamer')
 require('user.fzf')
 
 -- Treesitter

@@ -34,6 +34,19 @@ gitsigns.setup {
   },
   numhl = true,
   -- word_diff = true,
+  -- Inline current-line blame (replaces blamer.nvim). gitsigns resolves
+  -- symlinks via uv.fs_realpath before locating the git repo, so stowed
+  -- dotfiles (e.g. ~/.zshrc -> ~/dotfiles/zsh/.zshrc) blame against the real
+  -- repo correctly — which blamer.nvim could not do.
+  current_line_blame = true,
+  current_line_blame_opts = {
+    virt_text = true,
+    virt_text_pos = "eol",
+    delay = 1000,
+    ignore_whitespace = false,
+  },
+  -- Absolute date (%Y/%m/%d) to match the old blamer_date_format.
+  current_line_blame_formatter = "   <author>, <author_time:%Y/%m/%d> • <summary>",
   on_attach = function(bufnr)
     local gs = package.loaded.gitsigns
 
